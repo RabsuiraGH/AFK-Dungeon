@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using LA.Abilities;
-using LA.Abilities.Interfaces;
+using LA.Gameplay.Abilities;
+using LA.Gameplay.Abilities.Interfaces;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

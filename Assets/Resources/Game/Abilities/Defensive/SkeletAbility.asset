@@ -13,5 +13,14 @@ MonoBehaviour:
   m_Name: SkeletAbility
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Double damage from crush weapon
+  <Conditions>k__BackingField:
+  - _conditionBase: {fileID: 0}
+    _parameters:
+      rid: -2
   <RequiredDamageType>k__BackingField: 2
   <Multiplier>k__BackingField: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

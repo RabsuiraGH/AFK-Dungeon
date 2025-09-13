@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using LA.Abilities;
+using LA.Gameplay.Abilities;
 using LA.WeaponSystem;
 using UnityEngine;
 

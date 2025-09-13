@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Shield
+  <Conditions>k__BackingField: []
   <StatsToCompare>k__BackingField:
   - <StatType>k__BackingField: 1
     <StatCompareType>k__BackingField: 1
   <Reduction>k__BackingField: 3
+  references:
+    version: 2
+    RefIds: []
