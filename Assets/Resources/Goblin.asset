@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2c304992ac06443a0bf686ea5993b5, type: 3}
+  m_Name: Goblin
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: "\u0413\u043E\u0431\u043B\u0438\u043D"
+  <BaseHealth>k__BackingField: 5
+  <BaseWeapon>k__BackingField: {fileID: 11400000, guid: ae793c394c194974e843fc0a797df18e, type: 2}
+  <BaseStats>k__BackingField:
+    <Strength>k__BackingField: 1
+    <Agility>k__BackingField: 1
+    <Endurance>k__BackingField: 1
+  <DeathDrop>k__BackingField: {fileID: 11400000, guid: fb2840ade3b4cd74fa912127aad997a8, type: 2}

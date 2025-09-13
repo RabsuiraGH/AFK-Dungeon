@@ -1,0 +1,51 @@
+using System;
+using LA.WeaponSystem;
+using UnityEngine;
+
+namespace LA
+{
+    [Serializable]
+    public class Enemy : BattleUnit
+    {
+        [field: SerializeField] public EnemySO EnemyBase { get; set; }
+
+
+        public Enemy(EnemySO enemyBase)
+        {
+            EnemyBase = enemyBase;
+        }
+        public override void Init()
+        {
+            MaxHealth = EnemyBase.BaseHealth;
+            Stats = EnemyBase.BaseStats;
+            RestoreHealth();
+
+            CurrentWeapon = new Weapon(EnemyBase.BaseWeapon);
+            Abilities.AddRange(EnemyBase.Abilities);
+        }
+
+
+        public override bool IsHit(int hitValue)
+        {
+            return hitValue > EnemyBase.BaseStats.Agility;
+        }
+
+
+        public override int GetDamage()
+        {
+            return EnemyBase.BaseWeapon.BaseDamage;
+        }
+
+
+        public override void TakeDamage(int damage)
+        {
+            CurrentHealth -= damage;
+        }
+
+
+        public override bool IsDead()
+        {
+            return CurrentHealth <= 0;
+        }
+    }
+}

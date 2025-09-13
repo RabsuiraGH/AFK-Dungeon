@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5dfdacfce435a74b9cfad444f0742c6, type: 3}
+  m_Name: Barbarian
+  m_EditorClassIdentifier: 
+  <ClassName>k__BackingField: Barbarian
+  <HealthPerLevel>k__BackingField: 6
+  <StartWeapon>k__BackingField: {fileID: 11400000, guid: e7295817f7c6d454b87d5a61dc9acbb0, type: 2}
+  <LevelUpgrades>k__BackingField:
+  - <StatUpgrades>k__BackingField:
+      <Strength>k__BackingField: 0
+      <Agility>k__BackingField: 0
+      <Endurance>k__BackingField: 0
+    <NewAbilities>k__BackingField:
+    - {fileID: 11400000, guid: bfb07ee2af04e854987c15a7088aff14, type: 2}
+  - <StatUpgrades>k__BackingField:
+      <Strength>k__BackingField: 0
+      <Agility>k__BackingField: 0
+      <Endurance>k__BackingField: 0
+    <NewAbilities>k__BackingField:
+    - {fileID: 11400000, guid: 4a005a3136af5a0498872010998ad41e, type: 2}
+  - <StatUpgrades>k__BackingField:
+      <Strength>k__BackingField: 0
+      <Agility>k__BackingField: 0
+      <Endurance>k__BackingField: 1
+    <NewAbilities>k__BackingField: []

@@ -1,0 +1,12 @@
+﻿using InspectorPathField;
+using UnityEngine;
+
+namespace LA
+{
+    [CreateAssetMenu(fileName = "PathConfig", menuName = "Game/PathConfig")]
+    public class PathConfig : ScriptableObject
+    {
+        [field: SerializeField, PathField] public string GameScope { get; private set; }
+        [field: SerializeField, PathField] public string EnemyDatabase { get; private set; }
+    }
+}
