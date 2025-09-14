@@ -21,7 +21,7 @@ MonoBehaviour:
       <Agility>k__BackingField: 0
       <Endurance>k__BackingField: 0
     <NewAbilities>k__BackingField:
-    - {fileID: 0}
+    - {fileID: 11400000, guid: a1874861131ad68409752115d16da350, type: 2}
   - <StatUpgrades>k__BackingField:
       <Strength>k__BackingField: 0
       <Agility>k__BackingField: 1
@@ -32,4 +32,4 @@ MonoBehaviour:
       <Agility>k__BackingField: 0
       <Endurance>k__BackingField: 0
     <NewAbilities>k__BackingField:
-    - {fileID: 0}
+    - {fileID: 11400000, guid: 38d5d46de8a58da459f4221d09e538be, type: 2}
