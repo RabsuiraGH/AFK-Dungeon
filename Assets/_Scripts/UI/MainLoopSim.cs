@@ -28,6 +28,7 @@ namespace LA.UI
         [EasyButtons.Button]
         public void OneClickStartBattle()
         {
+            _mainGameLoop.Reset();
             _player.RestoreHealth();
             AddRandomEnemy();
             using CancellationTokenSource cts = new CancellationTokenSource();
@@ -40,10 +41,11 @@ namespace LA.UI
             while (!_mainGameLoop.CheckWin() && !token.IsCancellationRequested)
             {
                 _mainGameLoop.SimulateTurn();
-                if(_mainGameLoop.CheckWin())
+                if (_mainGameLoop.CheckWin())
                 {
                     break;
                 }
+
                 await Task.Delay(1000, token);
             }
 

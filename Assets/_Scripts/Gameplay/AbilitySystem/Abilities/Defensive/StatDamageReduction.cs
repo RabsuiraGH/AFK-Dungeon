@@ -17,6 +17,8 @@ namespace LA.Gameplay.AbilitySystem.Abilities
             int damageReduction = temp.GetSumOfStats();
 
             context.AddDamage(new DamageContext(-damageReduction, DamageType.None, Name));
+
+            Log($"Owner: {context.AbilityOwner} Damage Reduction: {damageReduction}");
         }
     }
 }

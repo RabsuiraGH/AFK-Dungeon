@@ -7,14 +7,12 @@ namespace LA.Gameplay.AbilitySystem.Abilities
                      menuName = "Game/Abilities/Defensive/Weapon Base Damage Immunity")]
     public class WeaponBaseDamageImmunityAbility : AbilitySO, IDefensiveAbility, IOnBeforeHitAbility
     {
-        [field: SerializeField] public DamageType DamageType { get; set; }
-
-
         public void OnBeforeHit(BattleContext context)
         {
-            if (context.WeaponDamage.DamageType == DamageType)
+            if (IsAllConditionsMet(context))
             {
                 context.WeaponDamage.ModifyDamage(-context.WeaponDamage.BaseDamage);
+                Log($"Owner: {context.AbilityOwner} Damage Immunity: {context.WeaponDamage.BaseDamage}");
             }
         }
     }
