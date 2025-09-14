@@ -1,9 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using LA.Gameplay.AbilitySystem;
 using UnityEngine;
 
-namespace LA.Gameplay.AbilitySystem
+namespace LA.Gameplay.AbilitySystem.Conditions
 {
     [CreateAssetMenu(fileName = "StatCondition", menuName = "Game/Abilities/Conditions/Stat Condition")]
     public class StatCondition : AbilityCondition<StatConditionParametersBase>
@@ -15,6 +15,7 @@ namespace LA.Gameplay.AbilitySystem
         }
     }
 
+    [Serializable]
     public class StatConditionParametersBase : ConditionParametersBase
     {
         [field: SerializeField] public List<StatCompare> StatsToCompare { get; private set; } = new();
