@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace LA.Gameplay.Abilities
+namespace LA.Gameplay.AbilitySystem
 {
     [Serializable]
     public sealed class ConditionEntry

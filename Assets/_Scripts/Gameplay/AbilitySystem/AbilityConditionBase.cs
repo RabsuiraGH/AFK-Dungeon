@@ -1,10 +1,10 @@
 ﻿
 using UnityEngine;
 
-namespace LA.Gameplay.Abilities
+namespace LA.Gameplay.AbilitySystem
 {
     /// <summary>
-    /// Base class for unity storage. Use  <see cref="LA.Gameplay.Abilities.AbilityCondition"/>
+    /// Base class for unity storage. Use  <see cref="AbilityCondition{TParams}"/>
     /// to work with custom conditions.
     /// </summary>
     public abstract class AbilityConditionBase : ScriptableObject

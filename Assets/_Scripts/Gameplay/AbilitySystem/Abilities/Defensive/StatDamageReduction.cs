@@ -1,7 +1,7 @@
-﻿using LA.Gameplay.Abilities.Interfaces;
+﻿using LA.Gameplay.AbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace LA.Gameplay.Abilities.Abilities
+namespace LA.Gameplay.AbilitySystem.Abilities
 {
     [CreateAssetMenu(fileName = "StatDamageReduction", menuName = "Game/Abilities/Defensive/Stat Damage Reduction")]
     public class StatDamageReduction : AbilitySO, IDefensiveAbility, IOnBeforeHitAbility

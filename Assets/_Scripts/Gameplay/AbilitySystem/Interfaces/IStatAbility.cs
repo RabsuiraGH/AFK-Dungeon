@@ -1,4 +1,4 @@
-﻿namespace LA.Gameplay.Abilities.Interfaces
+﻿namespace LA.Gameplay.AbilitySystem.Interfaces
 {
     public interface IStatAbility : IAbility
     {

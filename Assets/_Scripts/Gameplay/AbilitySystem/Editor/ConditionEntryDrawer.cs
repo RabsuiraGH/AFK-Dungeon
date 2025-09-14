@@ -3,7 +3,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace LA.Gameplay.Abilities.Editor
+namespace LA.Gameplay.AbilitySystem.Editor
 {
     [CustomPropertyDrawer(typeof(ConditionEntry))]
     public class ConditionEntryDrawer : PropertyDrawer

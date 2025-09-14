@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using LA.Gameplay.Abilities;
+using LA.Gameplay.AbilitySystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

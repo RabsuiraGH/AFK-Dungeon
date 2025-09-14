@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using LA.Gameplay.Abilities;
+using LA.Gameplay.AbilitySystem;
 using UnityEngine;
 
-namespace LA.Gameplay.Abilities
+namespace LA.Gameplay.AbilitySystem
 {
     public abstract class AbilitySO : ScriptableObject
     {
