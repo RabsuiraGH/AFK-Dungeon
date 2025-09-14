@@ -7,7 +7,7 @@ namespace LA.Gameplay.Abilities.Abilities
 {
     [CreateAssetMenu(fileName = "DamageRedStatConditionAbility",
                      menuName = "Game/Abilities/Defensive/Damage Red Stat Condition")]
-    public class DamageRedStatConditionAbility : AbilitySO, IDefensiveAbility, IOnBeforeHitAbility, IConditionalAbility
+    public class DamageRedStatConditionAbility : AbilitySO, IDefensiveAbility, IOnBeforeHitAbility
     {
         [field: SerializeField] public List<StatCompare> StatsToCompare { get; protected set; } = new();
         [field: SerializeField] public int Reduction { get; protected set; }

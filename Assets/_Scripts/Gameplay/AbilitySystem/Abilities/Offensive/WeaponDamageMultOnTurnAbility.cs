@@ -5,7 +5,7 @@ namespace LA.Gameplay.Abilities.Abilities
 {
     [CreateAssetMenu(fileName = "WeaponDamageMultOnTurnAbility",
                      menuName = "Game/Abilities/Offensive/Weapon Damage Mult On Turn")]
-    public class WeaponDamageMultOnTurnAbility : AbilitySO, IOffensiveAbility, IOnBeforeHitAbility, IConditionalAbility
+    public class WeaponDamageMultOnTurnAbility : AbilitySO, IOffensiveAbility, IOnBeforeHitAbility
     {
         [field: SerializeField] public int ActivateOnTurn { get; protected set; }
         [field: SerializeField] public int Multiplier { get; protected set; }

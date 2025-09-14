@@ -7,7 +7,7 @@ namespace LA.Gameplay.Abilities.Abilities
 {
     [CreateAssetMenu(fileName = "DamageModStatConditionAbility",
                      menuName = "Game/Abilities/Offensive/Damage Mod Stat Condition")]
-    public class DamageModStatConditionAbility : AbilitySO, IOffensiveAbility, IOnBeforeHitAbility, IConditionalAbility
+    public class DamageModStatConditionAbility : AbilitySO, IOffensiveAbility, IOnBeforeHitAbility
     {
         [field: SerializeField] public List<StatCompare> StatsToCompare { get; protected set; } = new();
         [field: SerializeField] public int DamageBonus { get; protected set; }
