@@ -20,3 +20,4 @@ MonoBehaviour:
     <Agility>k__BackingField: 1
     <Endurance>k__BackingField: 1
   <DeathDrop>k__BackingField: {fileID: 11400000, guid: fb2840ade3b4cd74fa912127aad997a8, type: 2}
+  <Abilities>k__BackingField: []

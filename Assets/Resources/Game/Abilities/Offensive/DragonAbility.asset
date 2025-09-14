@@ -9,10 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33822a871229441889ade9004ec0e363, type: 3}
+  m_Script: {fileID: 11500000, guid: 41c5e98182da4d008bf13c181edd2004, type: 3}
   m_Name: DragonAbility
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Fire breath
-  <Damage>k__BackingField: 3
-  <OnTurn>k__BackingField: 3
-  <Repeat>k__BackingField: 1
+  <Name>k__BackingField: Fire Breath
+  <Conditions>k__BackingField:
+  - _condition: {fileID: 11400000, guid: 212abfea176185643968924658e55e06, type: 2}
+    _parameters:
+      rid: 8723951104452198477
+  <DamageBonus>k__BackingField: 3
+  <DamageType>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 8723951104452198477
+      type: {class: TurnConditionParameters, ns: LA.Gameplay.AbilitySystem.Conditions, asm: Assembly-CSharp}
+      data:
+        <OnTurn>k__BackingField: 03000000
+        <RepeatEach>k__BackingField: 1
+        <UseGlobalTurn>k__BackingField: 0

@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Poison
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Poison
-  <FirstTurnDamage>k__BackingField: 0
+  <Conditions>k__BackingField: []
+  <BaseDamage>k__BackingField: 0
   <BonusDamagePerTurn>k__BackingField: 1
-  <DurationInProcs>k__BackingField: 3
+  <DurationInProcs>k__BackingField: 999
   <ProcOnlyOnMyTurn>k__BackingField: 1
+  references:
+    version: 2
+    RefIds: []
