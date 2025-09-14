@@ -3,7 +3,7 @@ using System.Linq;
 using LA.Gameplay.Abilities;
 using UnityEngine;
 
-namespace LA.Gameplay.Abilities.Conditions
+namespace LA.Gameplay.AbilitySystem
 {
     [CreateAssetMenu(fileName = "StatCondition", menuName = "Game/Abilities/Conditions/Stat Condition")]
     public class StatCondition : AbilityCondition<StatConditionParametersBase>

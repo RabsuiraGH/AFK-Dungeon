@@ -13,7 +13,17 @@ MonoBehaviour:
   m_Name: StealthAttack
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Stealth attack
-  <StatsToCompare>k__BackingField:
-  - <StatType>k__BackingField: 0
-    <StatCompareType>k__BackingField: 1
+  <Conditions>k__BackingField:
+  - _condition: {fileID: 11400000, guid: 94921781a1b809647b3306b5a333b167, type: 2}
+    _parameters:
+      rid: 8723951090847973457
   <DamageBonus>k__BackingField: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 8723951090847973457
+      type: {class: StatConditionParametersBase, ns: LA.Gameplay.Abilities.Conditions, asm: Assembly-CSharp}
+      data:
+        <StatsToCompare>k__BackingField:
+        - <StatType>k__BackingField: 0
+          <StatCompareType>k__BackingField: 1
