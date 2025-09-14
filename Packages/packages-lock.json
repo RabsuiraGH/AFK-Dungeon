@@ -12,7 +12,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "6cb520b6a2c78879b5e46e157775a69effc45120"
+      "hash": "e45b346676a786127c2fd286c560992c61ffb437"
     },
     "com.rabsuiragh.hierarchy2": {
       "version": "https://github.com/RabsuiraGH/Hierarchy2Package.git#upm-preset",
