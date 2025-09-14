@@ -16,7 +16,7 @@ namespace LA.Gameplay.Abilities
     /// Class to work with condition parameters.
     /// </summary>
     /// <typeparam name="TParams">Condition parameters to work with.</typeparam>
-    public abstract class AbilityCondition<TParams> : AbilityConditionBase where TParams : ConditionParameters
+    public abstract class AbilityCondition<TParams> : AbilityConditionBase where TParams : ConditionParametersBase
     {
         public abstract bool IsMet(BattleContext context, TParams parameters);
 
