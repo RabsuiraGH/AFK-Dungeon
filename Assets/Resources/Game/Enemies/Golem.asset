@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2c304992ac06443a0bf686ea5993b5, type: 3}
+  m_Name: Golem
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Golem
+  <BaseHealth>k__BackingField: 10
+  <BaseWeapon>k__BackingField: {fileID: 11400000, guid: 2b9f6986d03a5854cadaac004550101b, type: 2}
+  <BaseStats>k__BackingField:
+    <Strength>k__BackingField: 3
+    <Agility>k__BackingField: 1
+    <Endurance>k__BackingField: 3
+  <DeathDrop>k__BackingField: {fileID: 11400000, guid: e0f5a3054c9655f4bba3a323f5f120dc, type: 2}
+  <Abilities>k__BackingField:
+  - {fileID: 11400000, guid: 4a005a3136af5a0498872010998ad41e, type: 2}

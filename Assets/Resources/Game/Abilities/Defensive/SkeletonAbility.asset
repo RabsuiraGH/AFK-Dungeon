@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11aa12deec7414e9250ffdd16b0fe30, type: 3}
-  m_Name: SkeletAbility
+  m_Name: SkeletonAbility
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Double damage from crush weapon
   <Conditions>k__BackingField:

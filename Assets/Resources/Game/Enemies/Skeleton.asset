@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2c304992ac06443a0bf686ea5993b5, type: 3}
+  m_Name: Skeleton
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Skeleton
+  <BaseHealth>k__BackingField: 10
+  <BaseWeapon>k__BackingField: {fileID: 11400000, guid: da5a75cd48946e24b993a003709b83ae, type: 2}
+  <BaseStats>k__BackingField:
+    <Strength>k__BackingField: 2
+    <Agility>k__BackingField: 2
+    <Endurance>k__BackingField: 1
+  <DeathDrop>k__BackingField: {fileID: 11400000, guid: e7295817f7c6d454b87d5a61dc9acbb0, type: 2}
+  <Abilities>k__BackingField:
+  - {fileID: 11400000, guid: 2448d9eadafeb9c47b69d90f5a398cba, type: 2}

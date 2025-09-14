@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2c304992ac06443a0bf686ea5993b5, type: 3}
+  m_Name: Slime
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Slime
+  <BaseHealth>k__BackingField: 8
+  <BaseWeapon>k__BackingField: {fileID: 11400000, guid: dd070348e09eda2408fbeffa57fd5821, type: 2}
+  <BaseStats>k__BackingField:
+    <Strength>k__BackingField: 3
+    <Agility>k__BackingField: 1
+    <Endurance>k__BackingField: 2
+  <DeathDrop>k__BackingField: {fileID: 11400000, guid: c6725914217478e4ca276f8250c0e443, type: 2}
+  <Abilities>k__BackingField:
+  - {fileID: 11400000, guid: e0a4a7b7230a8e445b55bdc2f5fab1a1, type: 2}

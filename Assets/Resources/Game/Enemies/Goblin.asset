@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2c304992ac06443a0bf686ea5993b5, type: 3}
   m_Name: Goblin
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: "\u0413\u043E\u0431\u043B\u0438\u043D"
+  <Name>k__BackingField: Goblin
   <BaseHealth>k__BackingField: 5
   <BaseWeapon>k__BackingField: {fileID: 11400000, guid: ae793c394c194974e843fc0a797df18e, type: 2}
   <BaseStats>k__BackingField:
