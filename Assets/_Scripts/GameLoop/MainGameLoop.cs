@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using LA.Gameplay.AbilitySystem;
 using LA.Gameplay.AbilitySystem.Interfaces;
@@ -18,6 +19,7 @@ namespace LA
         [SerializeField] private BattleUnit _defendingUnit;
 
         [SerializeField] private int _currentTurn = 0;
+        private Dictionary<BattleUnit, int> _turnCounters = new();
 
         public event Action<BattleUnit> OnPlayerAppears;
         public event Action<BattleUnit> OnEnemyAppears;
@@ -58,9 +60,16 @@ namespace LA
         }
 
 
+        private void EnsureCounter(BattleUnit unit)
+        {
+            _turnCounters.TryAdd(unit, 0);
+        }
+
+
         public void SimulateTurn()
         {
             _currentTurn += 1;
+
 
             if (_currentTurn == 1)
             {
@@ -69,12 +78,16 @@ namespace LA
                 DecideFirstTurn();
             }
 
+            EnsureCounter(_attackingUnit);
+            _turnCounters[_attackingUnit]++;
+
             BattleContext context = new()
             {
                 TurnNumber = _currentTurn,
                 Attacker = _attackingUnit,
                 Defender = _defendingUnit,
-                WeaponDamage = _attackingUnit.CurrentWeapon.ToDamageContext()
+                WeaponDamage = _attackingUnit.CurrentWeapon.ToDamageContext(),
+                TurnCounters = new Dictionary<BattleUnit, int>(_turnCounters)
             };
 
             int hitChance = Random.Range(1, context.Attacker.Stats.Agility + context.Defender.Stats.Agility + 1);
@@ -86,12 +99,14 @@ namespace LA
             foreach (IOnBeforeHitAbility beforeHitAbility in context.Attacker.Abilities.OfType<IOffensiveAbility>()
                                                                     .OfType<IOnBeforeHitAbility>())
             {
+                context.AbilityOwner = context.Attacker;
                 beforeHitAbility.OnBeforeHit(context);
             }
 
             foreach (IOnBeforeHitAbility beforeHitAbility in context.Defender.Abilities.OfType<IDefensiveAbility>()
                                                                     .OfType<IOnBeforeHitAbility>())
             {
+                context.AbilityOwner = context.Defender;
                 beforeHitAbility.OnBeforeHit(context);
             }
 

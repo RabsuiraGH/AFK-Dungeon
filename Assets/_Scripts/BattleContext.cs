@@ -9,6 +9,11 @@ namespace LA
         public BattleUnit Attacker;
         public BattleUnit Defender;
 
+        public BattleUnit AbilityOwner;
+
+        public IReadOnlyDictionary<BattleUnit, int> TurnCounters;
+
+
         public DamageContext WeaponDamage;
 
         public readonly List<DamageContext> OtherDamages = new();
@@ -17,7 +22,10 @@ namespace LA
         public bool IsHit;
         public int HitChance;
 
-
+        public int GetTurnCountFor(BattleUnit unit)
+        {
+            return TurnCounters.GetValueOrDefault(unit, 0);
+        }
         public void AddDamage(DamageContext damageContext)
         {
             OtherDamages.Add(damageContext);
