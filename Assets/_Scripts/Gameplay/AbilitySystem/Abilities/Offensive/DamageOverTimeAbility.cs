@@ -17,6 +17,8 @@ namespace LA.Gameplay.AbilitySystem.Abilities
 
         public void OnBeforeHit(BattleContext context)
         {
+            if(!IsAllConditionsMet(context)) return;
+
             int proc = ProcOnlyOnMyTurn ? context.GetTurnCountFor(context.AbilityOwner) : context.TurnNumber;
 
             if (proc >= DurationInProcs)

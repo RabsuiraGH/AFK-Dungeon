@@ -9,13 +9,12 @@ namespace LA.Gameplay.AbilitySystem.Abilities
     {
         public void OnBeforeHit(BattleContext context)
         {
-            if (IsAllConditionsMet(context))
-            {
-                DamageContext damage = context.GetWeaponDamage(context.Attacker);
+            if (!IsAllConditionsMet(context)) return;
 
-                damage.ModifyDamage(-damage.BaseDamage);
-                Log($"Owner: {context.AbilityOwner} Damage Immunity: {damage.BaseDamage}");
-            }
+            DamageContext damage = context.GetWeaponDamage(context.Attacker);
+
+            damage.ModifyDamage(-damage.BaseDamage);
+            Log($"Owner: {context.AbilityOwner} Damage Immunity: {damage.BaseDamage}");
         }
     }
 }

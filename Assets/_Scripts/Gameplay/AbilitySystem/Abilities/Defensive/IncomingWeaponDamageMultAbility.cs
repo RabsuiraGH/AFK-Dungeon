@@ -12,12 +12,11 @@ namespace LA.Gameplay.AbilitySystem.Abilities
 
         public void OnBeforeHit(BattleContext context)
         {
-            if (IsAllConditionsMet(context))
-            {
-                int bonusDamage = context.GetWeaponDamage(context.Attacker).BaseDamage * (Multiplier - 1);
-                context.GetWeaponDamage(context.Attacker).ModifyDamage(bonusDamage);
-                Log($"Owner: {context.AbilityOwner} Bonus Damage: {bonusDamage}");
-            }
+            if (!IsAllConditionsMet(context)) return;
+
+            int bonusDamage = context.GetWeaponDamage(context.Attacker).BaseDamage * (Multiplier - 1);
+            context.GetWeaponDamage(context.Attacker).ModifyDamage(bonusDamage);
+            Log($"Owner: {context.AbilityOwner} Bonus Damage: {bonusDamage}");
         }
     }
 }

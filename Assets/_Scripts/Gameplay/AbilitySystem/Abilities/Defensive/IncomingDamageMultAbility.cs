@@ -12,11 +12,10 @@ namespace LA.Gameplay.AbilitySystem.Abilities
 
         public void OnBeforeHit(BattleContext context)
         {
-            if (IsAllConditionsMet(context))
-            {
-                context.AddDamageMultiplier(Multiplier, context.Attacker);
-                Log($"Owner: {context.AbilityOwner} Damage Multiplier: {Multiplier}");
-            }
+            if (!IsAllConditionsMet(context)) return;
+
+            context.AddDamageMultiplier(Multiplier, context.Attacker);
+            Log($"Owner: {context.AbilityOwner} Damage Multiplier: {Multiplier}");
         }
     }
 }

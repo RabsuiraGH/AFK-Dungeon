@@ -11,6 +11,8 @@ namespace LA.Gameplay.AbilitySystem.Abilities
 
         public void OnBeforeHit(BattleContext context)
         {
+            if(!IsAllConditionsMet(context)) return;
+
             Stats temp = new(context.Defender.Stats);
             temp.MultiplyStats(ReductionStatMultiplier);
 
