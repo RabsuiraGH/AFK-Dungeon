@@ -1,8 +1,9 @@
 ﻿namespace LA.Gameplay
 {
-    public enum DamageSource
+    public enum BattleRole
     {
         Attacker,
-        Defender
+        Defender,
+        Any
     }
 }

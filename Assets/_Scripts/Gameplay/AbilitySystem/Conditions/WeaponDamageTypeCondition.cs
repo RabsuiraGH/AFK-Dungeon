@@ -8,7 +8,7 @@ namespace LA.Gameplay.AbilitySystem.Conditions
     {
         public override bool IsMet(BattleContext context, WeaponDamageTypeConditionParameters parameters)
         {
-            if (parameters.DamageSource == DamageSource.Attacker)
+            if (parameters.DamageSourceRole == BattleRole.Attacker)
             {
                 return context.GetWeaponDamage(context.Attacker).DamageType == parameters.DamageType;
             }
@@ -23,6 +23,6 @@ namespace LA.Gameplay.AbilitySystem.Conditions
     public class WeaponDamageTypeConditionParameters : ConditionParametersBase
     {
         [field: SerializeField] public DamageType DamageType { get; private set; }
-        [field: SerializeField] public DamageSource DamageSource { get; private set; }
+        [field: SerializeField] public BattleRole DamageSourceRole { get; private set; }
     }
 }
