@@ -42,9 +42,10 @@ namespace LA
         }
 
 
-        public void Reset()
+        public void ResetBattle()
         {
             _currentTurn = 0;
+            _turnCounters = new Dictionary<BattleUnit, int>();
         }
 
 

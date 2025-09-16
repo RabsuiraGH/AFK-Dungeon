@@ -28,7 +28,7 @@ namespace LA.UI
         [EasyButtons.Button]
         public void OneClickStartBattle()
         {
-            _mainGameLoop.Reset();
+            _mainGameLoop.ResetBattle();
             _player.RestoreHealth();
             AddRandomEnemy();
             using CancellationTokenSource cts = new CancellationTokenSource();
@@ -76,7 +76,7 @@ namespace LA.UI
         [EasyButtons.Button]
         public void Reset()
         {
-            _mainGameLoop.Reset();
+            _mainGameLoop.ResetBattle();
         }
     }
 }
