@@ -16,6 +16,7 @@ namespace LA
 
         public override void Init()
         {
+            Name = "Player";
             MaxHealth = 0;
             CurrentWeapon = new Weapon();
             Abilities = new List<AbilitySO>();
