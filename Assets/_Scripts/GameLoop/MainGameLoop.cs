@@ -96,31 +96,38 @@ namespace LA
             bool isHit = _defendingUnit.IsHit(hitChance);
 
 
-            context.AbilityOwner = context.Attacker;
-            foreach (IOnBeforeHitAbility beforeHitAbility in context.Attacker.Abilities.OfType<IOnBeforeHitAbility>())
-            {
-                beforeHitAbility.OnBeforeHit(context);
-            }
-
-            context.AbilityOwner = context.Defender;
-            foreach (IOnBeforeHitAbility beforeHitAbility in context.Defender.Abilities.OfType<IOnBeforeHitAbility>())
-            {
-                beforeHitAbility.OnBeforeHit(context);
-            }
+            OnBeforeHitAbilities(context.Attacker);
+            OnBeforeHitAbilities(context.Defender);
 
             int totalDamage = 0;
             if (isHit)
             {
                 totalDamage = context.GetTotalDamage(context.Attacker);
 
-                context.Defender.TakeDamage(totalDamage);
+                if (totalDamage > 0)
+                {
+                    context.Defender.TakeDamage(totalDamage);
+                }
             }
 
-            Debug.Log(($"{_currentTurn}-{_attackingUnit.GetType().Name}: Hit chance: {hitChance} | Is hit: {isHit} | Damage: {totalDamage}"));
+            totalDamage = context.GetTotalDamage(context.Defender);
+            context.Attacker.TakeDamage(totalDamage);
+
+
+            //Debug.Log(($"{_currentTurn}-{_attackingUnit.GetType().Name}: Hit chance: {hitChance} | Is hit: {isHit} | Damage: {totalDamage}"));
 
             OnPlayerUpdates?.Invoke(_player);
             OnEnemyUpdates?.Invoke(_enemy);
             SwapUnits();
+
+            void OnBeforeHitAbilities(BattleUnit owner)
+            {
+                context.AbilityOwner = owner;
+                foreach (IOnBeforeHitAbility ability in context.AbilityOwner.Abilities.OfType<IOnBeforeHitAbility>())
+                {
+                    ability.OnBeforeHit(context);
+                }
+            }
         }
 
 
