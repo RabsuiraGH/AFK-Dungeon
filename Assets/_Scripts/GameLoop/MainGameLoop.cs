@@ -28,9 +28,11 @@ namespace LA
         public event Action<BattleUnit> OnEnemyUpdates;
 
 
+        private IRandomService _randomService;
         [VContainer.Inject]
-        public void Construct(Player player)
+        public void Construct(Player player, IRandomService randomService)
         {
+            _randomService = randomService;
             _player = player;
         }
 
@@ -91,7 +93,7 @@ namespace LA
             };
             context.Init();
 
-            int hitChance = Random.Range(1, context.Attacker.Stats.Agility + context.Defender.Stats.Agility + 1);
+            int hitChance = _randomService.Range(1, context.Attacker.Stats.Agility + context.Defender.Stats.Agility + 1);
 
 
             bool isHit = _defendingUnit.IsHit(hitChance);
