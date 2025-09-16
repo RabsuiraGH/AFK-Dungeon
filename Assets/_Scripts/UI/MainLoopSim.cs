@@ -24,6 +24,16 @@ namespace LA.UI
             _enemyDatabase = LoadAssetUtility.Load<EnemyDatabase>(pathConfig.EnemyDatabase);
         }
 
+        [EasyButtons.Button]
+        public void StartBattle(EnemySO enemy)
+        {
+            _mainGameLoop.ResetBattle();
+            _player.RestoreHealth();
+            _mainGameLoop.CreateEnemy(enemy);
+            using CancellationTokenSource cts = new CancellationTokenSource();
+            _ = SimulateBattle(cts.Token);
+        }
+
 
         [EasyButtons.Button]
         public void OneClickStartBattle()
@@ -32,7 +42,7 @@ namespace LA.UI
             _player.RestoreHealth();
             AddRandomEnemy();
             using CancellationTokenSource cts = new CancellationTokenSource();
-            SimulateBattle(cts.Token);
+            _ = SimulateBattle(cts.Token);
         }
 
 

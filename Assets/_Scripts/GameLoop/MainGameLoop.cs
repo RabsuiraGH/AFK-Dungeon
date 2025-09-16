@@ -87,7 +87,6 @@ namespace LA
                 TurnNumber = _currentTurn,
                 Attacker = _attackingUnit,
                 Defender = _defendingUnit,
-                WeaponDamage = _attackingUnit.CurrentWeapon.ToDamageContext(),
                 TurnCounters = new Dictionary<BattleUnit, int>(_turnCounters)
             };
 
@@ -97,24 +96,22 @@ namespace LA
             bool isHit = _defendingUnit.IsHit(hitChance);
 
 
-            foreach (IOnBeforeHitAbility beforeHitAbility in context.Attacker.Abilities.OfType<IOffensiveAbility>()
-                                                                    .OfType<IOnBeforeHitAbility>())
+            context.AbilityOwner = context.Attacker;
+            foreach (IOnBeforeHitAbility beforeHitAbility in context.Attacker.Abilities.OfType<IOnBeforeHitAbility>())
             {
-                context.AbilityOwner = context.Attacker;
                 beforeHitAbility.OnBeforeHit(context);
             }
 
-            foreach (IOnBeforeHitAbility beforeHitAbility in context.Defender.Abilities.OfType<IDefensiveAbility>()
-                                                                    .OfType<IOnBeforeHitAbility>())
+            context.AbilityOwner = context.Defender;
+            foreach (IOnBeforeHitAbility beforeHitAbility in context.Defender.Abilities.OfType<IOnBeforeHitAbility>())
             {
-                context.AbilityOwner = context.Defender;
                 beforeHitAbility.OnBeforeHit(context);
             }
 
             int totalDamage = 0;
             if (isHit)
             {
-                totalDamage = context.GetTotalDamage();
+                totalDamage = context.GetTotalDamage(context.Attacker);
 
                 context.Defender.TakeDamage(totalDamage);
             }

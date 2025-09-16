@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 
 namespace LA
 {
@@ -13,40 +15,73 @@ namespace LA
 
         public IReadOnlyDictionary<BattleUnit, int> TurnCounters;
 
-
-        public DamageContext WeaponDamage;
-
-        public readonly List<DamageContext> OtherDamages = new();
-        public readonly List<int> DamageMultipliers = new();
+        private Dictionary<BattleUnit, DamageContext> _weaponDamage;
+        private Dictionary<BattleUnit, List<DamageContext>> _otherDamages;
+        private Dictionary<BattleUnit, List<int>> _damageMultipliers;
 
         public bool IsHit;
         public int HitChance;
+
+
+        public void Init()
+        {
+            _weaponDamage = new Dictionary<BattleUnit, DamageContext>
+            {
+                { Attacker, Attacker.CurrentWeapon.ToDamageContext() },
+                { Defender, Defender.CurrentWeapon.ToDamageContext() }
+            };
+            _otherDamages = new Dictionary<BattleUnit, List<DamageContext>>
+            {
+                { Attacker, new List<DamageContext>() },
+                { Defender, new List<DamageContext>() }
+            };
+            _damageMultipliers = new Dictionary<BattleUnit, List<int>>
+            {
+                { Attacker, new List<int>() },
+                { Defender, new List<int>() }
+            };
+        }
+
 
         public int GetTurnCountFor(BattleUnit unit)
         {
             return TurnCounters.GetValueOrDefault(unit, 0);
         }
-        public void AddDamage(DamageContext damageContext)
+
+
+        public DamageContext GetWeaponDamage(BattleUnit weaponOwner = null)
         {
-            OtherDamages.Add(damageContext);
+            return _weaponDamage[weaponOwner];
         }
 
 
-        public void AddDamageMultiplier(int value)
+        public void AddWeaponDamage(int bonusDamage, BattleUnit damageSource = null)
         {
-            DamageMultipliers.Add(value);
+            _weaponDamage[damageSource].ModifyDamage(bonusDamage);
         }
 
 
-        public int GetTotalDamage()
+        public void AddDamage(DamageContext damageContext, BattleUnit damageSource = null)
+        {
+            _otherDamages[damageSource].Add(damageContext);
+        }
+
+
+        public void AddDamageMultiplier(int value, BattleUnit damageSource = null)
+        {
+            _damageMultipliers[damageSource].Add(value);
+        }
+
+
+        public int GetTotalDamage(BattleUnit damageSource)
         {
             int totalDamage = 0;
 
-            totalDamage += WeaponDamage.TotalDamage;
-            totalDamage += OtherDamages.Sum(x => x.TotalDamage);
-            totalDamage += Attacker.Stats.Strength;
+            totalDamage += _weaponDamage[damageSource].TotalDamage;
+            totalDamage += _otherDamages[damageSource].Sum(x => x.TotalDamage);
+            totalDamage += damageSource.Stats.Strength;
 
-            totalDamage *= DamageMultipliers.Aggregate(1, (x, y) => x * y);
+            totalDamage *= _damageMultipliers[damageSource].Aggregate(1, (x, y) => x * y);
             return totalDamage;
         }
     }

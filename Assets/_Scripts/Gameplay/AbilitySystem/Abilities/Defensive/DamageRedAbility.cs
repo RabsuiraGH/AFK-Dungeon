@@ -15,7 +15,7 @@ namespace LA.Gameplay.AbilitySystem.Abilities
         {
             if (!IsAllConditionsMet(context)) return;
 
-            context.AddDamage(new DamageContext(-Reduction, DamageType.None, Name));
+            context.AddDamage(new DamageContext(-Reduction, DamageType.None, Name), context.Attacker);
 
             Log($"Owner: {context.AbilityOwner} Damage Reduction: {Reduction}");
         }

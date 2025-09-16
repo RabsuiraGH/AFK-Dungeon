@@ -11,8 +11,10 @@ namespace LA.Gameplay.AbilitySystem.Abilities
         {
             if (IsAllConditionsMet(context))
             {
-                context.WeaponDamage.ModifyDamage(-context.WeaponDamage.BaseDamage);
-                Log($"Owner: {context.AbilityOwner} Damage Immunity: {context.WeaponDamage.BaseDamage}");
+                DamageContext damage = context.GetWeaponDamage(context.Attacker);
+
+                damage.ModifyDamage(-damage.BaseDamage);
+                Log($"Owner: {context.AbilityOwner} Damage Immunity: {damage.BaseDamage}");
             }
         }
     }

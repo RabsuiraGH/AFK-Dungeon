@@ -14,8 +14,8 @@ namespace LA.Gameplay.AbilitySystem.Abilities
         {
             if (IsAllConditionsMet(context))
             {
-                int bonusDamage = context.WeaponDamage.BaseDamage * (Multiplier - 1);
-                context.WeaponDamage.ModifyDamage(bonusDamage);
+                int bonusDamage = context.GetWeaponDamage(context.Attacker).BaseDamage * (Multiplier - 1);
+                context.GetWeaponDamage(context.Attacker).ModifyDamage(bonusDamage);
                 Log($"Owner: {context.AbilityOwner} Bonus Damage: {bonusDamage}");
             }
         }
