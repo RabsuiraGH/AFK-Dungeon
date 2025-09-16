@@ -111,11 +111,13 @@ namespace LA
                 }
             }
 
-            totalDamage = context.GetTotalDamage(context.Defender);
+
+            Debug.Log(($"{_currentTurn} - {context.Attacker.Name}: Hit chance: {hitChance} | Is hit: {isHit} | Damage: {totalDamage}"));
+
+            totalDamage = context.GetTotalOtherDamage(context.Defender);
             context.Attacker.TakeDamage(totalDamage);
 
 
-            //Debug.Log(($"{_currentTurn}-{_attackingUnit.GetType().Name}: Hit chance: {hitChance} | Is hit: {isHit} | Damage: {totalDamage}"));
 
             OnPlayerUpdates?.Invoke(_player);
             OnEnemyUpdates?.Invoke(_enemy);

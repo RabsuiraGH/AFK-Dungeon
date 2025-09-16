@@ -89,5 +89,15 @@ namespace LA
             totalDamage *= _damageMultipliers[damageSource].Aggregate(1, (x, y) => x * y);
             return totalDamage;
         }
+
+        public int GetTotalOtherDamage(BattleUnit damageSource)
+        {
+            int totalDamage = 0;
+
+            totalDamage += _otherDamages[damageSource].Sum(x => x.TotalDamage);
+
+            totalDamage *= _damageMultipliers[damageSource].Aggregate(1, (x, y) => x * y);
+            return totalDamage;
+        }
     }
 }
