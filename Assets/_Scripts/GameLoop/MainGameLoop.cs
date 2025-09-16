@@ -89,6 +89,7 @@ namespace LA
                 Defender = _defendingUnit,
                 TurnCounters = new Dictionary<BattleUnit, int>(_turnCounters)
             };
+            context.Init();
 
             int hitChance = Random.Range(1, context.Attacker.Stats.Agility + context.Defender.Stats.Agility + 1);
 

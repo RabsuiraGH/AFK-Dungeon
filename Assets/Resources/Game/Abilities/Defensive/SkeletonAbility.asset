@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SkeletonAbility
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Double damage from crush weapon
+  <ApplyWhenRole>k__BackingField: 1
   <Conditions>k__BackingField:
   - _condition: {fileID: 11400000, guid: 664cb0846c30c584895b341a73e4a3d0, type: 2}
     _parameters:
@@ -25,3 +26,4 @@ MonoBehaviour:
       type: {class: WeaponDamageTypeConditionParameters, ns: LA.Gameplay.AbilitySystem.Conditions, asm: Assembly-CSharp}
       data:
         <DamageType>k__BackingField: 2
+        <DamageSourceRole>k__BackingField: 0

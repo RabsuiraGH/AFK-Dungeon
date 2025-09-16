@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: StoneSkin
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Stone skin
+  <ApplyWhenRole>k__BackingField: 1
+  <Conditions>k__BackingField: []
   <ReductionStatMultiplier>k__BackingField:
     <Strength>k__BackingField: 0
     <Agility>k__BackingField: 0
     <Endurance>k__BackingField: 1
+  references:
+    version: 2
+    RefIds: []

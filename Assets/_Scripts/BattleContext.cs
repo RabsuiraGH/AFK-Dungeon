@@ -51,24 +51,29 @@ namespace LA
 
         public DamageContext GetWeaponDamage(BattleUnit weaponOwner = null)
         {
+            weaponOwner ??= AbilityOwner;
+
             return _weaponDamage[weaponOwner];
         }
 
 
         public void AddWeaponDamage(int bonusDamage, BattleUnit damageSource = null)
         {
+            damageSource ??= AbilityOwner;
             _weaponDamage[damageSource].ModifyDamage(bonusDamage);
         }
 
 
         public void AddDamage(DamageContext damageContext, BattleUnit damageSource = null)
         {
+            damageSource ??= AbilityOwner;
             _otherDamages[damageSource].Add(damageContext);
         }
 
 
         public void AddDamageMultiplier(int value, BattleUnit damageSource = null)
         {
+            damageSource ??= AbilityOwner;
             _damageMultipliers[damageSource].Add(value);
         }
 
