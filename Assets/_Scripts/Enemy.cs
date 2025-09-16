@@ -16,6 +16,7 @@ namespace LA
         }
         public override void Init()
         {
+            Name = EnemyBase.Name;
             MaxHealth = EnemyBase.BaseHealth;
             Stats = EnemyBase.BaseStats;
             RestoreHealth();
