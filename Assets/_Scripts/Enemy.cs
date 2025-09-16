@@ -36,17 +36,5 @@ namespace LA
         {
             return EnemyBase.BaseWeapon.BaseDamage;
         }
-
-
-        public override void TakeDamage(int damage)
-        {
-            CurrentHealth -= damage;
-        }
-
-
-        public override bool IsDead()
-        {
-            return CurrentHealth <= 0;
-        }
     }
 }

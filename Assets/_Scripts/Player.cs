@@ -92,17 +92,5 @@ namespace LA
         {
             return CurrentWeapon.Damage + Stats.Strength;
         }
-
-
-        public override void TakeDamage(int damage)
-        {
-            CurrentHealth -= damage;
-        }
-
-
-        public override bool IsDead()
-        {
-            return CurrentHealth <= 0;
-        }
     }
 }

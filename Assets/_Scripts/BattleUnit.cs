@@ -15,6 +15,7 @@ namespace LA
 
         [field: SerializeField] public List<AbilitySO> Abilities { get; protected set; } = new List<AbilitySO>();
 
+
         public void RestoreHealth()
         {
             CurrentHealth = MaxHealth;
@@ -22,12 +23,21 @@ namespace LA
 
 
         public abstract void Init();
+
         public abstract bool IsHit(int hitValue);
 
         public abstract int GetDamage();
 
-        public abstract void TakeDamage(int damage);
 
-        public abstract bool IsDead();
+        public virtual void TakeDamage(int damage)
+        {
+            CurrentHealth -= damage;
+        }
+
+
+        public virtual bool IsDead()
+        {
+            return CurrentHealth <= 0;
+        }
     }
 }
