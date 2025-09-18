@@ -52,10 +52,9 @@ namespace LA.UI
         {
             unitInfoUI.SetUnitName(unit.Name);
             unitInfoUI.SetHealth(unit.CurrentHealth, unit.MaxHealth);
-            unitInfoUI.SetAgility(unit.Stats.Agility);
-            unitInfoUI.SetStrength(unit.Stats.Strength);
-            unitInfoUI.SetEndurance(unit.Stats.Endurance);
-            unitInfoUI.SetWeaponIcon(unit.CurrentWeapon.WeaponSource.Sprite);
+            unitInfoUI.SetStats(unit.Stats.GetStats());
+            unitInfoUI.SetWeaponData(unit.CurrentWeapon.WeaponSource.Sprite, unit.CurrentWeapon.WeaponSource.Name,
+                                     unit.CurrentWeapon.WeaponSource.Description);
         }
 
 

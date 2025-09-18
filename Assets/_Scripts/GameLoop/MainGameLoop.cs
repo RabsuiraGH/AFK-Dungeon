@@ -27,8 +27,12 @@ namespace LA
         public event Action<BattleUnit> OnPlayerUpdates;
         public event Action<BattleUnit> OnEnemyUpdates;
 
+        public event Action OnPlayerWin;
+        public event Action<Enemy> OnPlayerLose;
 
         private IRandomService _randomService;
+
+
         [VContainer.Inject]
         public void Construct(Player player, IRandomService randomService)
         {
@@ -60,6 +64,19 @@ namespace LA
         public string GetWinText()
         {
             return _player.IsDead() ? "You Lose" : "You Win";
+        }
+
+
+        public void OnBattleEnd()
+        {
+            if (!_player.IsDead())
+            {
+                OnPlayerWin?.Invoke();
+            }
+            else
+            {
+                OnPlayerLose?.Invoke(_enemy);
+            }
         }
 
 
@@ -118,7 +135,6 @@ namespace LA
 
             totalDamage = context.GetTotalOtherDamage(context.Defender);
             context.Attacker.TakeDamage(totalDamage);
-
 
 
             OnPlayerUpdates?.Invoke(_player);

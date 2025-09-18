@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using LA.Gameplay.AbilitySystem;
+using LA.WeaponSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,37 +12,61 @@ namespace LA.UI
 {
     public class ClassCard : TemplateUI, IPointerClickHandler
     {
-        [SerializeField] private Image _image;
-        [SerializeField] private TextMeshProUGUI _name;
+        [SerializeField] private Image _classIcon;
+        [SerializeField] private TextMeshProUGUI _className;
 
-        [SerializeField] private List<IconWithInfo> _newAbilities = new();
-        [SerializeField] private Transform _abilitiesContainer;
+        [SerializeField] private Transform _weaponPanel;
+        [SerializeField] private IconWithInfo _weaponIcon;
+
+        [SerializeField] private TextMeshProUGUI _healthUpgradeText;
+
+        [SerializeField] private Transform _statCardsPanel;
         [SerializeField] private List<StatCard> _statCards;
 
-        [SerializeField] private IconWithInfo _iconWithInfoPrefab;
+        [SerializeField] private Transform _abilitiesPanel;
+        [SerializeField] private List<IconWithInfo> _abilityIcons = new();
+        [SerializeField] private Transform _abilityIconContainer;
 
         public event Action<ClassCard> OnClick;
 
 
-        public void SetData(PlayerClassData classData)
+        public void SetData(PlayerClassData classData, int totalLevel)
         {
-            _image.sprite = classData.Class.ClassIcon;
-            _name.text = classData.Class.ClassName;
+            _classIcon.sprite = classData.Class.ClassIcon;
+            _className.text = classData.Class.ClassName;
+            _healthUpgradeText.text = $"HP: +{classData.Class.HealthPerLevel.ToString()}";
 
             DisplayUpgrade(classData.Class.LevelUpgrades[classData.Level - 1]);
+
+            if (totalLevel == 0)
+            {
+                DisplayWeapon(classData.Class.StartWeapon);
+            }
+            else
+            {
+                _weaponPanel.gameObject.SetActive(false);
+            }
         }
 
 
         private void DisplayUpgrade(LevelUpgrade classLevelUpgrade)
         {
-            // TODO: Add dynamic container creation
             AddStatUpgrades(classLevelUpgrade.StatUpgrades);
             AddAbilities(classLevelUpgrade.NewAbilities);
         }
 
 
+        private void DisplayWeapon(WeaponSO classStartWeapon)
+        {
+            _weaponIcon.SetData(classStartWeapon.Sprite, classStartWeapon.Name, classStartWeapon.Description);
+            _weaponPanel.gameObject.SetActive(true);
+        }
+
+
         private void AddStatUpgrades(Stats statUpgrades)
         {
+            bool anyVisible = false;
+
             foreach (StatCard card in _statCards)
             {
                 int statValue = statUpgrades.GetStat(card.StatType);
@@ -49,30 +75,37 @@ namespace LA.UI
                 {
                     card.UpdateData(statValue);
                     card.Show();
+
+                    anyVisible = true;
                 }
                 else
                 {
                     card.Hide();
                 }
             }
+
+            _statCardsPanel.gameObject.SetActive(anyVisible);
         }
 
 
         private void AddAbilities(List<AbilitySO> newAbilities)
         {
-            for (int i = 0; i < _newAbilities.Count; i++)
-            {
-                _newAbilities[i].Hide();
-            }
+            bool hasAbilities = newAbilities.Any();
 
+            _abilitiesPanel.gameObject.SetActive(hasAbilities);
 
-            for (int i = 0; i < newAbilities.Count; i++)
+            if (!hasAbilities) return;
+
+            for (int i = 0; i < _abilityIcons.Count; i++)
             {
-                Debug.Log(($"{newAbilities[i].Name} {_newAbilities.Count < i}"));
-                if (i < _newAbilities.Count)
+                if (i < newAbilities.Count)
                 {
-                    _newAbilities[i].SetData(newAbilities[i].Icon, newAbilities[i].Name, newAbilities[i].Description);
-                    _newAbilities[i].Show();
+                    _abilityIcons[i].SetData(newAbilities[i].Icon, newAbilities[i].Name, newAbilities[i].Description);
+                    _abilityIcons[i].Show();
+                }
+                else
+                {
+                    _abilityIcons[i].Hide();
                 }
             }
         }

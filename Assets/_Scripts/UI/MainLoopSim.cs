@@ -24,6 +24,7 @@ namespace LA.UI
             _enemyDatabase = LoadAssetUtility.Load<EnemyDatabase>(pathConfig.EnemyDatabase);
         }
 
+
         [EasyButtons.Button]
         public void StartBattle(EnemySO enemy)
         {
@@ -53,6 +54,7 @@ namespace LA.UI
                 _mainGameLoop.SimulateTurn();
                 if (_mainGameLoop.CheckWin())
                 {
+                    _mainGameLoop.OnBattleEnd();
                     break;
                 }
 

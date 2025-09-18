@@ -13,6 +13,8 @@ namespace LA
     {
         [field: SerializeField] public List<PlayerClassData> ClassesData { get; set; } = new();
 
+        public int TotalLevel => ClassesData.Sum(x => x.Level);
+
 
         public override void Init()
         {

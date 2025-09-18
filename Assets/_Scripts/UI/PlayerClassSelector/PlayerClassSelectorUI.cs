@@ -7,40 +7,55 @@ using UnityEngine.UI;
 
 namespace LA.UI
 {
-    public class PlayerClassSelectorUI : MonoBehaviour
+    public class PlayerClassSelectorUI : TemplateUI
     {
-        [SerializeField] private TextMeshProUGUI _currentClasses;
-        [SerializeField] private TMP_Dropdown _dropdown;
-        [SerializeField] private Button _addClassLevelButton;
+        [SerializeField] private TextMeshProUGUI _levelText;
+        [SerializeField] private Transform _contentPanel;
+        [SerializeField] private List<ClassCard> _classCards;
 
+        [SerializeField] private ClassCard _classCardPrefab;
         public event Action<int> OnClassLevelAdded;
 
 
-        public void PrepareUI(List<ClassSO> availableClasses)
+        public void PrepareUI(IReadOnlyList<PlayerClassData> availableClasses, int totalLevel)
         {
-            _currentClasses.text = string.Empty;
-            _dropdown.ClearOptions();
-            List<TMP_Dropdown.OptionData> data = new();
+            _levelText.text = $"Level: {totalLevel + 1}";
 
-            foreach (ClassSO avClass in availableClasses)
+            foreach (PlayerClassData classData in availableClasses)
             {
-                data.Add(new TMP_Dropdown.OptionData(avClass.ClassName));
+                ClassCard card = Instantiate(_classCardPrefab, _contentPanel);
+
+                card.SetData(classData, totalLevel);
+
+                card.OnClick += AddClassLevelButtonPressed;
+                _classCards.Add(card);
             }
-
-            _dropdown.AddOptions(data);
-
-            _dropdown.value = 0;
-
-            _addClassLevelButton.onClick.AddListener(() => OnClassLevelAdded?.Invoke(_dropdown.value));
         }
 
 
-        public void UpdateCurrentClasses(string currentClasses) => _currentClasses.text = currentClasses;
-
-
-        private void OnDestroy()
+        public void UpdateUI(IReadOnlyList<PlayerClassData> availableClasses, int totalLevel)
         {
-            _addClassLevelButton.onClick.RemoveAllListeners();
+            _levelText.text = $"Level: {totalLevel + 1}";
+
+            for (int i = 0; i < availableClasses.Count; i++)
+            {
+                if (i >= _classCards.Count) break;
+
+                if (availableClasses[i].Level > availableClasses[i].Class.MaxLevel)
+                {
+                    _classCards[i].Hide();
+                }
+                else
+                {
+                    _classCards[i].SetData(availableClasses[i], totalLevel);
+                }
+            }
+        }
+
+
+        void AddClassLevelButtonPressed(ClassCard classCard)
+        {
+            OnClassLevelAdded?.Invoke(_classCards.IndexOf(classCard));
         }
     }
 }
