@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LA
@@ -62,6 +63,17 @@ namespace LA
                 StatType.Strength => Strength,
                 StatType.Endurance => Endurance,
                 _ => throw new ArgumentOutOfRangeException(nameof(statType), statType, null)
+            };
+        }
+
+
+        public Dictionary<StatType, int> GetStats()
+        {
+            return new Dictionary<StatType, int>()
+            {
+                { StatType.Agility, Agility },
+                { StatType.Strength, Strength },
+                { StatType.Endurance, Endurance }
             };
         }
     }
