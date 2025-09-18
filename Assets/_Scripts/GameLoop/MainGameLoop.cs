@@ -11,6 +11,8 @@ namespace LA
     [Serializable]
     public class MainGameLoop
     {
+        [field: SerializeField] public int BattleCounter { get; private set; } = 0;
+
         [SerializeField] private Enemy _enemy;
 
         [SerializeField] private Player _player;
@@ -48,6 +50,12 @@ namespace LA
         }
 
 
+        public void ResetGame()
+        {
+            BattleCounter = 0;
+        }
+
+
         public void ResetBattle()
         {
             _currentTurn = 0;
@@ -69,6 +77,7 @@ namespace LA
 
         public void OnBattleEnd()
         {
+            BattleCounter++;
             if (!_player.IsDead())
             {
                 OnPlayerWin?.Invoke();
@@ -110,7 +119,8 @@ namespace LA
             };
             context.Init();
 
-            int hitChance = _randomService.Range(1, context.Attacker.Stats.Agility + context.Defender.Stats.Agility + 1);
+            int hitChance =
+                _randomService.Range(1, context.Attacker.Stats.Agility + context.Defender.Stats.Agility + 1);
 
 
             bool isHit = _defendingUnit.IsHit(hitChance);
