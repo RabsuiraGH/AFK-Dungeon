@@ -8,5 +8,9 @@ namespace LA
     {
         [field: SerializeField, PathField] public string GameScope { get; private set; }
         [field: SerializeField, PathField] public string EnemyDatabase { get; private set; }
+
+        [field: SerializeField, PathField] public string ClassesDatabase { get; private set; }
+
+        [field: SerializeField, PathField] public string GameplayConfig { get; private set; }
     }
 }

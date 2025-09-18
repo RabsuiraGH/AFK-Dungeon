@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05f1f5cc9b614e90ad089b1bbb819a25, type: 3}
-  m_Name: PathConfig
+  m_Script: {fileID: 11500000, guid: c260d187aebd4b61bc3638dc0f65f49b, type: 3}
+  m_Name: GameplayConfig
   m_EditorClassIdentifier: 
-  <GameScope>k__BackingField: Assets/Resources/Prefabs/GameScope.prefab
-  <EnemyDatabase>k__BackingField: Assets/Resources/Game/Enemies/Database/EnemyDatabase.asset
+  <MaxPlayerLevel>k__BackingField: 3
