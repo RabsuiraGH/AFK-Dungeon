@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Rogue
   m_EditorClassIdentifier: 
   <ClassName>k__BackingField: Rogue
+  <ClassIcon>k__BackingField: {fileID: 21300000, guid: 573ca83207091624d9ec148c90865dc7, type: 3}
   <HealthPerLevel>k__BackingField: 4
   <StartWeapon>k__BackingField: {fileID: 11400000, guid: fb2840ade3b4cd74fa912127aad997a8, type: 2}
   <LevelUpgrades>k__BackingField:

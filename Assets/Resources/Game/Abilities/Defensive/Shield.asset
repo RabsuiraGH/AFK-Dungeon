@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Shield
+  <Icon>k__BackingField: {fileID: 21300000, guid: cfc8a1dcbe9b81c45b38e16685bebc51, type: 3}
+  <Description>k__BackingField: 
   <ApplyWhenRole>k__BackingField: 1
   <Conditions>k__BackingField:
   - _condition: {fileID: 11400000, guid: 94921781a1b809647b3306b5a333b167, type: 2}

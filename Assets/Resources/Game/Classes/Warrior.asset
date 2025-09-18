@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Warrior
   m_EditorClassIdentifier: 
   <ClassName>k__BackingField: Warrior
+  <ClassIcon>k__BackingField: {fileID: 21300000, guid: 89225da5f6156bc47bab6ae44a2e1ae9, type: 3}
   <HealthPerLevel>k__BackingField: 5
   <StartWeapon>k__BackingField: {fileID: 11400000, guid: 3ec01c43423b6284eb379b4570a18a47, type: 2}
   <LevelUpgrades>k__BackingField:

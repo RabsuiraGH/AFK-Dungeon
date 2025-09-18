@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Axe
+  <Description>k__BackingField: 
+  <Sprite>k__BackingField: {fileID: 21300000, guid: fd5c6750eb3719a40ba417b91f18925f, type: 3}
   <BaseDamage>k__BackingField: 4
   <DamageType>k__BackingField: 1

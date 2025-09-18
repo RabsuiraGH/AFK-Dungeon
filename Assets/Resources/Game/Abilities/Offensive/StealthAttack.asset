@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: StealthAttack
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Stealth Attack
+  <Icon>k__BackingField: {fileID: 21300000, guid: 524460c6cf6f1984aa85ba2d451680fd, type: 3}
+  <Description>k__BackingField: 
+  <ApplyWhenRole>k__BackingField: 0
   <Conditions>k__BackingField:
   - _condition: {fileID: 11400000, guid: 94921781a1b809647b3306b5a333b167, type: 2}
     _parameters:

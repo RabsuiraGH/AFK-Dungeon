@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Barbarian
   m_EditorClassIdentifier: 
   <ClassName>k__BackingField: Barbarian
+  <ClassIcon>k__BackingField: {fileID: 21300000, guid: 500a04358e776c8449a9068c4e8f1536, type: 3}
   <HealthPerLevel>k__BackingField: 6
   <StartWeapon>k__BackingField: {fileID: 11400000, guid: e7295817f7c6d454b87d5a61dc9acbb0, type: 2}
   <LevelUpgrades>k__BackingField:

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: LegendarySword
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Legendary sword
+  <Description>k__BackingField: 
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 1be178b9fd66056489feac019689bc05, type: 3}
   <BaseDamage>k__BackingField: 5
   <DamageType>k__BackingField: 1

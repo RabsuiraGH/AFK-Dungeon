@@ -9,6 +9,11 @@ namespace LA.Gameplay.AbilitySystem
     public abstract class AbilitySO : ScriptableObject, ILogableAbility
     {
         [field: SerializeField] public string Name { get; set; }
+        [field: SerializeField] public Sprite Icon { get; set; }
+
+        [field: TextArea]
+        [field: SerializeField] public string Description { get; set; }
+
         [field: SerializeField] public BattleRole ApplyWhenRole { get; set; }
         [field: SerializeField] public List<ConditionEntry> Conditions { get; set; } = new();
 
