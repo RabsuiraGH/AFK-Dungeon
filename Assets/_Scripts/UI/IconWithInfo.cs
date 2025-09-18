@@ -7,38 +7,32 @@ namespace LA.UI
 {
     public class IconWithInfo : TemplateUI, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] private Image _iconImage;
-        public event Action<Transform> OnHoverEnter;
-        public event Action<Transform> OnHoverExit;
+        [SerializeField] public Image _iconImage;
+        public Sprite Sprite { get; private set; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public static event Action<IconWithInfo> OnHoverEnter;
+        public static event Action<IconWithInfo> OnHoverExit;
 
 
-        public void SetIcon(Sprite sprite)
+        public void SetData(Sprite sprite, string name, string description)
         {
             _iconImage.sprite = sprite;
-        }
-
-
-        public void HideIcon()
-        {
-            _iconImage.enabled = false;
-        }
-
-
-        public void ShowIcon()
-        {
-            _iconImage.enabled = true;
+            Sprite = sprite;
+            Name = name;
+            Description = description;
         }
 
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            OnHoverEnter?.Invoke(this.transform);
+            OnHoverEnter?.Invoke(this);
         }
 
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            OnHoverExit?.Invoke(this.transform);
+            OnHoverExit?.Invoke(this);
         }
     }
 }
