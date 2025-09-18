@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -87,8 +88,11 @@ namespace LA
             totalDamage += damageSource.Stats.Strength;
 
             totalDamage *= _damageMultipliers[damageSource].Aggregate(1, (x, y) => x * y);
+            totalDamage = Math.Clamp(totalDamage, 0, int.MaxValue);
+
             return totalDamage;
         }
+
 
         public int GetTotalOtherDamage(BattleUnit damageSource)
         {
@@ -97,6 +101,8 @@ namespace LA
             totalDamage += _otherDamages[damageSource].Sum(x => x.TotalDamage);
 
             totalDamage *= _damageMultipliers[damageSource].Aggregate(1, (x, y) => x * y);
+            totalDamage = Math.Clamp(totalDamage, 0, int.MaxValue);
+
             return totalDamage;
         }
     }
