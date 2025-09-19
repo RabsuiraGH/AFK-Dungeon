@@ -8,7 +8,7 @@ namespace LA.DI
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<Player>(Lifetime.Singleton);
-            builder.Register<MainGameLoop>(Lifetime.Singleton);
+            builder.Register<BattleService>(Lifetime.Singleton);
             builder.Register<MainLoopSim>(Lifetime.Singleton);
         }
     }

@@ -8,16 +8,16 @@ namespace LA.UI
         [SerializeField] private UnitInfoUI _playerInfoUI;
         [SerializeField] private UnitInfoUI _enemyInfoUI;
 
-        private MainGameLoop _mainGameLoop;
+        private BattleService _battleService;
 
 
         [VContainer.Inject]
-        public void Construct(MainGameLoop mainGameLoop)
+        public void Construct(BattleService battleService)
         {
-            _mainGameLoop = mainGameLoop;
+            _battleService = battleService;
 
-            _mainGameLoop.OnPlayerUpdates += UpdatePlayerHealth;
-            _mainGameLoop.OnEnemyUpdates += UpdateEnemyHealth;
+            _battleService.OnPlayerUpdates += UpdatePlayerHealth;
+            _battleService.OnEnemyUpdates += UpdateEnemyHealth;
 
             _playerInfoUI.Hide();
             _enemyInfoUI.Hide();
@@ -68,8 +68,8 @@ namespace LA.UI
 
         private void OnDestroy()
         {
-            _mainGameLoop.OnPlayerUpdates -= UpdatePlayerHealth;
-            _mainGameLoop.OnEnemyUpdates -= UpdateEnemyHealth;
+            _battleService.OnPlayerUpdates -= UpdatePlayerHealth;
+            _battleService.OnEnemyUpdates -= UpdateEnemyHealth;
         }
     }
 }

@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 namespace LA
 {
     [Serializable]
-    public class MainGameLoop
+    public class BattleService
     {
         [SerializeField] private Enemy _enemy;
 

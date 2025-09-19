@@ -30,9 +30,9 @@ namespace LA.UI
             _playerClassSelectorController.MaxLevelReachedAlready += ShowStartBattleUI;
             _startBattleUIController.OnStartBattleRequested += _mainLoopSim.StartBattle;
 
-            _mainLoopSim.MainGameLoop.OnPlayerWin += OnPlayerWinBattleWrapper;
+            _mainLoopSim.BattleService.OnPlayerWin += OnPlayerWinBattleWrapper;
 
-            _mainLoopSim.MainGameLoop.OnEnemySet += _unitInfoUIController.SetEnemyInfo;
+            _mainLoopSim.BattleService.OnEnemySet += _unitInfoUIController.SetEnemyInfo;
 
 
 
@@ -92,9 +92,9 @@ namespace LA.UI
             _playerClassSelectorController.MaxLevelReachedAlready -= ShowStartBattleUI;
             _startBattleUIController.OnStartBattleRequested -= _mainLoopSim.StartBattle;
 
-            _mainLoopSim.MainGameLoop.OnPlayerWin -= OnPlayerWinBattleWrapper;
+            _mainLoopSim.BattleService.OnPlayerWin -= OnPlayerWinBattleWrapper;
 
-            _mainLoopSim.MainGameLoop.OnEnemySet -= _unitInfoUIController.SetEnemyInfo;
+            _mainLoopSim.BattleService.OnEnemySet -= _unitInfoUIController.SetEnemyInfo;
         }
     }
 }

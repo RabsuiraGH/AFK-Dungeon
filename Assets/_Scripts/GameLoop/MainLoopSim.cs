@@ -13,7 +13,7 @@ namespace LA
         [field: SerializeField] public int BattleCounter { get; private set; } = 0;
 
         private EnemyDatabase _enemyDatabase;
-        [field: SerializeField] public MainGameLoop MainGameLoop { get; private set; }
+        [field: SerializeField] public BattleService BattleService { get; private set; }
         private Player _player;
 
 
@@ -24,13 +24,13 @@ namespace LA
 
 
         [VContainer.Inject]
-        public void Construct(Player player, MainGameLoop mainGameLoop, PathConfig pathConfig)
+        public void Construct(Player player, BattleService battleService, PathConfig pathConfig)
         {
             _player = player;
             _player.Init();
 
-            MainGameLoop = mainGameLoop;
-            MainGameLoop.OnPlayerWin += CountWin;
+            BattleService = battleService;
+            BattleService.OnPlayerWin += CountWin;
 
             _enemyDatabase = LoadAssetUtility.Load<EnemyDatabase>(pathConfig.EnemyDatabase);
         }
@@ -57,24 +57,24 @@ namespace LA
         {
             await Task.Yield(); // To avoid same frame win/lose
 
-            MainGameLoop.ResetBattle();
-            MainGameLoop.SetEnemy(GetRandomEnemy());
-            MainGameLoop.SetPlayer(_player);
+            BattleService.ResetBattle();
+            BattleService.SetEnemy(GetRandomEnemy());
+            BattleService.SetPlayer(_player);
 
 
-            MainGameLoop.DecideFirstTurn();
+            BattleService.DecideFirstTurn();
 
             while (!token.IsCancellationRequested)
             {
-                MainGameLoop.NextTurn();
+                BattleService.NextTurn();
 
-                if (MainGameLoop.CheckBattleEnd())
+                if (BattleService.CheckBattleEnd())
                 {
-                    MainGameLoop.OnBattleEnd();
+                    BattleService.OnBattleEnd();
                     break;
                 }
 
-                MainGameLoop.SwapUnits();
+                BattleService.SwapUnits();
 
                 await Task.Delay(1000, token);
             }
