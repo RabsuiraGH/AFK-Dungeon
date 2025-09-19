@@ -11,23 +11,20 @@ namespace LA
     [Serializable]
     public class MainGameLoop
     {
-        [field: SerializeField] public int BattleCounter { get; private set; } = 0;
-
         [SerializeField] private Enemy _enemy;
 
         [SerializeField] private Player _player;
 
-        [SerializeField] private BattleUnit _attackingUnit;
-        [SerializeField] private BattleUnit _defendingUnit;
+        private BattleUnit _attackingUnit;
+        private BattleUnit _defendingUnit;
 
         [SerializeField] private int _currentTurn = 0;
         private Dictionary<BattleUnit, int> _turnCounters = new();
 
-        public event Action<BattleUnit> OnPlayerAppears;
-        public event Action<BattleUnit> OnEnemyAppears;
-
         public event Action<BattleUnit> OnPlayerUpdates;
         public event Action<BattleUnit> OnEnemyUpdates;
+
+        public event Action<BattleUnit> OnEnemySet;
 
         public event Action OnPlayerWin;
         public event Action<Enemy> OnPlayerLose;
@@ -36,79 +33,17 @@ namespace LA
 
 
         [VContainer.Inject]
-        public void Construct(Player player, IRandomService randomService)
+        public void Construct(IRandomService randomService)
         {
             _randomService = randomService;
-            _player = player;
         }
 
 
-        public void CreateEnemy(EnemySO enemyBase)
-        {
-            _enemy = new Enemy(enemyBase);
-            _enemy.Init();
-        }
-
-
-        public void ResetGame()
-        {
-            BattleCounter = 0;
-        }
-
-
-        public void ResetBattle()
-        {
-            _currentTurn = 0;
-            _turnCounters = new Dictionary<BattleUnit, int>();
-        }
-
-
-        public bool CheckWin()
-        {
-            return _player.IsDead() || _enemy.IsDead();
-        }
-
-
-        public string GetWinText()
-        {
-            return _player.IsDead() ? "You Lose" : "You Win";
-        }
-
-
-        public void OnBattleEnd()
-        {
-            BattleCounter++;
-            if (!_player.IsDead())
-            {
-                OnPlayerWin?.Invoke();
-            }
-            else
-            {
-                OnPlayerLose?.Invoke(_enemy);
-            }
-        }
-
-
-        private void EnsureCounter(BattleUnit unit)
-        {
-            _turnCounters.TryAdd(unit, 0);
-        }
-
-
-        public void SimulateTurn()
+        public void NextTurn()
         {
             _currentTurn += 1;
 
-
-            if (_currentTurn == 1)
-            {
-                OnEnemyAppears?.Invoke(_enemy);
-                OnPlayerAppears?.Invoke(_player);
-                DecideFirstTurn();
-            }
-
-            EnsureCounter(_attackingUnit);
-            _turnCounters[_attackingUnit]++;
+            AddTurn(_attackingUnit);
 
             BattleContext context = new()
             {
@@ -149,7 +84,6 @@ namespace LA
 
             OnPlayerUpdates?.Invoke(_player);
             OnEnemyUpdates?.Invoke(_enemy);
-            SwapUnits();
 
             void OnBeforeHitAbilities(BattleUnit owner)
             {
@@ -162,7 +96,55 @@ namespace LA
         }
 
 
-        private void DecideFirstTurn()
+        public void SetEnemy(Enemy enemyBase)
+        {
+            _enemy = enemyBase;
+            _enemy.Init();
+            OnEnemySet?.Invoke(_enemy);
+        }
+
+
+        public void SetPlayer(Player player)
+        {
+            _player = player;
+            _player.RestoreHealth();
+        }
+
+
+        public void ResetBattle()
+        {
+            _currentTurn = 0;
+            _turnCounters = new Dictionary<BattleUnit, int>();
+        }
+
+
+        public bool CheckBattleEnd()
+        {
+            return _player.IsDead() || _enemy.IsDead();
+        }
+
+
+        public void OnBattleEnd()
+        {
+            if (!_player.IsDead())
+            {
+                OnPlayerWin?.Invoke();
+            }
+            else
+            {
+                OnPlayerLose?.Invoke(_enemy);
+            }
+        }
+
+
+        private void AddTurn(BattleUnit unit)
+        {
+            _turnCounters.TryAdd(unit, 0);
+            _turnCounters[_attackingUnit]++;
+        }
+
+
+        public void DecideFirstTurn()
         {
             if (_player.Stats.Agility >= _enemy.Stats.Agility)
             {
@@ -177,9 +159,6 @@ namespace LA
         }
 
 
-        private void SwapUnits()
-        {
-            (_attackingUnit, _defendingUnit) = (_defendingUnit, _attackingUnit);
-        }
+        public void SwapUnits() => (_attackingUnit, _defendingUnit) = (_defendingUnit, _attackingUnit);
     }
 }

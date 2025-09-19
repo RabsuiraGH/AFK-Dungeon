@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 308658634906213279}
   - component: {fileID: 8234237555625024311}
-  - component: {fileID: 2259024305070070195}
   m_Layer: 0
   m_Name: GameScope
   m_TagString: Untagged
@@ -51,46 +50,6 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 7871045651168686373}
---- !u!114 &2259024305070070195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7871045651168686373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdbe0538af574692bc9385975fdbe238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyDatabase: {fileID: 0}
-  _mainGameLoop:
-    _enemy:
-      <MaxHealth>k__BackingField: 0
-      <CurrentHealth>k__BackingField: 0
-      <CurrentWeapon>k__BackingField:
-        <WeaponSource>k__BackingField: {fileID: 0}
-        <Damage>k__BackingField: 0
-      <Stats>k__BackingField:
-        <Strength>k__BackingField: 0
-        <Agility>k__BackingField: 0
-        <Endurance>k__BackingField: 0
-      <Abilities>k__BackingField: []
-      <EnemyBase>k__BackingField: {fileID: 0}
-    _player:
-      <MaxHealth>k__BackingField: 0
-      <CurrentHealth>k__BackingField: 0
-      <CurrentWeapon>k__BackingField:
-        <WeaponSource>k__BackingField: {fileID: 0}
-        <Damage>k__BackingField: 0
-      <Stats>k__BackingField:
-        <Strength>k__BackingField: 0
-        <Agility>k__BackingField: 0
-        <Endurance>k__BackingField: 0
-      <Abilities>k__BackingField: []
-      <ClassesData>k__BackingField: []
-    _enemyBase: {fileID: 0}
-    _currentTurn: 0
 --- !u!1001 &6203629962793278759
 PrefabInstance:
   m_ObjectHideFlags: 0

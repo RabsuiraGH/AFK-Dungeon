@@ -625,7 +625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5826235601484352863
 RectTransform:
   m_ObjectHideFlags: 0
@@ -953,6 +953,7 @@ GameObject:
   - component: {fileID: 8822111152673643344}
   - component: {fileID: 5986655101472063080}
   - component: {fileID: 6115182402386862779}
+  - component: {fileID: 7472450803395553016}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Manager
@@ -1028,6 +1029,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startBattleUI: {fileID: 7091622824302635480}
+--- !u!114 &7472450803395553016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9185331604620504343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3ef18498d541b0844f1e84a8e70492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startBattleUIController: {fileID: 6115182402386862779}
+  _playerClassSelectorController: {fileID: 4501120415560075687}
+  _unitInfoUIController: {fileID: 8822111152673643344}
+  _mainLoopSim:
+    <BattleCounter>k__BackingField: 0
+    <MainGameLoop>k__BackingField:
+      _enemy:
+        <Name>k__BackingField: 
+        <MaxHealth>k__BackingField: 0
+        <CurrentHealth>k__BackingField: 0
+        <CurrentWeapon>k__BackingField:
+          <WeaponSource>k__BackingField: {fileID: 0}
+          <Damage>k__BackingField: 0
+        <Stats>k__BackingField:
+          <Strength>k__BackingField: 0
+          <Agility>k__BackingField: 0
+          <Endurance>k__BackingField: 0
+        <Abilities>k__BackingField: []
+        <EnemyBase>k__BackingField: {fileID: 0}
+      _player:
+        <Name>k__BackingField: Unit
+        <MaxHealth>k__BackingField: 0
+        <CurrentHealth>k__BackingField: 0
+        <CurrentWeapon>k__BackingField:
+          <WeaponSource>k__BackingField: {fileID: 0}
+          <Damage>k__BackingField: 0
+        <Stats>k__BackingField:
+          <Strength>k__BackingField: 0
+          <Agility>k__BackingField: 0
+          <Endurance>k__BackingField: 0
+        <Abilities>k__BackingField: []
+        <ClassesData>k__BackingField: []
+      _currentTurn: 0
+  _player:
+    <Name>k__BackingField: Unit
+    <MaxHealth>k__BackingField: 0
+    <CurrentHealth>k__BackingField: 0
+    <CurrentWeapon>k__BackingField:
+      <WeaponSource>k__BackingField: {fileID: 0}
+      <Damage>k__BackingField: 0
+    <Stats>k__BackingField:
+      <Strength>k__BackingField: 0
+      <Agility>k__BackingField: 0
+      <Endurance>k__BackingField: 0
+    <Abilities>k__BackingField: []
+    <ClassesData>k__BackingField: []
 --- !u!1001 &459413905622148547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1155,15 +1214,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 917756764458947494, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 917756764458947494, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 917756764458947494, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -125
       objectReference: {fileID: 0}
     - target: {fileID: 3091826137999112418, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1183,7 +1242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4175650257818104301, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4812955146351917425, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_Name
@@ -1203,15 +1262,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6790768113629440504, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6790768113629440504, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6790768113629440504, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 6887860981669132051, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1311,15 +1370,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7700058830022074830, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7700058830022074830, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7700058830022074830, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 7977814272316699718, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1364,20 +1423,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 917756764458947494, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 917756764458947494, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 917756764458947494, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -125
       objectReference: {fileID: 0}
     - target: {fileID: 4175650257818104301, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_Name
       value: EnemyUnitInfoUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4175650257818104301, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5260922575055956414, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1392,15 +1455,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6790768113629440504, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6790768113629440504, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6790768113629440504, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 6887860981669132051, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1496,15 +1559,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7700058830022074830, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7700058830022074830, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7700058830022074830, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 7977814272316699718, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchorMax.y

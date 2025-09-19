@@ -16,21 +16,18 @@ namespace LA.UI
         {
             _mainGameLoop = mainGameLoop;
 
-            _mainGameLoop.OnPlayerAppears += SetPlayerInfo;
-            _mainGameLoop.OnEnemyAppears += SetEnemyInfo;
-
             _mainGameLoop.OnPlayerUpdates += UpdatePlayerHealth;
             _mainGameLoop.OnEnemyUpdates += UpdateEnemyHealth;
         }
 
 
-        private void SetPlayerInfo(BattleUnit unit)
+        public void SetPlayerInfo(BattleUnit unit)
         {
             SetUnitInfo(unit, _playerInfoUI);
         }
 
 
-        private void SetEnemyInfo(BattleUnit unit)
+        public void SetEnemyInfo(BattleUnit unit)
         {
             SetUnitInfo(unit, _enemyInfoUI);
         }
@@ -55,6 +52,8 @@ namespace LA.UI
             unitInfoUI.SetStats(unit.Stats.GetStats());
             unitInfoUI.SetWeaponData(unit.CurrentWeapon.WeaponSource.Sprite, unit.CurrentWeapon.WeaponSource.Name,
                                      unit.CurrentWeapon.WeaponSource.Description);
+
+            unitInfoUI.Show();
         }
 
 
@@ -66,9 +65,6 @@ namespace LA.UI
 
         private void OnDestroy()
         {
-            _mainGameLoop.OnPlayerAppears -= SetPlayerInfo;
-            _mainGameLoop.OnEnemyAppears -= SetEnemyInfo;
-
             _mainGameLoop.OnPlayerUpdates -= UpdatePlayerHealth;
             _mainGameLoop.OnEnemyUpdates -= UpdateEnemyHealth;
         }

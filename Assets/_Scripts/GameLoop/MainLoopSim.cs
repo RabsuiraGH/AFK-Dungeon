@@ -1,0 +1,98 @@
+﻿using System;
+using SW.Utilities.LoadAsset;
+using UnityEngine;
+using UnityEngine.UI;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace LA
+{
+    [Serializable]
+    public class MainLoopSim
+    {
+        [field: SerializeField] public int BattleCounter { get; private set; } = 0;
+
+        private EnemyDatabase _enemyDatabase;
+        [field: SerializeField] public MainGameLoop MainGameLoop { get; private set; }
+        private Player _player;
+
+
+        public void ResetGame()
+        {
+            BattleCounter = 0;
+        }
+
+
+        [VContainer.Inject]
+        public void Construct(Player player, MainGameLoop mainGameLoop, PathConfig pathConfig)
+        {
+            _player = player;
+            _player.Init();
+
+            MainGameLoop = mainGameLoop;
+            MainGameLoop.OnPlayerWin += CountWin;
+
+            _enemyDatabase = LoadAssetUtility.Load<EnemyDatabase>(pathConfig.EnemyDatabase);
+        }
+
+
+        private void CountWin()
+        {
+            BattleCounter++;
+            if(BattleCounter >= 5)
+            {
+                Debug.Log(($"Game completed"));
+            }
+        }
+
+
+        public void StartBattle()
+        {
+            using CancellationTokenSource cts = new CancellationTokenSource();
+            _ = SimulateBattle(cts.Token);
+        }
+
+
+        private async Task SimulateBattle(CancellationToken token)
+        {
+            await Task.Yield(); // To avoid same frame win/lose
+
+            MainGameLoop.ResetBattle();
+            MainGameLoop.SetEnemy(GetRandomEnemy());
+            MainGameLoop.SetPlayer(_player);
+
+
+            MainGameLoop.DecideFirstTurn();
+
+            while (!token.IsCancellationRequested)
+            {
+                MainGameLoop.NextTurn();
+
+                if (MainGameLoop.CheckBattleEnd())
+                {
+                    MainGameLoop.OnBattleEnd();
+                    break;
+                }
+
+                MainGameLoop.SwapUnits();
+
+                await Task.Delay(1000, token);
+            }
+        }
+
+
+        private Enemy GetRandomEnemy()
+        {
+            EnemySO enemyBase = _enemyDatabase.GetRandomEnemy();
+
+            if (enemyBase == null)
+            {
+                throw new NullReferenceException("Enemy database is empty!");
+            }
+
+            Enemy enemy = new Enemy(enemyBase);
+            enemy.Init();
+            return enemy;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5dfdacfce435a74b9cfad444f0742c6, type: 3}
+  m_Name: ImbaClass
+  m_EditorClassIdentifier: 
+  <ClassName>k__BackingField: Imba
+  <ClassIcon>k__BackingField: {fileID: 0}
+  <HealthPerLevel>k__BackingField: 5
+  <StartWeapon>k__BackingField: {fileID: 11400000, guid: 7f957fe1434f70b439c05f1c647c9815, type: 2}
+  <LevelUpgrades>k__BackingField:
+  - <StatUpgrades>k__BackingField:
+      <Strength>k__BackingField: 5
+      <Agility>k__BackingField: 5
+      <Endurance>k__BackingField: 5
+    <NewAbilities>k__BackingField:
+    - {fileID: 11400000, guid: c0fb5e9d0df22184283d11d6f114dd6e, type: 2}

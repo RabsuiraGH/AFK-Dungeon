@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SW.Utilities.LoadAsset;
 using UnityEngine;
@@ -13,6 +14,9 @@ namespace LA.UI
         private ClassesDatabase _classesDatabase;
         private GameplayConfig _gameplayConfig;
         private MainGameLoop _mainGameLoop;
+
+        public event Action OnClassSelected;
+        public event Action MaxLevelReachedAlready;
 
 
         [VContainer.Inject]
@@ -30,17 +34,24 @@ namespace LA.UI
 
         private void Start()
         {
+            _playerClassSelectorUI.OnClassLevelAdded += LevelUpClass;
+        }
+
+
+        public void Setup()
+        {
             List<PlayerClassData> availableClasses = GetAvailableClasses();
 
             _playerClassSelectorUI.PrepareUI(availableClasses, _player.TotalLevel);
 
-            _playerClassSelectorUI.OnClassLevelAdded += LevelUpClass;
+            _playerClassSelectorUI.Show();
         }
 
 
         private void LevelUpClass(int classIndex)
         {
             _player.AddClass(_classesDatabase.Classes[classIndex]);
+            OnClassSelected?.Invoke();
             _playerClassSelectorUI.Hide();
         }
 
@@ -55,6 +66,7 @@ namespace LA.UI
             }
             else
             {
+                MaxLevelReachedAlready?.Invoke();
                 _playerClassSelectorUI.Hide();
             }
         }

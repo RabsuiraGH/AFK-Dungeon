@@ -9,6 +9,7 @@ namespace LA.DI
         {
             builder.Register<Player>(Lifetime.Singleton);
             builder.Register<MainGameLoop>(Lifetime.Singleton);
+            builder.Register<MainLoopSim>(Lifetime.Singleton);
         }
     }
 }
