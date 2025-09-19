@@ -69,13 +69,13 @@ namespace LA
             await Task.Yield(); // To avoid same frame win/lose
 
             BattleService.ResetBattle();
-            BattleService.SetEnemy(GetRandomEnemy());
             BattleService.SetPlayer(_player);
-
-
+            BattleService.SetEnemy(GetRandomEnemy());
             BattleService.DecideFirstTurn();
 
-            while (!token.IsCancellationRequested)
+            await Task.Delay(TimeSpan.FromSeconds( 0.33f), token);
+
+            while (!token.IsCancellationRequested && !BattleService.CheckBattleEnd())
             {
                 BattleService.NextTurn();
 
