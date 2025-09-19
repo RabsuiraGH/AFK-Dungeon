@@ -5,29 +5,29 @@ using UnityEngine.UI;
 
 namespace LA.UI.MainMenu
 {
-    public class GameMenuUI : MonoBehaviour
+    public class GameMenuUI : TemplateUI
     {
-        [SerializeField] private Button _startGameButton;
         [SerializeField] private Button _resetGameButton;
+        [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _quitGameButton;
-        private GameStarterService _gameStarterService;
+
+        public event Action OnResetGameButtonClicked;
+        public event Action OnSettingsButtonClicked;
+        public event Action OnQuitGameButtonClicked;
 
 
-        [VContainer.Inject]
-        public void Construct(GameStarterService gameStarterService)
+        public void Start()
         {
-            _gameStarterService = gameStarterService;
-
-            _startGameButton.onClick.AddListener(() => _gameStarterService.Load());
-            _resetGameButton.onClick.AddListener(() => _gameStarterService.Reset());
-            _quitGameButton.onClick.AddListener(() => _gameStarterService.Unload());
+            _resetGameButton.onClick.AddListener(() => OnResetGameButtonClicked?.Invoke());
+            _settingsButton.onClick.AddListener(() => OnSettingsButtonClicked?.Invoke());
+            _quitGameButton.onClick.AddListener(() => OnQuitGameButtonClicked?.Invoke());
         }
 
 
         private void OnDestroy()
         {
-            _startGameButton.onClick.RemoveAllListeners();
             _resetGameButton.onClick.RemoveAllListeners();
+            _settingsButton.onClick.RemoveAllListeners();
             _quitGameButton.onClick.RemoveAllListeners();
         }
     }

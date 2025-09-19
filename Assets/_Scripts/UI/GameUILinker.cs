@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using LA.UI.Loot;
+using LA.UI.MainMenu;
 using UnityEngine;
 
 namespace LA.UI
@@ -11,6 +12,8 @@ namespace LA.UI
         [SerializeField] private PlayerClassSelectorController _playerClassSelectorController;
         [SerializeField] private UnitInfoUIController _unitInfoUIController;
         [SerializeField] private LootUIController _lootUIController;
+
+        [SerializeField] private GameMenuUIController _gameMenuUIController;
 
         [SerializeField] private BattleResultPopupUI _battleResultPopupUI;
 
@@ -33,12 +36,27 @@ namespace LA.UI
             _startBattleUIController.OnStartBattleRequested += _gameService.StartBattle;
 
             _gameService.BattleService.OnPlayerWin += OnPlayerWinBattleWrapper;
+            _gameService.BattleService.OnPlayerLose += OnPlayerLoseBattleWrapper;
 
             _gameService.BattleService.OnEnemySet += _unitInfoUIController.SetEnemyInfo;
 
             _lootUIController.OnChoiceMade += ShowClassSelector;
 
             _playerClassSelectorController.Setup();
+        }
+
+
+        private void OnPlayerLoseBattleWrapper(Enemy killedBy)
+        {
+            StartCoroutine(OnPlayerLoseBattle());
+        }
+
+
+        private IEnumerator OnPlayerLoseBattle()
+        {
+            yield return _battleResultPopupUI.ShowPopup("YOU LOSE! :(");
+
+            _gameMenuUIController.Show();
         }
 
 
@@ -102,6 +120,8 @@ namespace LA.UI
             _startBattleUIController.OnStartBattleRequested -= _gameService.StartBattle;
 
             _gameService.BattleService.OnPlayerWin -= OnPlayerWinBattleWrapper;
+            _gameService.BattleService.OnPlayerLose -= OnPlayerLoseBattleWrapper;
+
 
             _gameService.BattleService.OnEnemySet -= _unitInfoUIController.SetEnemyInfo;
 

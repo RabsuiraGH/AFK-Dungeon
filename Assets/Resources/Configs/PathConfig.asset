@@ -17,3 +17,4 @@ MonoBehaviour:
   <ClassesDatabase>k__BackingField: Assets/Resources/Game/Classes/ClassesDatabase/ClassesDatabase.asset
   <GameplayConfig>k__BackingField: Assets/Resources/Configs/GameplayConfig.asset
   <GameScene>k__BackingField: Assets/Scenes/MainScene.unity
+  <MainMenuScene>k__BackingField: Assets/Scenes/MainMenu.unity

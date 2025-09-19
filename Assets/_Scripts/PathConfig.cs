@@ -14,5 +14,7 @@ namespace LA
         [field: SerializeField, PathField] public string GameplayConfig { get; private set; }
 
         [field: SerializeField, PathField] public string GameScene { get; private set; }
+        [field: SerializeField, PathField] public string MainMenuScene { get; private set; }
+
     }
 }
