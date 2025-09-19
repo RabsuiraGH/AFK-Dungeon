@@ -16,3 +16,4 @@ MonoBehaviour:
   <EnemyDatabase>k__BackingField: Assets/Resources/Game/Enemies/Database/EnemyDatabase.asset
   <ClassesDatabase>k__BackingField: Assets/Resources/Game/Classes/ClassesDatabase/ClassesDatabase.asset
   <GameplayConfig>k__BackingField: Assets/Resources/Configs/GameplayConfig.asset
+  <GameScene>k__BackingField: Assets/Scenes/MainScene.unity

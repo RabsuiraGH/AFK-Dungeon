@@ -1,34 +1,33 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace LA.UI.MainMenu
 {
-    public class MainMenuUI : MonoBehaviour
+    public class MainMenuUI : TemplateUI
     {
-        [SerializeField] private Button _startGameButton;
-        [SerializeField] private Button _resetGameButton;
-        [SerializeField] private Button _quitGameButton;
-        private GameStarter _gameStarter;
+        [SerializeField] private Button _startButton;
+        [SerializeField] private Button _settingsButton;
+        [SerializeField] private Button _quitButton;
+
+        public event Action OnStartButtonClicked;
+        public event Action OnSettingsButtonClicked;
+        public event Action OnQuitButtonClicked;
 
 
-        [VContainer.Inject]
-        public void Construct(GameStarter gameStarter)
+        private void Start()
         {
-            _gameStarter = gameStarter;
-
-            _startGameButton.onClick.AddListener(() => _gameStarter.Load());
-            _resetGameButton.onClick.AddListener(() => _gameStarter.Reset());
-            _quitGameButton.onClick.AddListener(() => _gameStarter.Unload());
+            _startButton.onClick.AddListener(() => OnStartButtonClicked?.Invoke());
+            _settingsButton.onClick.AddListener(() => OnSettingsButtonClicked?.Invoke());
+            _quitButton.onClick.AddListener(() => OnQuitButtonClicked?.Invoke());
         }
 
 
         private void OnDestroy()
         {
-            _startGameButton.onClick.RemoveAllListeners();
-            _resetGameButton.onClick.RemoveAllListeners();
-            _quitGameButton.onClick.RemoveAllListeners();
+            _startButton.onClick.RemoveAllListeners();
+            _settingsButton.onClick.RemoveAllListeners();
+            _quitButton.onClick.RemoveAllListeners();
         }
     }
 }
