@@ -9,7 +9,7 @@ namespace LA.DI
         {
             builder.Register<Player>(Lifetime.Singleton);
             builder.Register<BattleService>(Lifetime.Singleton);
-            builder.Register<MainLoopSim>(Lifetime.Singleton);
+            builder.Register<GameService>(Lifetime.Singleton);
         }
     }
 }

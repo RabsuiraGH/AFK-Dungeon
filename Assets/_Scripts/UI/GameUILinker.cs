@@ -12,14 +12,14 @@ namespace LA.UI
 
         [SerializeField] private BattleResultPopupUI _battleResultPopupUI;
 
-        [SerializeField] private MainLoopSim _mainLoopSim;
+        [SerializeField] private GameService _gameService;
         [SerializeField] private Player _player;
 
 
         [VContainer.Inject]
-        public void Construct(MainLoopSim mainLoopSim, Player player, PathConfig pathConfig)
+        public void Construct(GameService gameService, Player player, PathConfig pathConfig)
         {
-            _mainLoopSim = mainLoopSim;
+            _gameService = gameService;
             _player = player;
         }
 
@@ -28,11 +28,11 @@ namespace LA.UI
         {
             _playerClassSelectorController.OnClassSelected += InitPlayerUI;
             _playerClassSelectorController.MaxLevelReachedAlready += ShowStartBattleUI;
-            _startBattleUIController.OnStartBattleRequested += _mainLoopSim.StartBattle;
+            _startBattleUIController.OnStartBattleRequested += _gameService.StartBattle;
 
-            _mainLoopSim.BattleService.OnPlayerWin += OnPlayerWinBattleWrapper;
+            _gameService.BattleService.OnPlayerWin += OnPlayerWinBattleWrapper;
 
-            _mainLoopSim.BattleService.OnEnemySet += _unitInfoUIController.SetEnemyInfo;
+            _gameService.BattleService.OnEnemySet += _unitInfoUIController.SetEnemyInfo;
 
 
 
@@ -90,11 +90,11 @@ namespace LA.UI
         {
             _playerClassSelectorController.OnClassSelected -= InitPlayerUI;
             _playerClassSelectorController.MaxLevelReachedAlready -= ShowStartBattleUI;
-            _startBattleUIController.OnStartBattleRequested -= _mainLoopSim.StartBattle;
+            _startBattleUIController.OnStartBattleRequested -= _gameService.StartBattle;
 
-            _mainLoopSim.BattleService.OnPlayerWin -= OnPlayerWinBattleWrapper;
+            _gameService.BattleService.OnPlayerWin -= OnPlayerWinBattleWrapper;
 
-            _mainLoopSim.BattleService.OnEnemySet -= _unitInfoUIController.SetEnemyInfo;
+            _gameService.BattleService.OnEnemySet -= _unitInfoUIController.SetEnemyInfo;
         }
     }
 }

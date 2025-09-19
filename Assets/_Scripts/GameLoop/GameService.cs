@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace LA
 {
     [Serializable]
-    public class MainLoopSim
+    public class GameService
     {
         [field: SerializeField] public int BattleCounter { get; private set; } = 0;
 
