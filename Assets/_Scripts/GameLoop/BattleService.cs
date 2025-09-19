@@ -103,6 +103,10 @@ namespace LA
             OnEnemySet?.Invoke(_enemy);
         }
 
+        public Enemy GetEnemy()
+        {
+            return _enemy;
+        }
 
         public void SetPlayer(Player player)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using LA.UI.Loot;
 using UnityEngine;
 
 namespace LA.UI
@@ -9,6 +10,7 @@ namespace LA.UI
         [SerializeField] private StartBattleUIController _startBattleUIController;
         [SerializeField] private PlayerClassSelectorController _playerClassSelectorController;
         [SerializeField] private UnitInfoUIController _unitInfoUIController;
+        [SerializeField] private LootUIController _lootUIController;
 
         [SerializeField] private BattleResultPopupUI _battleResultPopupUI;
 
@@ -26,7 +28,7 @@ namespace LA.UI
 
         private void Start()
         {
-            _playerClassSelectorController.OnClassSelected += InitPlayerUI;
+            _playerClassSelectorController.OnClassSelected += BeforeBattle;
             _playerClassSelectorController.MaxLevelReachedAlready += ShowStartBattleUI;
             _startBattleUIController.OnStartBattleRequested += _gameService.StartBattle;
 
@@ -34,9 +36,16 @@ namespace LA.UI
 
             _gameService.BattleService.OnEnemySet += _unitInfoUIController.SetEnemyInfo;
 
-
+            _lootUIController.OnChoiceMade += ShowClassSelector;
 
             _playerClassSelectorController.Setup();
+        }
+
+
+        private void ShowClassSelector()
+        {
+            _playerClassSelectorController.OnPlayerWin();
+            _unitInfoUIController.SetPlayerInfo(_player);
         }
 
 
@@ -50,11 +59,11 @@ namespace LA.UI
         {
             yield return _battleResultPopupUI.ShowPopup("YOU WIN!");
 
-            _playerClassSelectorController.OnPlayerWin();
+            _lootUIController.OnPlayerWin(_gameService.BattleService.GetEnemy().EnemyBase.DeathDrop);
         }
 
 
-        private void InitPlayerUI()
+        private void BeforeBattle()
         {
             _unitInfoUIController.SetPlayerInfo(_player);
             _startBattleUIController.Show();
@@ -88,13 +97,15 @@ namespace LA.UI
 
         private void OnDestroy()
         {
-            _playerClassSelectorController.OnClassSelected -= InitPlayerUI;
+            _playerClassSelectorController.OnClassSelected -= BeforeBattle;
             _playerClassSelectorController.MaxLevelReachedAlready -= ShowStartBattleUI;
             _startBattleUIController.OnStartBattleRequested -= _gameService.StartBattle;
 
             _gameService.BattleService.OnPlayerWin -= OnPlayerWinBattleWrapper;
 
             _gameService.BattleService.OnEnemySet -= _unitInfoUIController.SetEnemyInfo;
+
+            _lootUIController.OnChoiceMade -= ShowClassSelector;
         }
     }
 }

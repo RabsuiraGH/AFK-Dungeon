@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c260d187aebd4b61bc3638dc0f65f49b, type: 3}
   m_Name: GameplayConfig
   m_EditorClassIdentifier: 
+  <BaseTurnIntervalInSeconds>k__BackingField: 1
+  <GameSpeeds>k__BackingField:
+  - 1
+  - 2
   <MaxPlayerLevel>k__BackingField: 3
