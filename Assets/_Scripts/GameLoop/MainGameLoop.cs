@@ -60,6 +60,7 @@ namespace LA
 
             bool isHit = _defendingUnit.IsHit(hitChance);
 
+            Debug.Log(($"{context.Attacker.Name}  || {context.Defender.Name}"));
 
             OnBeforeHitAbilities(context.Attacker);
             OnBeforeHitAbilities(context.Defender);
@@ -99,7 +100,6 @@ namespace LA
         public void SetEnemy(Enemy enemyBase)
         {
             _enemy = enemyBase;
-            _enemy.Init();
             OnEnemySet?.Invoke(_enemy);
         }
 
