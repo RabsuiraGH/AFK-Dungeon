@@ -112,6 +112,7 @@ namespace LA
         {
             _player = player;
             _player.RestoreHealth();
+            OnPlayerUpdates?.Invoke(_player);
         }
 
 
