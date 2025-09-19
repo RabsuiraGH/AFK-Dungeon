@@ -18,6 +18,9 @@ namespace LA.UI
 
             _mainGameLoop.OnPlayerUpdates += UpdatePlayerHealth;
             _mainGameLoop.OnEnemyUpdates += UpdateEnemyHealth;
+
+            _playerInfoUI.Hide();
+            _enemyInfoUI.Hide();
         }
 
 
@@ -50,8 +53,8 @@ namespace LA.UI
             unitInfoUI.SetUnitName(unit.Name);
             unitInfoUI.SetHealth(unit.CurrentHealth, unit.MaxHealth);
             unitInfoUI.SetStats(unit.Stats.GetStats());
-            unitInfoUI.SetWeaponData(unit.CurrentWeapon.WeaponSource.Sprite, unit.CurrentWeapon.WeaponSource.Name,
-                                     unit.CurrentWeapon.WeaponSource.Description);
+            unitInfoUI.SetWeaponData(unit.CurrentWeapon.WeaponSource);
+            unitInfoUI.SetAbilities(unit.Abilities);
 
             unitInfoUI.Show();
         }

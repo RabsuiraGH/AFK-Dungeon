@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using LA.Gameplay.AbilitySystem;
+using LA.WeaponSystem;
 using TMPro;
 using UnityEngine;
 
@@ -12,6 +14,7 @@ namespace LA.UI
         [SerializeField] private StatCard _strengthCard;
         [SerializeField] private StatCard _enduranceCard;
         [SerializeField] private IconWithInfo _weaponIcon;
+        [SerializeField] private List<IconWithInfo> _abilityIcons;
 
         public void SetUnitName(string unitName) => _unitName.text = unitName;
 
@@ -26,9 +29,26 @@ namespace LA.UI
         }
 
 
-        public void SetWeaponData(Sprite sprite, string name, string description)
+        public void SetAbilities(List<AbilitySO> newAbilities)
         {
-            _weaponIcon.SetData(sprite, name, description);
+            for (int i = 0; i < _abilityIcons.Count; i++)
+            {
+                if (i < newAbilities.Count)
+                {
+                    _abilityIcons[i].SetData(newAbilities[i].Icon, newAbilities[i].Name, newAbilities[i].Description);
+                    _abilityIcons[i].Show();
+                }
+                else
+                {
+                    _abilityIcons[i].Hide();
+                }
+            }
+        }
+
+
+        public void SetWeaponData(WeaponSO weaponSource)
+        {
+            _weaponIcon.SetData(weaponSource.Sprite, weaponSource.Name, weaponSource.Description);
         }
     }
 }
