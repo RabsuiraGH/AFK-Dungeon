@@ -14,7 +14,12 @@ namespace LA
 
         private EnemyDatabase _enemyDatabase;
         [field: SerializeField] public BattleService BattleService { get; private set; }
+
+        [SerializeField] private float _baseTurnIntervalInSeconds = 1f;
+        [SerializeField] private float _gameSpeed = 1f;
+
         private Player _player;
+        private GameplayConfig _gameplayConfig;
 
 
         public void ResetGame()
@@ -33,13 +38,17 @@ namespace LA
             BattleService.OnPlayerWin += CountWin;
 
             _enemyDatabase = LoadAssetUtility.Load<EnemyDatabase>(pathConfig.EnemyDatabase);
+            _gameplayConfig = LoadAssetUtility.Load<GameplayConfig>(pathConfig.GameplayConfig);
+
+            _baseTurnIntervalInSeconds = _gameplayConfig.BaseTurnIntervalInSeconds;
+            _gameSpeed = _gameplayConfig.GameSpeeds[0];
         }
 
 
         private void CountWin()
         {
             BattleCounter++;
-            if(BattleCounter >= 5)
+            if (BattleCounter >= 5)
             {
                 Debug.Log(($"Game completed"));
             }
@@ -76,7 +85,7 @@ namespace LA
 
                 BattleService.SwapUnits();
 
-                await Task.Delay(1000, token);
+                await Task.Delay(TimeSpan.FromSeconds(_baseTurnIntervalInSeconds / _gameSpeed), token);
             }
         }
 

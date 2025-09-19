@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace LA
 {
     [CreateAssetMenu(fileName = "GameplayConfig", menuName = "Game/Config/GameplayConfig")]
     public class GameplayConfig : ScriptableObject
     {
+        [field: SerializeField] public float BaseTurnIntervalInSeconds { get; private set; }
+        [field: SerializeField] public List<float> GameSpeeds { get; private set; } = new() { 1f,2f };
+
         [field: SerializeField] public int MaxPlayerLevel { get; private set; }
     }
 }
