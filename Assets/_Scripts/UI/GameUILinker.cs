@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace LA.UI
@@ -8,6 +9,8 @@ namespace LA.UI
         [SerializeField] private StartBattleUIController _startBattleUIController;
         [SerializeField] private PlayerClassSelectorController _playerClassSelectorController;
         [SerializeField] private UnitInfoUIController _unitInfoUIController;
+
+        [SerializeField] private BattleResultPopupUI _battleResultPopupUI;
 
         [SerializeField] private MainLoopSim _mainLoopSim;
         [SerializeField] private Player _player;
@@ -27,9 +30,27 @@ namespace LA.UI
             _playerClassSelectorController.MaxLevelReachedAlready += ShowStartBattleUI;
             _startBattleUIController.OnStartBattleRequested += _mainLoopSim.StartBattle;
 
+            _mainLoopSim.MainGameLoop.OnPlayerWin += OnPlayerWinBattleWrapper;
+
             _mainLoopSim.MainGameLoop.OnEnemySet += _unitInfoUIController.SetEnemyInfo;
 
+
+
             _playerClassSelectorController.Setup();
+        }
+
+
+        private void OnPlayerWinBattleWrapper()
+        {
+            StartCoroutine(OnPlayerWinBattle());
+        }
+
+
+        private IEnumerator OnPlayerWinBattle()
+        {
+            yield return _battleResultPopupUI.ShowPopup("YOU WIN!");
+
+            _playerClassSelectorController.OnPlayerWin();
         }
 
 
@@ -70,6 +91,10 @@ namespace LA.UI
             _playerClassSelectorController.OnClassSelected -= InitPlayerUI;
             _playerClassSelectorController.MaxLevelReachedAlready -= ShowStartBattleUI;
             _startBattleUIController.OnStartBattleRequested -= _mainLoopSim.StartBattle;
+
+            _mainLoopSim.MainGameLoop.OnPlayerWin -= OnPlayerWinBattleWrapper;
+
+            _mainLoopSim.MainGameLoop.OnEnemySet -= _unitInfoUIController.SetEnemyInfo;
         }
     }
 }

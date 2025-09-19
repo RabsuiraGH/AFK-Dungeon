@@ -13,22 +13,18 @@ namespace LA.UI
         private Player _player;
         private ClassesDatabase _classesDatabase;
         private GameplayConfig _gameplayConfig;
-        private MainGameLoop _mainGameLoop;
 
         public event Action OnClassSelected;
         public event Action MaxLevelReachedAlready;
 
 
         [VContainer.Inject]
-        public void Construct(Player player, MainGameLoop mainGameLoop, PathConfig pathConfig)
+        public void Construct(Player player, PathConfig pathConfig)
         {
             _classesDatabase = LoadAssetUtility.Load<ClassesDatabase>(pathConfig.ClassesDatabase);
             _gameplayConfig = LoadAssetUtility.Load<GameplayConfig>(pathConfig.GameplayConfig);
 
             _player = player;
-            _mainGameLoop = mainGameLoop;
-
-            _mainGameLoop.OnPlayerWin += OnPlayerWin;
         }
 
 
@@ -56,7 +52,7 @@ namespace LA.UI
         }
 
 
-        private void OnPlayerWin()
+        public void OnPlayerWin()
         {
             if (_player.TotalLevel < _gameplayConfig.MaxPlayerLevel)
             {
@@ -97,7 +93,6 @@ namespace LA.UI
         private void OnDestroy()
         {
             _playerClassSelectorUI.OnClassLevelAdded -= LevelUpClass;
-            _mainGameLoop.OnPlayerWin -= OnPlayerWin;
         }
     }
 }
