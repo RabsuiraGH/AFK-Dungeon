@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace LA
 {
-    public class GameStarter
+    public class GameStarterService
     {
         private readonly LifetimeScope _parentScope;
         private LifetimeScope _gameScope;
@@ -15,9 +15,8 @@ namespace LA
         private PathConfig _pathConfig;
 
 
-        public GameStarter(LifetimeScope parentScope, PathConfig pathConfig)
+        public GameStarterService(LifetimeScope parentScope, PathConfig pathConfig)
         {
-            Debug.Log(($"ParentScope {parentScope.name}"));
             _parentScope = parentScope;
             _pathConfig = pathConfig;
         }
@@ -25,9 +24,7 @@ namespace LA
 
         public void Load()
         {
-            Debug.Log(($"Load Game"));
-
-            var prefab = LoadAssetUtility.Load<LifetimeScope>(_pathConfig.GameScope);
+            LifetimeScope prefab = LoadAssetUtility.Load<LifetimeScope>(_pathConfig.GameScope);
 
             _gameScope = _parentScope.CreateChildFromPrefab(prefab);
         }
@@ -35,14 +32,12 @@ namespace LA
 
         public void Unload()
         {
-            Debug.Log(($"Unload Game"));
             _gameScope?.Dispose();
         }
 
 
         public void Reset()
         {
-            Debug.Log(($"Reset Game"));
             _gameScope?.Dispose();
             Load();
         }

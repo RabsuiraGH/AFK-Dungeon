@@ -14,7 +14,7 @@ namespace LA.DI
             builder.RegisterInstance(_pathConfig);
 
             builder.Register<RandomService>(Lifetime.Singleton).As<IRandomService>();
-            builder.Register<GameStarter>(Lifetime.Singleton);
+            builder.Register<GameStarterService>(Lifetime.Singleton);
         }
     }
 }

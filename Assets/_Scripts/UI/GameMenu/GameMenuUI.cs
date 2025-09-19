@@ -10,17 +10,17 @@ namespace LA.UI.MainMenu
         [SerializeField] private Button _startGameButton;
         [SerializeField] private Button _resetGameButton;
         [SerializeField] private Button _quitGameButton;
-        private GameStarter _gameStarter;
+        private GameStarterService _gameStarterService;
 
 
         [VContainer.Inject]
-        public void Construct(GameStarter gameStarter)
+        public void Construct(GameStarterService gameStarterService)
         {
-            _gameStarter = gameStarter;
+            _gameStarterService = gameStarterService;
 
-            _startGameButton.onClick.AddListener(() => _gameStarter.Load());
-            _resetGameButton.onClick.AddListener(() => _gameStarter.Reset());
-            _quitGameButton.onClick.AddListener(() => _gameStarter.Unload());
+            _startGameButton.onClick.AddListener(() => _gameStarterService.Load());
+            _resetGameButton.onClick.AddListener(() => _gameStarterService.Reset());
+            _quitGameButton.onClick.AddListener(() => _gameStarterService.Unload());
         }
 
 
