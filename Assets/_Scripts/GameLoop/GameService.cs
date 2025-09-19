@@ -27,6 +27,8 @@ namespace LA
             BattleCounter = 0;
         }
 
+        public void SetGameSpeed(float gameSpeed) => _gameSpeed = gameSpeed;
+
 
         [VContainer.Inject]
         public void Construct(Player player, BattleService battleService, PathConfig pathConfig)

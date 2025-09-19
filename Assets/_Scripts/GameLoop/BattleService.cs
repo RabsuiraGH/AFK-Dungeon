@@ -26,6 +26,8 @@ namespace LA
 
         public event Action<BattleUnit> OnEnemySet;
 
+        public event Action<int> OnTurnCountUpdated;
+
         public event Action OnPlayerWin;
         public event Action<Enemy> OnPlayerLose;
 
@@ -41,8 +43,6 @@ namespace LA
 
         public void NextTurn()
         {
-            _currentTurn += 1;
-
             AddTurn(_attackingUnit);
 
             BattleContext context = new()
@@ -119,6 +119,7 @@ namespace LA
         {
             _currentTurn = 0;
             _turnCounters = new Dictionary<BattleUnit, int>();
+            OnTurnCountUpdated?.Invoke(_currentTurn);
         }
 
 
@@ -143,8 +144,10 @@ namespace LA
 
         private void AddTurn(BattleUnit unit)
         {
+            _currentTurn += 1;
             _turnCounters.TryAdd(unit, 0);
             _turnCounters[_attackingUnit]++;
+            OnTurnCountUpdated?.Invoke(_currentTurn);
         }
 
 
