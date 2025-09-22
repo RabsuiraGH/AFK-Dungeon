@@ -37,12 +37,28 @@ namespace LA.UI
 
             _gameService.BattleService.OnPlayerWin += OnPlayerWinBattleWrapper;
             _gameService.BattleService.OnPlayerLose += OnPlayerLoseBattleWrapper;
-
             _gameService.BattleService.OnEnemySet += _unitInfoUIController.SetEnemyInfo;
+
+            _gameService.OnPlayerCompletedGame += OnPlayerCompletedGameWrapper;
 
             _lootUIController.OnChoiceMade += ShowClassSelector;
 
+
             _playerClassSelectorController.Setup();
+        }
+
+
+        private void OnPlayerCompletedGameWrapper()
+        {
+            StartCoroutine(OnPlayerCompletedGame());
+        }
+
+
+        private IEnumerator OnPlayerCompletedGame()
+        {
+            yield return _battleResultPopupUI.ShowPopup("YOU COMPLETED THE GAME!");
+
+            _gameMenuUIController.Show();
         }
 
 
@@ -122,6 +138,7 @@ namespace LA.UI
             _gameService.BattleService.OnPlayerWin -= OnPlayerWinBattleWrapper;
             _gameService.BattleService.OnPlayerLose -= OnPlayerLoseBattleWrapper;
 
+            _gameService.OnPlayerCompletedGame -= OnPlayerCompletedGameWrapper;
 
             _gameService.BattleService.OnEnemySet -= _unitInfoUIController.SetEnemyInfo;
 

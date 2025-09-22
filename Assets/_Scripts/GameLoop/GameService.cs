@@ -18,6 +18,8 @@ namespace LA
         [SerializeField] private float _baseTurnIntervalInSeconds = 1f;
         [SerializeField] private float _gameSpeed = 1f;
 
+        public Action OnPlayerCompletedGame;
+
         private Player _player;
         private GameplayConfig _gameplayConfig;
 
@@ -26,6 +28,7 @@ namespace LA
         {
             BattleCounter = 0;
         }
+
 
         public void SetGameSpeed(float gameSpeed) => _gameSpeed = gameSpeed;
 
@@ -52,7 +55,7 @@ namespace LA
             BattleCounter++;
             if (BattleCounter >= 5)
             {
-                Debug.Log(($"Game completed"));
+                OnPlayerCompletedGame?.Invoke();
             }
         }
 
@@ -73,7 +76,7 @@ namespace LA
             BattleService.SetEnemy(GetRandomEnemy());
             BattleService.DecideFirstTurn();
 
-            await Task.Delay(TimeSpan.FromSeconds( 0.33f), token);
+            await Task.Delay(TimeSpan.FromSeconds(0.33f), token);
 
             while (!token.IsCancellationRequested && !BattleService.CheckBattleEnd())
             {
