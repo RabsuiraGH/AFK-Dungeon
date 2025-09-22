@@ -11,6 +11,7 @@ namespace LA.UI
     {
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private Transform _contentPanel;
+        [SerializeField] private List<StatCard> _statCards;
         [SerializeField] private List<ClassCard> _classCards;
 
         [SerializeField] private ClassCard _classCardPrefab;
@@ -49,6 +50,17 @@ namespace LA.UI
                 {
                     _classCards[i].SetData(availableClasses[i], totalLevel);
                 }
+            }
+        }
+
+
+        public void UpdateStats(Stats statUpgrades)
+        {
+            foreach (StatCard card in _statCards)
+            {
+                int statValue = statUpgrades.GetStat(card.StatType);
+
+                card.UpdateData(statValue.ToString());
             }
         }
 

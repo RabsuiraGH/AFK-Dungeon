@@ -39,6 +39,7 @@ namespace LA.UI
             List<PlayerClassData> availableClasses = GetAvailableClasses();
 
             _playerClassSelectorUI.PrepareUI(availableClasses, _player.TotalLevel);
+            _playerClassSelectorUI.UpdateStats(_player.Stats);
 
             _playerClassSelectorUI.Show();
         }
@@ -58,6 +59,7 @@ namespace LA.UI
             {
                 List<PlayerClassData> availableClasses = GetAvailableClasses();
                 _playerClassSelectorUI.UpdateUI(availableClasses, _player.TotalLevel);
+                _playerClassSelectorUI.UpdateStats(_player.Stats);
                 _playerClassSelectorUI.Show();
             }
             else
