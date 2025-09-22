@@ -18,6 +18,7 @@ namespace LA.UI
         public void SetData(Sprite sprite, string name, string description)
         {
             _iconImage.sprite = sprite;
+            _iconImage.enabled = true;
             Sprite = sprite;
             Name = name;
             Description = description;
