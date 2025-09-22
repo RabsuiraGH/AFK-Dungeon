@@ -144,6 +144,7 @@ namespace LA.UI
 
             _gameService.BattleService.OnPlayerWin -= OnPlayerWinBattleWrapper;
             _gameService.BattleService.OnPlayerLose -= OnPlayerLoseBattleWrapper;
+            _gameService.BattleService.OnEnemySet -= BattleServiceOnOnEnemySet;
 
             _gameService.OnPlayerCompletedGame -= OnPlayerCompletedGameWrapper;
 

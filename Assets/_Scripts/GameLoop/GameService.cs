@@ -18,7 +18,7 @@ namespace LA
         [SerializeField] private float _baseTurnIntervalInSeconds = 1f;
         [SerializeField] private float _gameSpeed = 1f;
 
-        public Action OnPlayerCompletedGame;
+        public event Action OnPlayerCompletedGame;
 
         private Player _player;
         private GameplayConfig _gameplayConfig;
