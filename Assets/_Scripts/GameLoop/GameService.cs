@@ -23,6 +23,8 @@ namespace LA
         private Player _player;
         private GameplayConfig _gameplayConfig;
 
+        private TaskCompletionSource<bool> _pauseTcs;
+
 
         public void ResetGame()
         {
@@ -32,6 +34,22 @@ namespace LA
 
         public void SetGameSpeed(float gameSpeed) => _gameSpeed = gameSpeed;
 
+
+        public void PauseBattle()
+        {
+            if (_pauseTcs == null)
+            {
+                _pauseTcs = new TaskCompletionSource<bool>();
+            }
+        }
+        public void ResumeBattle()
+        {
+            if (_pauseTcs != null)
+            {
+                _pauseTcs.TrySetResult(true);
+                _pauseTcs = null;
+            }
+        }
 
         [VContainer.Inject]
         public void Construct(Player player, BattleService battleService, PathConfig pathConfig)
@@ -80,6 +98,8 @@ namespace LA
 
             while (!token.IsCancellationRequested && !BattleService.CheckBattleEnd())
             {
+                await WaitIfPaused(token);
+
                 BattleService.NextTurn();
 
                 if (BattleService.CheckBattleEnd())
@@ -94,7 +114,14 @@ namespace LA
             }
         }
 
-
+        private async Task WaitIfPaused(CancellationToken token)
+        {
+            if (_pauseTcs != null)
+            {
+                var tcs = _pauseTcs;
+                await Task.WhenAny(tcs.Task, Task.Delay(Timeout.Infinite, token));
+            }
+        }
         private Enemy GetRandomEnemy()
         {
             EnemySO enemyBase = _enemyDatabase.GetRandomEnemy();

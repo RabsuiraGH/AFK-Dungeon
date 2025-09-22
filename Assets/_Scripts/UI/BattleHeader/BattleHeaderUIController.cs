@@ -21,6 +21,13 @@ namespace LA.UI.BattleHeader
             _gameService.BattleService.OnTurnCountUpdated += _battleHeaderUI.SetTurn;
 
             _battleHeaderUI.OnSpeedButtonClicked += OnSpeedButtonClicked;
+            _battleHeaderUI.OnPauseButtonClicked += OnPauseButtonClicked;
+        }
+
+
+        private void OnPauseButtonClicked()
+        {
+            _gameService.PauseBattle();
         }
 
 
@@ -33,6 +40,7 @@ namespace LA.UI.BattleHeader
         private void OnSpeedButtonClicked(int speedIndex)
         {
             _gameService.SetGameSpeed(_gameplayConfig.GameSpeeds[speedIndex]);
+            _gameService.ResumeBattle();
         }
 
 
@@ -41,6 +49,7 @@ namespace LA.UI.BattleHeader
             _gameService.BattleService.OnTurnCountUpdated -= _battleHeaderUI.SetTurn;
 
             _battleHeaderUI.OnSpeedButtonClicked -= OnSpeedButtonClicked;
+            _battleHeaderUI.OnPauseButtonClicked -= OnPauseButtonClicked;
         }
     }
 }
