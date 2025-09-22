@@ -36,6 +36,11 @@ namespace LA.UI
         }
 
 
+        public void HidePlayerInfo() => _playerInfoUI.Hide();
+
+        public void HideEnemyInfo() => _enemyInfoUI.Hide();
+
+
         private void UpdatePlayerHealth(BattleUnit unit)
         {
             UpdateHealth(unit, _playerInfoUI);
