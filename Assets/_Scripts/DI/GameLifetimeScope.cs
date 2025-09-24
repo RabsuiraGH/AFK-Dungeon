@@ -1,4 +1,6 @@
-﻿using VContainer;
+﻿using LA.Gameplay.GameLoop;
+using LA.Gameplay.Player;
+using VContainer;
 using VContainer.Unity;
 
 namespace LA.DI

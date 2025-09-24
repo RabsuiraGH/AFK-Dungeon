@@ -1,4 +1,5 @@
 ﻿using LA.Gameplay.AbilitySystem.Interfaces;
+using LA.Gameplay.Stat;
 using UnityEngine;
 
 namespace LA.Gameplay.AbilitySystem.Abilities

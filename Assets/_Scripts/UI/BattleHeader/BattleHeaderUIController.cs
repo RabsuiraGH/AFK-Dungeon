@@ -1,4 +1,6 @@
 ﻿using System;
+using LA.Gameplay.Config;
+using LA.Gameplay.GameLoop;
 using SW.Utilities.LoadAsset;
 using UnityEngine;
 

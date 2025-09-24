@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using LA.Gameplay.AbilitySystem;
-using LA.WeaponSystem;
+using LA.Gameplay.Player.ClassSystem;
+using LA.Gameplay.Stat;
+using LA.Gameplay.WeaponSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace LA.UI
+namespace LA.UI.PlayerClassSelector
 {
     public class ClassCard : TemplateUI, IPointerClickHandler
     {

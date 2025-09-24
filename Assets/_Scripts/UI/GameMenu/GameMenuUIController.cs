@@ -1,8 +1,9 @@
 ﻿using System;
+using LA.Gameplay.GameStarter;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace LA.UI.MainMenu
+namespace LA.UI.GameMenu
 {
     public class GameMenuUIController : MonoBehaviour
     {

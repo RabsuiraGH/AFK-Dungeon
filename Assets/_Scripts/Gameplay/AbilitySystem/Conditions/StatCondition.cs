@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LA.Gameplay.Stat;
 using UnityEngine;
 
 namespace LA.Gameplay.AbilitySystem.Conditions

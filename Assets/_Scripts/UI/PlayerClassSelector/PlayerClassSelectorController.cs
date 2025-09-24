@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LA.Gameplay.Config;
+using LA.Gameplay.Player;
+using LA.Gameplay.Player.ClassSystem;
 using SW.Utilities.LoadAsset;
 using UnityEngine;
 
-namespace LA.UI
+namespace LA.UI.PlayerClassSelector
 {
     public class PlayerClassSelectorController : MonoBehaviour
     {

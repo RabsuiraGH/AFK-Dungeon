@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using LA.Gameplay.AbilitySystem.Interfaces;
+using LA.Gameplay.Damage;
 using UnityEngine;
 
 namespace LA.Gameplay.AbilitySystem.Abilities

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using LA.Gameplay.GameStarter;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 

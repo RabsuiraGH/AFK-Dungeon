@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace LA.UI
+namespace LA.UI.FillBar
 {
     public class FillBarWithTextUI : FillBarUI
     {

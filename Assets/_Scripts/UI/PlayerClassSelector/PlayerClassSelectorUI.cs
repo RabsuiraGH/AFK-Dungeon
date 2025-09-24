@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using LA.Gameplay.AbilitySystem;
+using LA.Gameplay.Player.ClassSystem;
+using LA.Gameplay.Stat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LA.UI
+namespace LA.UI.PlayerClassSelector
 {
     public class PlayerClassSelectorUI : TemplateUI
     {

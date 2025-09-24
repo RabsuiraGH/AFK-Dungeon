@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
-namespace LA.UI.MainMenu
+namespace LA.UI.GameMenu
 {
     public class GameMenuUI : TemplateUI
     {

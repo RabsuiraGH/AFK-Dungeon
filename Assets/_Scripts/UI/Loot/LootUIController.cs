@@ -1,5 +1,6 @@
 ﻿using System;
-using LA.WeaponSystem;
+using LA.Gameplay.Player;
+using LA.Gameplay.WeaponSystem;
 using UnityEngine;
 
 namespace LA.UI.Loot

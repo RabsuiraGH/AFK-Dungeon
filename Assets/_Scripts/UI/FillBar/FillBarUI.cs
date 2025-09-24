@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LA.UI
+namespace LA.UI.FillBar
 {
     public class FillBarUI : TemplateUI
     {

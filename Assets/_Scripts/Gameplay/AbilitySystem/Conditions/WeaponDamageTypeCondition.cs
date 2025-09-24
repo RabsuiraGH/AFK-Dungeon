@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using LA.Gameplay.Damage;
+using UnityEngine;
 
 namespace LA.Gameplay.AbilitySystem.Conditions
 {
