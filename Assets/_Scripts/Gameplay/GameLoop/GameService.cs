@@ -20,7 +20,12 @@ namespace LA.Gameplay.GameLoop
         [SerializeField] private float _baseTurnIntervalInSeconds = 1f;
         [SerializeField] private float _gameSpeed = 1f;
 
+        public event Action OnPlayerWinBattle;
+        public event Action<Enemy.Enemy> OnPlayerLoseBattle;
         public event Action OnPlayerCompletedGame;
+
+        public event Action<BattleUnit> OnEnemySet;
+
 
         private Player.Player _player;
         private GameplayConfig _gameplayConfig;
@@ -44,6 +49,8 @@ namespace LA.Gameplay.GameLoop
                 _pauseTcs = new TaskCompletionSource<bool>();
             }
         }
+
+
         public void ResumeBattle()
         {
             if (_pauseTcs != null)
@@ -53,6 +60,7 @@ namespace LA.Gameplay.GameLoop
             }
         }
 
+
         [VContainer.Inject]
         public void Construct(Player.Player player, BattleService battleService, PathConfig pathConfig)
         {
@@ -61,6 +69,7 @@ namespace LA.Gameplay.GameLoop
 
             BattleService = battleService;
             BattleService.OnPlayerWin += CountWin;
+            BattleService.OnPlayerLose += OnLose;
 
             _enemyDatabase = LoadAssetUtility.Load<EnemyDatabase>(pathConfig.EnemyDatabase);
             _gameplayConfig = LoadAssetUtility.Load<GameplayConfig>(pathConfig.GameplayConfig);
@@ -70,12 +79,22 @@ namespace LA.Gameplay.GameLoop
         }
 
 
+        private void OnLose(Enemy.Enemy killedBy)
+        {
+            OnPlayerLoseBattle?.Invoke(killedBy);
+        }
+
+
         private void CountWin()
         {
             BattleCounter++;
             if (BattleCounter >= 5)
             {
                 OnPlayerCompletedGame?.Invoke();
+            }
+            else
+            {
+                OnPlayerWinBattle?.Invoke();
             }
         }
 
@@ -93,7 +112,9 @@ namespace LA.Gameplay.GameLoop
 
             BattleService.ResetBattle();
             BattleService.SetPlayer(_player);
-            BattleService.SetEnemy(GetRandomEnemy());
+            Enemy.Enemy enemy = GetRandomEnemy();
+            BattleService.SetEnemy(enemy);
+            OnEnemySet?.Invoke(enemy);
             BattleService.DecideFirstTurn();
 
             await Task.Delay(TimeSpan.FromSeconds(0.33f), token);
@@ -116,6 +137,7 @@ namespace LA.Gameplay.GameLoop
             }
         }
 
+
         private async Task WaitIfPaused(CancellationToken token)
         {
             if (_pauseTcs != null)
@@ -124,6 +146,8 @@ namespace LA.Gameplay.GameLoop
                 await Task.WhenAny(tcs.Task, Task.Delay(Timeout.Infinite, token));
             }
         }
+
+
         private Enemy.Enemy GetRandomEnemy()
         {
             EnemySO enemyBase = _enemyDatabase.GetRandomEnemy();
@@ -137,6 +161,7 @@ namespace LA.Gameplay.GameLoop
             enemy.Init();
             return enemy;
         }
+
 
         ~GameService()
         {

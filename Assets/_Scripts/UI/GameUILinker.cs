@@ -42,9 +42,9 @@ namespace LA.UI
             _playerClassSelectorController.MaxLevelReachedAlready += ShowStartBattleUI;
             _startBattleUIController.OnStartBattleRequested += _gameService.StartBattle;
 
-            _gameService.BattleService.OnPlayerWin += OnPlayerWinBattleWrapper;
-            _gameService.BattleService.OnPlayerLose += OnPlayerLoseBattleWrapper;
-            _gameService.BattleService.OnEnemySet += BattleServiceOnOnEnemySet;
+            _gameService.OnPlayerWinBattle += OnPlayerWinBattleWrapper;
+            _gameService.OnPlayerLoseBattle += OnPlayerLoseBattleWrapper;
+            _gameService.OnEnemySet += BattleServiceOnOnEnemySet;
 
             _gameService.OnPlayerCompletedGame += OnPlayerCompletedGameWrapper;
 
@@ -69,7 +69,7 @@ namespace LA.UI
 
         private IEnumerator OnPlayerCompletedGame()
         {
-            yield return _battleResultPopupUI.ShowPopup("YOU COMPLETED THE GAME!",0.2f, 0.5f, 3f);
+            yield return _battleResultPopupUI.ShowPopup("YOU COMPLETED THE GAME!", 0.2f, 0.5f, 3f);
 
             _gameMenuUIController.Show();
         }
@@ -83,7 +83,7 @@ namespace LA.UI
 
         private IEnumerator OnPlayerLoseBattle()
         {
-            yield return _battleResultPopupUI.ShowPopup("YOU LOSE! :(",0.2f, 0.5f, 1f);
+            yield return _battleResultPopupUI.ShowPopup("YOU LOSE! :(", 0.2f, 0.5f, 1f);
 
             _gameMenuUIController.Show();
         }
@@ -105,7 +105,7 @@ namespace LA.UI
 
         private IEnumerator OnPlayerWinBattle()
         {
-            yield return _battleResultPopupUI.ShowPopup("YOU WIN!",0.2f, 0.5f, 1f);
+            yield return _battleResultPopupUI.ShowPopup("YOU WIN!", 0.2f, 0.5f, 1f);
 
             _lootUIController.OnPlayerWin(_gameService.BattleService.GetEnemy().EnemyBase.DeathDrop);
         }
@@ -149,13 +149,13 @@ namespace LA.UI
             _playerClassSelectorController.MaxLevelReachedAlready -= ShowStartBattleUI;
             _startBattleUIController.OnStartBattleRequested -= _gameService.StartBattle;
 
-            _gameService.BattleService.OnPlayerWin -= OnPlayerWinBattleWrapper;
-            _gameService.BattleService.OnPlayerLose -= OnPlayerLoseBattleWrapper;
-            _gameService.BattleService.OnEnemySet -= BattleServiceOnOnEnemySet;
+            _gameService.OnPlayerWinBattle -= OnPlayerWinBattleWrapper;
+            _gameService.OnPlayerLoseBattle -= OnPlayerLoseBattleWrapper;
+            _gameService.OnEnemySet -= BattleServiceOnOnEnemySet;
 
             _gameService.OnPlayerCompletedGame -= OnPlayerCompletedGameWrapper;
 
-            _gameService.BattleService.OnEnemySet -= _unitInfoUIController.SetEnemyInfo;
+            _gameService.OnEnemySet -= _unitInfoUIController.SetEnemyInfo;
 
             _lootUIController.OnChoiceMade -= ShowClassSelector;
         }

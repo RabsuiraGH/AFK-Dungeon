@@ -23,9 +23,6 @@ namespace LA.Gameplay.GameLoop
 
         public event Action<BattleUnit> OnPlayerUpdates;
         public event Action<BattleUnit> OnEnemyUpdates;
-
-        public event Action<BattleUnit> OnEnemySet;
-
         public event Action<int> OnTurnCountUpdated;
 
         public event Action OnPlayerWin;
@@ -100,7 +97,6 @@ namespace LA.Gameplay.GameLoop
         public void SetEnemy(Enemy.Enemy enemyBase)
         {
             _enemy = enemyBase;
-            OnEnemySet?.Invoke(_enemy);
         }
 
         public Enemy.Enemy GetEnemy()
