@@ -62,7 +62,7 @@ namespace LA.UI
 
         private IEnumerator OnPlayerCompletedGame()
         {
-            yield return _battleResultPopupUI.ShowPopup("YOU COMPLETED THE GAME!");
+            yield return _battleResultPopupUI.ShowPopup("YOU COMPLETED THE GAME!",0.2f, 0.5f, 3f);
 
             _gameMenuUIController.Show();
         }
@@ -76,7 +76,7 @@ namespace LA.UI
 
         private IEnumerator OnPlayerLoseBattle()
         {
-            yield return _battleResultPopupUI.ShowPopup("YOU LOSE! :(");
+            yield return _battleResultPopupUI.ShowPopup("YOU LOSE! :(",0.2f, 0.5f, 1f);
 
             _gameMenuUIController.Show();
         }
@@ -98,7 +98,7 @@ namespace LA.UI
 
         private IEnumerator OnPlayerWinBattle()
         {
-            yield return _battleResultPopupUI.ShowPopup("YOU WIN!");
+            yield return _battleResultPopupUI.ShowPopup("YOU WIN!",0.2f, 0.5f, 1f);
 
             _lootUIController.OnPlayerWin(_gameService.BattleService.GetEnemy().EnemyBase.DeathDrop);
         }

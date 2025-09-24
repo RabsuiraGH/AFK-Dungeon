@@ -13,35 +13,43 @@ namespace LA.UI
 
         [SerializeField] private CanvasGroup _canvasGroup;
 
-        [SerializeField] private float _fadeDilay = 0.5f;
-        [SerializeField] private float _fadeDuration = 1f;
 
-
-        public IEnumerator ShowPopup(string text)
+        public IEnumerator ShowPopup(string text, float fadeInDuration, float fadeOutDuration, float stayDuration)
         {
             _resultText.text = text;
-            _canvasGroup.alpha = 1;
             Show();
-            yield return StartCoroutine(Fade(1, 0));
+            yield return StartCoroutine(Fade(fadeInDuration, fadeOutDuration, stayDuration));
         }
 
 
-        private IEnumerator Fade(float start, float end)
+        private IEnumerator Fade(float fadeInDuration, float fadeOutDuration, float delay)
         {
-            yield return new WaitForSeconds(_fadeDilay);
             float time = 0;
+            float zeroAlpha = 0;
+            float oneAlpha = 1;
 
-
-            while (time < _fadeDuration)
+            _canvasGroup.alpha = 0;
+            while (time < fadeInDuration)
             {
                 time += Time.deltaTime;
-
-                _canvasGroup.alpha = Mathf.Lerp(start, end, time / _fadeDuration);
+                _canvasGroup.alpha = Mathf.Lerp(zeroAlpha, oneAlpha, time / fadeInDuration);
                 yield return null;
             }
 
+            _canvasGroup.alpha = oneAlpha;
 
-            _canvasGroup.alpha = end;
+            yield return new WaitForSeconds(delay);
+
+            time = 0;
+            while (time < fadeOutDuration)
+            {
+                time += Time.deltaTime;
+
+                _canvasGroup.alpha = Mathf.Lerp(oneAlpha, zeroAlpha, time / fadeOutDuration);
+                yield return null;
+            }
+
+            _canvasGroup.alpha = zeroAlpha;
             Hide();
         }
     }
