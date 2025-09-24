@@ -135,5 +135,10 @@ namespace LA
             enemy.Init();
             return enemy;
         }
+
+        ~GameService()
+        {
+            BattleService.OnPlayerWin -= CountWin;
+        }
     }
 }
