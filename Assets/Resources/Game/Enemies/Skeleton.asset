@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Skeleton
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Skeleton
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 919344ac417a85d428e9bbc642687790, type: 3}
   <BaseHealth>k__BackingField: 10
   <BaseWeapon>k__BackingField: {fileID: 11400000, guid: da5a75cd48946e24b993a003709b83ae, type: 2}
   <BaseStats>k__BackingField:

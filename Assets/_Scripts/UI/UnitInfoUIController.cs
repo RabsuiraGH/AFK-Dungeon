@@ -1,10 +1,14 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LA.UI
 {
     public class UnitInfoUIController : MonoBehaviour
     {
+        [SerializeField] private Image _playerImage;
+        [SerializeField] private Image _enemyImage;
+
         [SerializeField] private UnitInfoUI _playerInfoUI;
         [SerializeField] private UnitInfoUI _enemyInfoUI;
 
@@ -21,18 +25,25 @@ namespace LA.UI
 
             _playerInfoUI.Hide();
             _enemyInfoUI.Hide();
+            _playerImage.gameObject.SetActive(false);
+            _enemyImage.gameObject.SetActive(false);
         }
 
 
         public void SetPlayerInfo(BattleUnit unit)
         {
             SetUnitInfo(unit, _playerInfoUI);
+            _playerImage.sprite = unit.Sprite;
+            _playerImage.gameObject.SetActive(true);
+
         }
 
 
         public void SetEnemyInfo(BattleUnit unit)
         {
             SetUnitInfo(unit, _enemyInfoUI);
+            _enemyImage.sprite = unit.Sprite;
+            _enemyImage.gameObject.SetActive(true);
         }
 
 

@@ -8,6 +8,7 @@ namespace LA
     public abstract class BattleUnit
     {
         [field: SerializeField] public string Name { get; set; } = "Unit";
+        [field: SerializeField] public Sprite Sprite { get; set; }
         [field: SerializeField] public int MaxHealth { get; set; }
         [field: SerializeField] public int CurrentHealth { get; set; }
         [field: SerializeField] public Weapon CurrentWeapon { get; set; }

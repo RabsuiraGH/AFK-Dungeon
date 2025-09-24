@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Goblin
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Goblin
+  <Sprite>k__BackingField: {fileID: 21300000, guid: d74222ee67e491e4092abfdea2ef18ac, type: 3}
   <BaseHealth>k__BackingField: 5
   <BaseWeapon>k__BackingField: {fileID: 11400000, guid: ae793c394c194974e843fc0a797df18e, type: 2}
   <BaseStats>k__BackingField:

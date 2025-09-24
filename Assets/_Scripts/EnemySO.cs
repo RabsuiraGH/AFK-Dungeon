@@ -9,6 +9,7 @@ namespace LA
     public class EnemySO : ScriptableObject
     {
         [field: SerializeField] public string Name { get; set; }
+        [field: SerializeField] public Sprite Sprite { get; set; }
 
         [field: SerializeField] public int BaseHealth { get; set; }
         [field: SerializeField] public WeaponSO BaseWeapon { get; set; }

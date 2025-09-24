@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Golem
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Golem
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 59b22eba36244a9408d08da8fa6e4a30, type: 3}
   <BaseHealth>k__BackingField: 10
   <BaseWeapon>k__BackingField: {fileID: 11400000, guid: 2b9f6986d03a5854cadaac004550101b, type: 2}
   <BaseStats>k__BackingField:

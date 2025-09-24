@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LA.Gameplay.AbilitySystem;
 using LA.WeaponSystem;
+using SW.Utilities.LoadAsset;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,7 +19,8 @@ namespace LA
 
         public override void Init()
         {
-            Name = "Player";
+            Name = "Player"; // TODO: Remove direct path to config
+            Sprite = LoadAssetUtility.Load<Sprite>("Assets/Resources/Art/Game/Player/GigaPlayer.png");
             MaxHealth = 0;
             CurrentWeapon = new Weapon();
             Abilities = new List<AbilitySO>();
