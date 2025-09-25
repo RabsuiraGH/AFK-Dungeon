@@ -48,8 +48,7 @@ MonoBehaviour:
   parentReference:
     TypeName: 
   autoRun: 1
-  autoInjectGameObjects:
-  - {fileID: 7871045651168686373}
+  autoInjectGameObjects: []
 --- !u!1001 &6203629962793278759
 PrefabInstance:
   m_ObjectHideFlags: 0
