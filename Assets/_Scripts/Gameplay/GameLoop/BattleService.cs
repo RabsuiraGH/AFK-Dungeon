@@ -21,8 +21,9 @@ namespace LA.Gameplay.GameLoop
         [SerializeField] private int _currentTurn = 0;
         private Dictionary<BattleUnit, int> _turnCounters = new();
 
-        public event Action<BattleUnit> OnPlayerUpdates;
-        public event Action<BattleUnit> OnEnemyUpdates;
+        public event Action<BattleUnit> OnUnitUpdates;
+        public event Action<BattleUnit,bool> OnUnitAttack;
+
         public event Action<int> OnTurnCountUpdated;
 
         public event Action OnPlayerWin;
@@ -63,6 +64,8 @@ namespace LA.Gameplay.GameLoop
             OnBeforeHitAbilities(context.Defender);
 
             int totalDamage = 0;
+
+            OnUnitAttack?.Invoke(context.Attacker, isHit);
             if (isHit)
             {
                 totalDamage = context.GetTotalDamage(context.Attacker);
@@ -80,8 +83,8 @@ namespace LA.Gameplay.GameLoop
             context.Attacker.TakeDamage(totalDamage);
 
 
-            OnPlayerUpdates?.Invoke(_player);
-            OnEnemyUpdates?.Invoke(_enemy);
+            OnUnitUpdates?.Invoke(_player);
+            OnUnitUpdates?.Invoke(_enemy);
 
             void OnBeforeHitAbilities(BattleUnit owner)
             {
@@ -108,7 +111,7 @@ namespace LA.Gameplay.GameLoop
         {
             _player = player;
             _player.RestoreHealth();
-            OnPlayerUpdates?.Invoke(_player);
+            OnUnitUpdates?.Invoke(_player);
         }
 
 

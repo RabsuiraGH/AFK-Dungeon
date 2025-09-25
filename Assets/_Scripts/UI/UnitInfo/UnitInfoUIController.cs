@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
+using DG.Tweening;
 using LA.Gameplay;
 using LA.Gameplay.GameLoop;
+using LA.Gameplay.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,44 +11,39 @@ namespace LA.UI.UnitInfo
 {
     public class UnitInfoUIController : MonoBehaviour
     {
-        [SerializeField] private Image _playerImage;
-        [SerializeField] private Image _enemyImage;
-
         [SerializeField] private UnitInfoUI _playerInfoUI;
         [SerializeField] private UnitInfoUI _enemyInfoUI;
 
-        private BattleService _battleService;
+        private GameService _battleService;
 
 
         [VContainer.Inject]
-        public void Construct(BattleService battleService)
+        public void Construct(GameService battleService)
         {
             _battleService = battleService;
 
-            _battleService.OnPlayerUpdates += UpdatePlayerHealth;
-            _battleService.OnEnemyUpdates += UpdateEnemyHealth;
+            _battleService.OnUnitUpdates += UpdateUnit;
+
+            _battleService.OnUnitAttack += OnUnitAttack;
 
             _playerInfoUI.Hide();
             _enemyInfoUI.Hide();
-            _playerImage.gameObject.SetActive(false);
-            _enemyImage.gameObject.SetActive(false);
         }
 
 
-        public void SetPlayerInfo(BattleUnit unit)
+        private void OnUnitAttack(BattleUnit attackingUnit, bool isHit)
         {
-            SetUnitInfo(unit, _playerInfoUI);
-            _playerImage.sprite = unit.Sprite;
-            _playerImage.gameObject.SetActive(true);
-
+            GetUnitInfoUI(attackingUnit).AnimateAttack(_battleService.GetTurnDuration());
+            if (!isHit)
+            {
+                GetOpponentInfoUI(attackingUnit).AnimateDodge(_battleService.GetTurnDuration());
+            }
         }
 
 
-        public void SetEnemyInfo(BattleUnit unit)
+        public void SetUnitInfo(BattleUnit unit)
         {
-            SetUnitInfo(unit, _enemyInfoUI);
-            _enemyImage.sprite = unit.Sprite;
-            _enemyImage.gameObject.SetActive(true);
+            SetUnitInfo(unit, GetUnitInfoUI(unit));
         }
 
 
@@ -54,20 +52,15 @@ namespace LA.UI.UnitInfo
         public void HideEnemyInfo() => _enemyInfoUI.Hide();
 
 
-        private void UpdatePlayerHealth(BattleUnit unit)
+        private void UpdateUnit(BattleUnit unit)
         {
-            UpdateHealth(unit, _playerInfoUI);
+            UpdateHealth(unit, GetUnitInfoUI(unit));
         }
 
 
-        private void UpdateEnemyHealth(BattleUnit unit)
+        private void SetUnitInfo(BattleUnit unit, UnitInfoUI unitInfoUI)
         {
-            UpdateHealth(unit, _enemyInfoUI);
-        }
-
-
-        public void SetUnitInfo(BattleUnit unit, UnitInfoUI unitInfoUI)
-        {
+            unitInfoUI.SetUnitImage(unit.Sprite);
             unitInfoUI.SetUnitName(unit.Name);
             unitInfoUI.SetHealth(unit.CurrentHealth, unit.MaxHealth);
             unitInfoUI.SetStats(unit.Stats.GetStats());
@@ -78,16 +71,21 @@ namespace LA.UI.UnitInfo
         }
 
 
-        public void UpdateHealth(BattleUnit unit, UnitInfoUI unitInfoUI)
+        private void UpdateHealth(BattleUnit unit, UnitInfoUI unitInfoUI)
         {
             unitInfoUI.SetHealth(unit.CurrentHealth, unit.MaxHealth);
         }
 
 
+        private UnitInfoUI GetUnitInfoUI(BattleUnit unit) => unit is Player ? _playerInfoUI : _enemyInfoUI;
+
+        private UnitInfoUI GetOpponentInfoUI(BattleUnit unit) => unit is not Player ? _playerInfoUI : _enemyInfoUI;
+
+
         private void OnDestroy()
         {
-            _battleService.OnPlayerUpdates -= UpdatePlayerHealth;
-            _battleService.OnEnemyUpdates -= UpdateEnemyHealth;
+            _battleService.OnUnitUpdates -= UpdateUnit;
+            _battleService.OnUnitAttack -= OnUnitAttack;
         }
     }
 }

@@ -57,7 +57,7 @@ namespace LA.UI
 
         private void BattleServiceOnOnEnemySet(BattleUnit enemy)
         {
-            _unitInfoUIController.SetEnemyInfo(enemy);
+            _unitInfoUIController.SetUnitInfo(enemy);
         }
 
 
@@ -92,7 +92,7 @@ namespace LA.UI
         private void ShowClassSelector()
         {
             _playerClassSelectorController.OnPlayerWin();
-            _unitInfoUIController.SetPlayerInfo(_player);
+            _unitInfoUIController.SetUnitInfo(_player);
         }
 
 
@@ -113,7 +113,7 @@ namespace LA.UI
 
         private void BeforeBattle()
         {
-            _unitInfoUIController.SetPlayerInfo(_player);
+            _unitInfoUIController.SetUnitInfo(_player);
             _startBattleUIController.Show();
         }
 
@@ -155,7 +155,7 @@ namespace LA.UI
 
             _gameService.OnPlayerCompletedGame -= OnPlayerCompletedGameWrapper;
 
-            _gameService.OnEnemySet -= _unitInfoUIController.SetEnemyInfo;
+            _gameService.OnEnemySet -= _unitInfoUIController.SetUnitInfo;
 
             _lootUIController.OnChoiceMade -= ShowClassSelector;
         }

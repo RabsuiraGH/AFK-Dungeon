@@ -4294,8 +4294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1d19be189541dcb8262cfb2b711def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerImage: {fileID: 8742217704467730522}
-  _enemyImage: {fileID: 1539755173628909668}
   _playerInfoUI: {fileID: 1150749898032496287}
   _enemyInfoUI: {fileID: 588409420281331525}
 --- !u!114 &5986655101472063080
@@ -5181,6 +5179,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7841125988140164537, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
+      propertyPath: _unitImage
+      value: 
+      objectReference: {fileID: 8742217704467730522}
+    - target: {fileID: 7841125988140164537, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
+      propertyPath: _swingDirection.x
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 8993056727772111369, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -5485,6 +5491,14 @@ PrefabInstance:
     - target: {fileID: 7700058830022074830, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7841125988140164537, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
+      propertyPath: _unitImage
+      value: 
+      objectReference: {fileID: 1539755173628909668}
+    - target: {fileID: 7841125988140164537, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
+      propertyPath: _swingDirection.x
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 8993056727772111369, guid: 67334d8013c97b04caaa816ac093288c, type: 3}
       propertyPath: m_hasFontAssetChanged

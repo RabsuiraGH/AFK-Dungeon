@@ -24,8 +24,10 @@ namespace LA.Gameplay.GameLoop
         public event Action<Enemy.Enemy> OnPlayerLoseBattle;
         public event Action OnPlayerCompletedGame;
 
-        public event Action<BattleUnit> OnEnemySet;
+        public event Action<BattleUnit> OnUnitUpdates;
+        public event Action<BattleUnit, bool> OnUnitAttack;
 
+        public event Action<BattleUnit> OnEnemySet;
 
         private Player.Player _player;
         private GameplayConfig _gameplayConfig;
@@ -41,6 +43,8 @@ namespace LA.Gameplay.GameLoop
 
         public void SetGameSpeed(float gameSpeed) => _gameSpeed = gameSpeed;
 
+
+        public float GetTurnDuration() => _baseTurnIntervalInSeconds / _gameSpeed;
 
         public void PauseBattle()
         {
@@ -70,12 +74,27 @@ namespace LA.Gameplay.GameLoop
             BattleService = battleService;
             BattleService.OnPlayerWin += CountWin;
             BattleService.OnPlayerLose += OnLose;
+            BattleService.OnUnitUpdates += UpdateUnit;
+            BattleService.OnUnitAttack += UnitAttack;
+
 
             _enemyDatabase = LoadAssetUtility.Load<EnemyDatabase>(pathConfig.EnemyDatabase);
             _gameplayConfig = LoadAssetUtility.Load<GameplayConfig>(pathConfig.GameplayConfig);
 
             _baseTurnIntervalInSeconds = _gameplayConfig.BaseTurnIntervalInSeconds;
             _gameSpeed = _gameplayConfig.GameSpeeds[0];
+        }
+
+
+        private void UpdateUnit(BattleUnit unit)
+        {
+            OnUnitUpdates?.Invoke(unit);
+        }
+
+
+        private void UnitAttack(BattleUnit unit, bool isHit)
+        {
+            OnUnitAttack?.Invoke(unit, isHit);
         }
 
 
@@ -166,6 +185,9 @@ namespace LA.Gameplay.GameLoop
         ~GameService()
         {
             BattleService.OnPlayerWin -= CountWin;
+            BattleService.OnPlayerLose -= OnLose;
+            BattleService.OnUnitUpdates -= UpdateUnit;
+            BattleService.OnUnitAttack -= UnitAttack;
         }
     }
 }
