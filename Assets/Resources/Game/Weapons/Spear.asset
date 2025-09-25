@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spear
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Spear
-  <Description>k__BackingField: 
+  <Description>k__BackingField: Deals 3 Stab damage.
   <Sprite>k__BackingField: {fileID: 21300000, guid: 0c0822547eb944d4aa4b562aba5126fe, type: 3}
   <BaseDamage>k__BackingField: 3
   <DamageType>k__BackingField: 3

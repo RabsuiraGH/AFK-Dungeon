@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Stone skin
   <Icon>k__BackingField: {fileID: 21300000, guid: 71ced9d6f15185b43ad4b9c2c35e9b87, type: 3}
-  <Description>k__BackingField: 
+  <Description>k__BackingField: Reduce damage on Endurance owner value.
   <ApplyWhenRole>k__BackingField: 1
   <Conditions>k__BackingField: []
   <ReductionStatMultiplier>k__BackingField:

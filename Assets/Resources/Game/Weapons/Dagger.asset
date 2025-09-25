@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dagger
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Dagger
-  <Description>k__BackingField: 
+  <Description>k__BackingField: Deals 2 Stab damage.
   <Sprite>k__BackingField: {fileID: 21300000, guid: 9f17e09689fd9d94eaf231eb723ee84a, type: 3}
   <BaseDamage>k__BackingField: 2
   <DamageType>k__BackingField: 3

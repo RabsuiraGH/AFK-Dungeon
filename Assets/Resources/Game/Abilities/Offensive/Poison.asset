@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Poison
   <Icon>k__BackingField: {fileID: 21300000, guid: 9e74e55c9a6c7e7458efd6bab9c1408c, type: 3}
-  <Description>k__BackingField: 
+  <Description>k__BackingField: Deals 1 bonus damage starting from 2 turn. On each
+    next turn damage inreases by 1.
   <ApplyWhenRole>k__BackingField: 0
   <Conditions>k__BackingField: []
   <BaseDamage>k__BackingField: 0
