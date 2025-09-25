@@ -4,6 +4,8 @@ using LA.Gameplay.AbilitySystem;
 using LA.Gameplay.Stat;
 using LA.Gameplay.WeaponSystem;
 using LA.UI.FillBar;
+using LA.UI.Popup;
+using SW.Utilities.LoadAsset;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +25,15 @@ namespace LA.UI.UnitInfo
         [SerializeField] private List<IconWithInfo> _abilityIcons;
 
         [SerializeField] private float _attackSwingPercentage = 0.3f;
+
+
+        public void CreatePopup(string popupPath)
+        {
+            PopupUI popup = PopupUI.CreatePopup(LoadAssetUtility.Load<PopupUI>(popupPath), _unitImage.transform.position,
+                                _unitImage.transform.parent);
+
+            popup.SetText("DODGE").MovePopup(Vector3.up * 50, 0.3f).FadePopup(0, 0.2f).DestroyOnComplete();
+        }
 
 
         public void AnimateAttack(float duration)

@@ -4,6 +4,7 @@ using DG.Tweening;
 using LA.Gameplay;
 using LA.Gameplay.GameLoop;
 using LA.Gameplay.Player;
+using LA.UI.Popup;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,12 +16,13 @@ namespace LA.UI.UnitInfo
         [SerializeField] private UnitInfoUI _enemyInfoUI;
 
         private GameService _battleService;
-
+        private string _popupUIPrefabPath;
 
         [VContainer.Inject]
-        public void Construct(GameService battleService)
+        public void Construct(GameService battleService, PathConfig pathConfig)
         {
             _battleService = battleService;
+            _popupUIPrefabPath = pathConfig.PopupUI;
 
             _battleService.OnUnitUpdates += UpdateUnit;
 
@@ -37,6 +39,7 @@ namespace LA.UI.UnitInfo
             if (!isHit)
             {
                 GetOpponentInfoUI(attackingUnit).AnimateDodge(_battleService.GetTurnDuration());
+                GetOpponentInfoUI(attackingUnit).CreatePopup(_popupUIPrefabPath);
             }
         }
 
