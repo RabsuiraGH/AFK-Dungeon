@@ -7,6 +7,8 @@ namespace LA.UI
         [SerializeField] protected Transform _parentTransform;
 
 
+        public bool IsVisible => _parentTransform.gameObject.activeSelf;
+
         public virtual void Show()
         {
             _parentTransform.gameObject.SetActive(true);

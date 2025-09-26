@@ -13,6 +13,7 @@ namespace LA.UI.BattleHeader
         private GameService _gameService;
         private GameplayConfig _gameplayConfig;
 
+        public event Action OnMenuShowRequested;
 
         [VContainer.Inject]
         public void Construct(PathConfig pathConfig, GameService gameService)
@@ -22,8 +23,16 @@ namespace LA.UI.BattleHeader
 
             _gameService.BattleService.OnTurnCountUpdated += _battleHeaderUI.SetTurn;
 
+            _battleHeaderUI.OnMenuButtonClicked +=  OnMenu;
             _battleHeaderUI.OnSpeedButtonClicked += OnSpeedButtonClicked;
             _battleHeaderUI.OnPauseButtonClicked += OnPauseButtonClicked;
+        }
+
+
+        private void OnMenu()
+        {
+            OnMenuShowRequested?.Invoke();
+            _gameService.PauseBattle();
         }
 
 
@@ -50,6 +59,7 @@ namespace LA.UI.BattleHeader
         {
             _gameService.BattleService.OnTurnCountUpdated -= _battleHeaderUI.SetTurn;
 
+            _battleHeaderUI.OnMenuButtonClicked -=  OnMenu;
             _battleHeaderUI.OnSpeedButtonClicked -= OnSpeedButtonClicked;
             _battleHeaderUI.OnPauseButtonClicked -= OnPauseButtonClicked;
         }

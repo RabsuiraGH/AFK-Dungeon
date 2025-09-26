@@ -4,6 +4,7 @@ using LA.Gameplay;
 using LA.Gameplay.Enemy;
 using LA.Gameplay.GameLoop;
 using LA.Gameplay.Player;
+using LA.UI.BattleHeader;
 using LA.UI.Loot;
 using LA.UI.GameMenu;
 using LA.UI.PlayerClassSelector;
@@ -15,6 +16,7 @@ namespace LA.UI
 {
     public class GameUILinker : MonoBehaviour
     {
+        [SerializeField] private BattleHeaderUIController _battleHeaderUIController;
         [SerializeField] private StartBattleUIController _startBattleUIController;
         [SerializeField] private PlayerClassSelectorController _playerClassSelectorController;
         [SerializeField] private UnitInfoUIController _unitInfoUIController;
@@ -50,8 +52,17 @@ namespace LA.UI
 
             _lootUIController.OnChoiceMade += ShowClassSelector;
 
+            _gameMenuUIController.OnGameContinue += _gameService.ResumeBattle;
+
+            _battleHeaderUIController.OnMenuShowRequested += ToggleGameMenu;
 
             _playerClassSelectorController.Setup();
+        }
+
+
+        private void ToggleGameMenu()
+        {
+            _gameMenuUIController.Toggle();
         }
 
 
@@ -71,7 +82,7 @@ namespace LA.UI
         {
             yield return _battleResultPopupUI.ShowPopup("YOU COMPLETED THE GAME!", 0.2f, 0.5f, 3f);
 
-            _gameMenuUIController.Show();
+            _gameMenuUIController.ShowWithoutContinueButton();
         }
 
 
@@ -85,7 +96,7 @@ namespace LA.UI
         {
             yield return _battleResultPopupUI.ShowPopup("YOU LOSE! :(", 0.2f, 0.5f, 1f);
 
-            _gameMenuUIController.Show();
+            _gameMenuUIController.ShowWithoutContinueButton();
         }
 
 
@@ -158,6 +169,9 @@ namespace LA.UI
             _gameService.OnEnemySet -= _unitInfoUIController.SetUnitInfo;
 
             _lootUIController.OnChoiceMade -= ShowClassSelector;
+            _gameMenuUIController.OnGameContinue -= _gameService.ResumeBattle;
+            _battleHeaderUIController.OnMenuShowRequested -= ToggleGameMenu;
+
         }
     }
 }

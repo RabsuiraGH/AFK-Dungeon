@@ -65,6 +65,7 @@ MonoBehaviour:
   <FillImage>k__BackingField: {fileID: 489709003227902380}
   _valueText: {fileID: 3728113734480040694}
   _separator: /
+  _allowsNegativeValues: 0
 --- !u!1 &2677479390423042472
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,6 +388,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentTransform: {fileID: 7208039077019474947}
+  _unitImage: {fileID: 0}
+  _swingDirection: {x: 0, y: 0, z: 0}
   _unitName: {fileID: 845463294813221453}
   _healthBar: {fileID: 4094666381475705202}
   _agilityCard: {fileID: 7105299775473363853}
@@ -400,6 +403,7 @@ MonoBehaviour:
   - {fileID: 1140703239493167036}
   - {fileID: 3789714669020090748}
   - {fileID: 4193562784262522532}
+  _attackSwingPercentage: 0.3
 --- !u!1 &8704114128921044230
 GameObject:
   m_ObjectHideFlags: 0

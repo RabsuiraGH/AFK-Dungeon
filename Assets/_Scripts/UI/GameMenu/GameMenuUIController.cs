@@ -13,6 +13,8 @@ namespace LA.UI.GameMenu
 
         private string _mainMenuSceneName;
 
+        public event Action OnGameContinue;
+
 
         [VContainer.Inject]
         public void Construct(GameStarterService gameStarterService, PathConfig pathConfig)
@@ -20,12 +22,46 @@ namespace LA.UI.GameMenu
             _gameStarterService = gameStarterService;
             _mainMenuSceneName = pathConfig.MainMenuScene.Split('/')[^1].Split('.')[0];
 
+            _gameMenuUI.OnContinueButtonClicked += ContinueGame;
             _gameMenuUI.OnResetGameButtonClicked += _gameStarterService.Reset;
             //_gameMenuUI.OnSettingsButtonClicked +=
             _gameMenuUI.OnQuitGameButtonClicked += BackToMainMenu;
         }
 
-        public void Show() => _gameMenuUI.Show();
+
+        private void ContinueGame()
+        {
+            OnGameContinue?.Invoke();
+            _gameMenuUI.Hide();
+        }
+
+
+        public void ShowWithoutContinueButton()
+        {
+            _gameMenuUI.ToggleContinueButton(false);
+            _gameMenuUI.Show();
+        }
+
+
+        public void Show()
+        {
+            _gameMenuUI.ToggleContinueButton(true);
+            _gameMenuUI.Show();
+        }
+
+
+        public void Toggle()
+        {
+            if (_gameMenuUI.IsVisible)
+            {
+                _gameMenuUI.Hide();
+            }
+            else
+            {
+                Show();
+            }
+        }
+
 
         private void BackToMainMenu()
         {
@@ -36,6 +72,7 @@ namespace LA.UI.GameMenu
 
         private void OnDestroy()
         {
+            _gameMenuUI.OnContinueButtonClicked -= ContinueGame;
             _gameMenuUI.OnResetGameButtonClicked -= _gameStarterService.Reset;
             //_gameMenuUI.OnSettingsButtonClicked -=
             _gameMenuUI.OnQuitGameButtonClicked -= BackToMainMenu;
