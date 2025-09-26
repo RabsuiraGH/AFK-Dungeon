@@ -57,6 +57,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 308658634906213279}
     m_Modifications:
+    - target: {fileID: 5369808106169990028, guid: 5c3bf9d58e99d4d4da05d0db2c8d5f54, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b4ea76ef609d8bc41865295697d17c32, type: 2}
+    - target: {fileID: 5369808106169990028, guid: 5c3bf9d58e99d4d4da05d0db2c8d5f54, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8188436350340913990, guid: b4ea76ef609d8bc41865295697d17c32, type: 2}
+    - target: {fileID: 5573028251260025430, guid: 5c3bf9d58e99d4d4da05d0db2c8d5f54, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b4ea76ef609d8bc41865295697d17c32, type: 2}
+    - target: {fileID: 5573028251260025430, guid: 5c3bf9d58e99d4d4da05d0db2c8d5f54, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8188436350340913990, guid: b4ea76ef609d8bc41865295697d17c32, type: 2}
+    - target: {fileID: 6442393653159575015, guid: 5c3bf9d58e99d4d4da05d0db2c8d5f54, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b4ea76ef609d8bc41865295697d17c32, type: 2}
+    - target: {fileID: 6442393653159575015, guid: 5c3bf9d58e99d4d4da05d0db2c8d5f54, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8188436350340913990, guid: b4ea76ef609d8bc41865295697d17c32, type: 2}
+    - target: {fileID: 6824573340634135613, guid: 5c3bf9d58e99d4d4da05d0db2c8d5f54, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b4ea76ef609d8bc41865295697d17c32, type: 2}
+    - target: {fileID: 6824573340634135613, guid: 5c3bf9d58e99d4d4da05d0db2c8d5f54, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8188436350340913990, guid: b4ea76ef609d8bc41865295697d17c32, type: 2}
     - target: {fileID: 7837751988175443611, guid: 5c3bf9d58e99d4d4da05d0db2c8d5f54, type: 3}
       propertyPath: m_Name
       value: GameUI
