@@ -14,7 +14,7 @@ namespace LA.UI.FillBar
         {
             base.Fill(currentValue, maxValue);
 
-            if(!_allowsNegativeValues) currentValue = 0;
+            if(!_allowsNegativeValues && currentValue < 0) currentValue = 0;
 
             _valueText.text = $"{currentValue}{_separator}{maxValue}";
         }
