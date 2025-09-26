@@ -10,7 +10,7 @@ using LA.Gameplay.Enemy;
 namespace LA.Gameplay.GameLoop
 {
     [Serializable]
-    public class GameService
+    public class GameService : IDisposable
     {
         [field: SerializeField] public int BattleCounter { get; private set; } = 0;
 
@@ -33,6 +33,7 @@ namespace LA.Gameplay.GameLoop
         private GameplayConfig _gameplayConfig;
 
         private TaskCompletionSource<bool> _pauseTcs;
+        private CancellationTokenSource _cts;
 
 
         public void ResetGame()
@@ -43,8 +44,8 @@ namespace LA.Gameplay.GameLoop
 
         public void SetGameSpeed(float gameSpeed) => _gameSpeed = gameSpeed;
 
-
         public float GetTurnDuration() => _baseTurnIntervalInSeconds / _gameSpeed;
+
 
         public void PauseBattle()
         {
@@ -120,8 +121,8 @@ namespace LA.Gameplay.GameLoop
 
         public void StartBattle()
         {
-            using CancellationTokenSource cts = new CancellationTokenSource();
-            _ = SimulateBattle(cts.Token);
+            _cts = new CancellationTokenSource();
+            _ = SimulateBattle(_cts.Token);
         }
 
 
@@ -182,8 +183,9 @@ namespace LA.Gameplay.GameLoop
         }
 
 
-        ~GameService()
+        public void Dispose()
         {
+            _cts?.Cancel();
             BattleService.OnPlayerWin -= CountWin;
             BattleService.OnPlayerLose -= OnLose;
             BattleService.OnUnitUpdates -= UpdateUnit;
