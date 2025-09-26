@@ -1,4 +1,5 @@
 ﻿using LA.Gameplay.GameStarter;
+using LA.SoundSystem;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,6 +15,7 @@ namespace LA.DI
         {
             builder.RegisterInstance(_pathConfig);
 
+            builder.Register<SoundFXService>(Lifetime.Singleton);
             builder.Register<RandomService>(Lifetime.Singleton).As<IRandomService>();
             builder.Register<GameStarterService>(Lifetime.Singleton);
         }

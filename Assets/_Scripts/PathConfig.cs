@@ -17,6 +17,8 @@ namespace LA
         [field: SerializeField, PathField] public string MainMenuScene { get; private set; }
 
         [field: SerializeField, PathField] public string PopupUI { get; private set; }
+        [field: SerializeField, PathField]public string AudioSourcePrefab { get; private set; }
 
+        [field: SerializeField, PathField]public string SoundFXDatabase { get; private set; }
     }
 }

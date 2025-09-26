@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using LA.Gameplay.AbilitySystem;
 using LA.Gameplay.AbilitySystem.Interfaces;
+using LA.SoundSystem;
+using SW.Utilities.LoadAsset;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -30,12 +32,15 @@ namespace LA.Gameplay.GameLoop
         public event Action<Enemy.Enemy> OnPlayerLose;
 
         private IRandomService _randomService;
-
+        private SoundFXService _soundFXService;
+        private SoundFXDatabase _soundFXDatabase;
 
         [VContainer.Inject]
-        public void Construct(IRandomService randomService)
+        public void Construct(IRandomService randomService, SoundFXService soundFXService, PathConfig pathConfig)
         {
             _randomService = randomService;
+            _soundFXDatabase = LoadAssetUtility.Load<SoundFXDatabase>(pathConfig.SoundFXDatabase);
+            _soundFXService = soundFXService;
         }
 
 
@@ -66,6 +71,8 @@ namespace LA.Gameplay.GameLoop
             int totalDamage = 0;
 
             OnUnitAttack?.Invoke(context.Attacker, isHit);
+            _soundFXService.PlayRandomSoundFX(_soundFXDatabase.Attack, Vector2.zero);
+
             if (isHit)
             {
                 totalDamage = context.GetTotalDamage(context.Attacker);
