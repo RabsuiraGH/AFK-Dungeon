@@ -27,6 +27,7 @@ namespace LA.Gameplay.GameStarter
             LifetimeScope prefab = LoadAssetUtility.Load<LifetimeScope>(_pathConfig.GameScope);
 
             _gameScope = _parentScope.CreateChildFromPrefab(prefab);
+            _gameScope.Build();
         }
 
 
@@ -38,7 +39,7 @@ namespace LA.Gameplay.GameStarter
 
         public void Reset()
         {
-            _gameScope?.Dispose();
+            Unload();
             Load();
         }
     }
