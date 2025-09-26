@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LA.Gameplay.AbilitySystem;
 using LA.Gameplay.AbilitySystem.Interfaces;
-using LA.SoundSystem;
+using LA.AudioSystem;
 using SW.Utilities.LoadAsset;
 using UnityEngine;
 using Random = UnityEngine.Random;

@@ -20,5 +20,8 @@ namespace LA
         [field: SerializeField, PathField]public string AudioSourcePrefab { get; private set; }
 
         [field: SerializeField, PathField]public string SoundFXDatabase { get; private set; }
+
+        [field: SerializeField, PathField]public string AudioMixer { get; private set; }
+
     }
 }

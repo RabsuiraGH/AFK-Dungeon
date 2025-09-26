@@ -14,6 +14,7 @@ namespace LA.UI.GameMenu
         private string _mainMenuSceneName;
 
         public event Action OnGameContinue;
+        public event Action OnSettingsRequested;
 
 
         [VContainer.Inject]
@@ -24,8 +25,14 @@ namespace LA.UI.GameMenu
 
             _gameMenuUI.OnContinueButtonClicked += ContinueGame;
             _gameMenuUI.OnResetGameButtonClicked += _gameStarterService.Reset;
-            //_gameMenuUI.OnSettingsButtonClicked +=
+            _gameMenuUI.OnSettingsButtonClicked += RequestSettings;
             _gameMenuUI.OnQuitGameButtonClicked += BackToMainMenu;
+        }
+
+
+        private void RequestSettings()
+        {
+            OnSettingsRequested?.Invoke();
         }
 
 
@@ -74,7 +81,7 @@ namespace LA.UI.GameMenu
         {
             _gameMenuUI.OnContinueButtonClicked -= ContinueGame;
             _gameMenuUI.OnResetGameButtonClicked -= _gameStarterService.Reset;
-            //_gameMenuUI.OnSettingsButtonClicked -=
+            _gameMenuUI.OnSettingsButtonClicked -= RequestSettings;
             _gameMenuUI.OnQuitGameButtonClicked -= BackToMainMenu;
         }
     }

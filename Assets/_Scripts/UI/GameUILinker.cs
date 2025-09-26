@@ -8,6 +8,7 @@ using LA.UI.BattleHeader;
 using LA.UI.Loot;
 using LA.UI.GameMenu;
 using LA.UI.PlayerClassSelector;
+using LA.UI.SettingsMenu;
 using LA.UI.StartBattle;
 using LA.UI.UnitInfo;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace LA.UI
         [SerializeField] private LootUIController _lootUIController;
 
         [SerializeField] private GameMenuUIController _gameMenuUIController;
+        [SerializeField] private SettingsMenuUIController _settingsMenuUIController;
 
         [SerializeField] private BattleResultPopupUI _battleResultPopupUI;
 
@@ -53,6 +55,7 @@ namespace LA.UI
             _lootUIController.OnChoiceMade += ShowClassSelector;
 
             _gameMenuUIController.OnGameContinue += _gameService.ResumeBattle;
+            _gameMenuUIController.OnSettingsRequested += ShowSettingsMenu;
 
             _battleHeaderUIController.OnMenuShowRequested += ToggleGameMenu;
 
@@ -60,9 +63,16 @@ namespace LA.UI
         }
 
 
+        private void ShowSettingsMenu()
+        {
+            _settingsMenuUIController.Show();
+        }
+
+
         private void ToggleGameMenu()
         {
             _gameMenuUIController.Toggle();
+            _settingsMenuUIController.Hide();
         }
 
 

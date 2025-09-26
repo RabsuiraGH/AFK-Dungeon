@@ -21,3 +21,4 @@ MonoBehaviour:
   <PopupUI>k__BackingField: Assets/Resources/Prefabs/UI/Popup.prefab
   <AudioSourcePrefab>k__BackingField: Assets/Resources/Prefabs/Sound/SFXAudioSource.prefab
   <SoundFXDatabase>k__BackingField: Assets/Resources/Game/Sound/SFX/SoundFXDatabase.asset
+  <AudioMixer>k__BackingField: Assets/Resources/Game/Sound/MasterMixer.mixer
