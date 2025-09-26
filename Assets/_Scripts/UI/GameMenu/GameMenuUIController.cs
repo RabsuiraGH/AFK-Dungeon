@@ -52,7 +52,6 @@ namespace LA.UI.GameMenu
 
         public void Show()
         {
-            _gameMenuUI.ToggleContinueButton(true);
             _gameMenuUI.Show();
         }
 
@@ -62,6 +61,7 @@ namespace LA.UI.GameMenu
             if (_gameMenuUI.IsVisible)
             {
                 _gameMenuUI.Hide();
+                ContinueGame();
             }
             else
             {
