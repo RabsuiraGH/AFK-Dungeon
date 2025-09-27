@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6981132, g: 0.049394794, b: 0.049394794, a: 1}
+  m_Color: {r: 0.6603774, g: 0.07164473, b: 0.51515317, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1295,7 +1295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6425922848022045722, guid: 9e900bfd0b70f73488753731e891a98e, type: 3}
       propertyPath: m_fontSize
-      value: 24
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6425922848022045722, guid: 9e900bfd0b70f73488753731e891a98e, type: 3}
       propertyPath: m_fontAsset
@@ -1311,7 +1311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6425922848022045722, guid: 9e900bfd0b70f73488753731e891a98e, type: 3}
       propertyPath: m_fontSizeBase
-      value: 24
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6425922848022045722, guid: 9e900bfd0b70f73488753731e891a98e, type: 3}
       propertyPath: m_RaycastTarget
@@ -1331,7 +1331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6425922848022045722, guid: 9e900bfd0b70f73488753731e891a98e, type: 3}
       propertyPath: m_HorizontalAlignment
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6440621515198146229, guid: 9e900bfd0b70f73488753731e891a98e, type: 3}
       propertyPath: m_Pivot.x
@@ -1359,7 +1359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6440621515198146229, guid: 9e900bfd0b70f73488753731e891a98e, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -270
+      value: -280
       objectReference: {fileID: 0}
     - target: {fileID: 6440621515198146229, guid: 9e900bfd0b70f73488753731e891a98e, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1395,7 +1395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6440621515198146229, guid: 9e900bfd0b70f73488753731e891a98e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 135
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 6440621515198146229, guid: 9e900bfd0b70f73488753731e891a98e, type: 3}
       propertyPath: m_AnchoredPosition.y
