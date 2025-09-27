@@ -1,19 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using SW.Utilities.LoadAsset;
+using Unity.Mathematics;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace LA.AudioSystem
 {
-    public class SoundFXService
+    public class SoundFXService : IDisposable
     {
         private AudioSource _audioSourcePrefab;
+        private readonly Queue<AudioSource> _pool = new Queue<AudioSource>();
+        private AudioContainer _audioContainer;
 
 
         [VContainer.Inject]
         public void Construct(PathConfig pathConfig)
         {
             _audioSourcePrefab = LoadAssetUtility.Load<AudioSource>(pathConfig.AudioSourcePrefab);
+            _audioContainer = AudioContainer.Create();
         }
 
         public void PlaySoundFXByName(ICollection<Sound> sounds, Vector2 position, string name)
@@ -41,15 +49,48 @@ namespace LA.AudioSystem
 
         public void PlaySoundFXClip(AudioClip clip, Vector2 position, float volume = 1f)
         {
-            AudioSource audioSource =
-                Object.Instantiate(_audioSourcePrefab, position, Quaternion.identity);
+            AudioSource audioSource = GetFromPool();
 
+            audioSource.transform.position = position;
             audioSource.clip = clip;
             audioSource.volume = volume;
+            audioSource.gameObject.SetActive(true);
             audioSource.Play();
 
             float clipLength = audioSource.clip.length;
-            Object.Destroy(audioSource.gameObject, clipLength);
+            _audioContainer.StartCoroutine(ReturnToPoolAfter(audioSource, clip.length));
+        }
+
+        private AudioSource GetFromPool()
+        {
+            if (_pool.Count > 0)
+            {
+                return _pool.Dequeue();
+            }
+
+            AudioSource newSource = Object.Instantiate(_audioSourcePrefab, _audioContainer.transform);
+            return newSource;
+        }
+
+        private IEnumerator ReturnToPoolAfter(AudioSource source, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            source.Stop();
+            source.gameObject.SetActive(false);
+            _pool.Enqueue(source);
+        }
+
+
+        public void Dispose()
+        {
+            AudioSource o = _pool.Dequeue();
+            while (o != null)
+            {
+                Object.Destroy(o.gameObject);
+                _pool.TryDequeue(out o);
+            }
+
+
         }
     }
 }
