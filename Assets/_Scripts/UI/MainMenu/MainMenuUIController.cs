@@ -1,4 +1,5 @@
 ﻿using System;
+using LA.UI.SettingsMenu;
 using SW.Utilities.LoadAsset;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,7 @@ namespace LA.UI.MainMenu
     public class MainMenuUIController : MonoBehaviour
     {
         [SerializeField] private MainMenuUI _mainMenuUI;
+        [SerializeField] private SettingsMenuUIController _settingsMenuUIController;
 
         private string _sceneName;
 
@@ -32,6 +34,7 @@ namespace LA.UI.MainMenu
 
         private void OnSettingsButtonClicked()
         {
+            _settingsMenuUIController.Show();
         }
 
 
