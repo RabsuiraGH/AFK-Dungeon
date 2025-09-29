@@ -16,6 +16,7 @@ namespace LA.UI.SettingsMenu
         public event Action<float> OnMusicVolumeChanged;
         public event Action OnBackButtonClicked;
 
+
         private void Start()
         {
             _masterVolumeSlider.onValueChanged.AddListener((val) => OnMasterVolumeChanged?.Invoke(val));
@@ -23,6 +24,13 @@ namespace LA.UI.SettingsMenu
             _musicVolumeSlider.onValueChanged.AddListener((val) => OnMusicVolumeChanged?.Invoke(val));
             _backButton.onClick.AddListener(() => OnBackButtonClicked?.Invoke());
         }
+
+
+        public void SetMasterVolumeSlider(float volume) => _masterVolumeSlider.SetValueWithoutNotify(volume);
+
+        public void SetSFXVolumeSlider(float volume) => _sfxVolumeSlider.SetValueWithoutNotify(volume);
+
+        public void SetMusicVolumeSlider(float volume) => _musicVolumeSlider.SetValueWithoutNotify(volume);
 
 
         private void OnDestroy()

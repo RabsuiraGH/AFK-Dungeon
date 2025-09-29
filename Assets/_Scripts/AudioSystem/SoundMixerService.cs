@@ -1,16 +1,22 @@
-﻿using SW.Utilities.LoadAsset;
+﻿using System;
+using SW.Utilities.LoadAsset;
 using UnityEngine;
 using UnityEngine.Audio;
+using VContainer.Unity;
 
 namespace LA.AudioSystem
 {
-    public class SoundMixerService
+    public class SoundMixerService : IDisposable, IStartable
     {
         private AudioMixer _audioMixer;
 
-        private readonly string _masterVolumeParameter = "MasterVolume";
-        private readonly string _musicVolumeParameter = "MusicVolume";
-        private readonly string _sfxVolumeParameter = "SFXVolume";
+        private const string MASTER_VOLUME_PARAMETER = "MasterVolume";
+        private const string MUSIC_VOLUME_PARAMETER = "MusicVolume";
+        private const string SFX_VOLUME_PARAMETER = "SFXVolume";
+
+        private const int DEFAULT_VOLUME = 100;
+
+        public event Action OnVolumeChanged;
 
 
         [VContainer.Inject]
@@ -20,27 +26,58 @@ namespace LA.AudioSystem
         }
 
 
-        public void SetMasterVolume(float volume)
+        public void SetMasterVolume(float volume) => SetVolume(MASTER_VOLUME_PARAMETER, volume);
+
+        public float GetMasterVolume() => GetVolume(MASTER_VOLUME_PARAMETER);
+
+        public void SetMusicVolume(float volume) => SetVolume(MUSIC_VOLUME_PARAMETER, volume);
+
+        public float GetMusicVolume() => GetVolume(MUSIC_VOLUME_PARAMETER);
+
+        public void SetSFXVolume(float volume) => SetVolume(SFX_VOLUME_PARAMETER, volume);
+
+        public float GetSFXVolume() => GetVolume(SFX_VOLUME_PARAMETER);
+
+
+        private void SetVolume(string parameter, float volume)
         {
-            _audioMixer.SetFloat(_masterVolumeParameter, GetVolumeInDb(volume));
+            _audioMixer.SetFloat(parameter, GetVolumeInDb(volume));
+            OnVolumeChanged?.Invoke();
         }
 
 
-        public void SetMusicVolume(float volume)
+        private float GetVolume(string parameter)
         {
-            _audioMixer.SetFloat(_musicVolumeParameter, GetVolumeInDb(volume));
-        }
-
-
-        public void SetSFXVolume(float volume)
-        {
-            _audioMixer.SetFloat(_sfxVolumeParameter, GetVolumeInDb(volume));
+            _audioMixer.GetFloat(parameter, out float volume);
+            return GetVolumeFromDb(volume);
         }
 
 
         private float GetVolumeInDb(float volume)
         {
             return Mathf.Log10(volume) * 20;
+        }
+
+
+        private float GetVolumeFromDb(float volume)
+        {
+            return Mathf.Pow(10, volume / 20);
+        }
+
+
+        public void Dispose()
+        {
+            PlayerPrefs.SetFloat(MASTER_VOLUME_PARAMETER, GetMasterVolume());
+            PlayerPrefs.SetFloat(MUSIC_VOLUME_PARAMETER, GetMusicVolume());
+            PlayerPrefs.SetFloat(SFX_VOLUME_PARAMETER, GetSFXVolume());
+        }
+
+
+        public void Start()
+        {
+            SetMasterVolume(PlayerPrefs.GetFloat(MASTER_VOLUME_PARAMETER, DEFAULT_VOLUME));
+            SetMasterVolume(PlayerPrefs.GetFloat(MASTER_VOLUME_PARAMETER, DEFAULT_VOLUME));
+            SetMasterVolume(PlayerPrefs.GetFloat(MASTER_VOLUME_PARAMETER, DEFAULT_VOLUME));
         }
     }
 }

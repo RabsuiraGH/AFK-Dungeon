@@ -15,7 +15,7 @@ namespace LA.DI
         {
             builder.RegisterInstance(_pathConfig);
 
-            builder.Register<SoundMixerService>(Lifetime.Singleton);
+            builder.Register<SoundMixerService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<SoundFXService>(Lifetime.Singleton);
             builder.Register<RandomService>(Lifetime.Singleton).As<IRandomService>();
             builder.Register<GameStarterService>(Lifetime.Singleton);
