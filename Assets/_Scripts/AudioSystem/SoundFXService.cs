@@ -24,11 +24,14 @@ namespace LA.AudioSystem
             _audioContainer = AudioContainer.Create();
         }
 
+
         public void PlaySoundFXByName(ICollection<Sound> sounds, Vector2 position, string name)
         {
             Sound firstOrDefault = sounds.FirstOrDefault(x => x.Name == name);
             PlaySoundFX(firstOrDefault, position);
         }
+
+
         public void PlayRandomSoundFX(ICollection<Sound> sounds, Vector2 position)
         {
             PlaySoundFX(sounds.ElementAt(Random.Range(0, sounds.Count)), position);
@@ -61,6 +64,7 @@ namespace LA.AudioSystem
             _audioContainer.StartCoroutine(ReturnToPoolAfter(audioSource, clip.length));
         }
 
+
         private AudioSource GetFromPool()
         {
             if (_pool.Count > 0)
@@ -71,6 +75,7 @@ namespace LA.AudioSystem
             AudioSource newSource = Object.Instantiate(_audioSourcePrefab, _audioContainer.transform);
             return newSource;
         }
+
 
         private IEnumerator ReturnToPoolAfter(AudioSource source, float delay)
         {
@@ -83,14 +88,13 @@ namespace LA.AudioSystem
 
         public void Dispose()
         {
-            AudioSource o = _pool.Dequeue();
+            AudioSource o;
+            _pool.TryDequeue(out o);
             while (o != null)
             {
                 Object.Destroy(o.gameObject);
                 _pool.TryDequeue(out o);
             }
-
-
         }
     }
 }
