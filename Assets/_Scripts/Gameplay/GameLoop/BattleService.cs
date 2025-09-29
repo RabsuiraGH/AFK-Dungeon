@@ -24,7 +24,7 @@ namespace LA.Gameplay.GameLoop
         private Dictionary<BattleUnit, int> _turnCounters = new();
 
         public event Action<BattleUnit> OnUnitUpdates;
-        public event Action<BattleUnit,bool> OnUnitAttack;
+        public event Action<BattleUnit, bool> OnUnitAttack;
 
         public event Action<int> OnTurnCountUpdated;
 
@@ -34,6 +34,7 @@ namespace LA.Gameplay.GameLoop
         private IRandomService _randomService;
         private SoundFXService _soundFXService;
         private SoundFXDatabase _soundFXDatabase;
+
 
         [VContainer.Inject]
         public void Construct(IRandomService randomService, SoundFXService soundFXService, PathConfig pathConfig)
@@ -48,6 +49,26 @@ namespace LA.Gameplay.GameLoop
         {
             AddTurn(_attackingUnit);
 
+            BattleContext context = CreateBattleContext();
+
+            CalculateHit(context);
+
+            OnBeforeHitAbilities(context, context.Attacker);
+            OnBeforeHitAbilities(context, context.Defender);
+
+
+            PerformAttack(context, out int totalDamage);
+
+            PerformCounterDamage(context, out int counterDamage);
+
+            Debug.Log(($"{_currentTurn} - {context.Attacker.Name}: Hit chance: {context.HitChance} | Is hit: {context.IsHit} | Damage: {totalDamage}"));
+
+            UpdateUnits(context);
+        }
+
+
+        private BattleContext CreateBattleContext()
+        {
             BattleContext context = new()
             {
                 TurnNumber = _currentTurn,
@@ -57,23 +78,26 @@ namespace LA.Gameplay.GameLoop
             };
             context.Init();
 
-            int hitChance =
-                _randomService.Range(1, context.Attacker.Stats.Agility + context.Defender.Stats.Agility + 1);
+            return context;
+        }
 
 
-            bool isHit = _defendingUnit.IsHit(hitChance);
+        private void CalculateHit(BattleContext context)
+        {
+            context.HitChance = CalculateHitChance(context.Attacker, context.Defender);
 
-            Debug.Log(($"{context.Attacker.Name}  || {context.Defender.Name}"));
 
-            OnBeforeHitAbilities(context.Attacker);
-            OnBeforeHitAbilities(context.Defender);
+            context.IsHit = context.Defender.IsHit(context.HitChance);
+        }
 
-            int totalDamage = 0;
 
-            OnUnitAttack?.Invoke(context.Attacker, isHit);
+        private void PerformAttack(BattleContext context, out int totalDamage)
+        {
+            totalDamage = 0;
+            OnUnitAttack?.Invoke(context.Attacker, context.IsHit);
             _soundFXService.PlayRandomSoundFX(_soundFXDatabase.Attack, Vector2.zero);
 
-            if (isHit)
+            if (context.IsHit)
             {
                 totalDamage = context.GetTotalDamage(context.Attacker);
 
@@ -82,25 +106,36 @@ namespace LA.Gameplay.GameLoop
                     context.Defender.TakeDamage(totalDamage);
                 }
             }
+        }
 
 
-            Debug.Log(($"{_currentTurn} - {context.Attacker.Name}: Hit chance: {hitChance} | Is hit: {isHit} | Damage: {totalDamage}"));
-
-            totalDamage = context.GetTotalOtherDamage(context.Defender);
+        private void PerformCounterDamage(BattleContext context, out int totalDamage)
+        {
+            totalDamage = context.GetTotalOtherDamage(context.Attacker);
             context.Attacker.TakeDamage(totalDamage);
+        }
 
 
+        private void UpdateUnits(BattleContext context)
+        {
             OnUnitUpdates?.Invoke(_player);
             OnUnitUpdates?.Invoke(_enemy);
+        }
 
-            void OnBeforeHitAbilities(BattleUnit owner)
+
+        private void OnBeforeHitAbilities(BattleContext context, BattleUnit owner)
+        {
+            context.AbilityOwner = owner;
+            foreach (IOnBeforeHitAbility ability in context.AbilityOwner.Abilities.OfType<IOnBeforeHitAbility>())
             {
-                context.AbilityOwner = owner;
-                foreach (IOnBeforeHitAbility ability in context.AbilityOwner.Abilities.OfType<IOnBeforeHitAbility>())
-                {
-                    ability.OnBeforeHit(context);
-                }
+                ability.OnBeforeHit(context);
             }
+        }
+
+
+        private int CalculateHitChance(BattleUnit attacker, BattleUnit defender)
+        {
+            return _randomService.Range(1, attacker.Stats.Agility + defender.Stats.Agility + 1);
         }
 
 
@@ -109,10 +144,12 @@ namespace LA.Gameplay.GameLoop
             _enemy = enemyBase;
         }
 
+
         public Enemy.Enemy GetEnemy()
         {
             return _enemy;
         }
+
 
         public void SetPlayer(Player.Player player)
         {
