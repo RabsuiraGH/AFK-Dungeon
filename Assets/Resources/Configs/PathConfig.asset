@@ -19,7 +19,9 @@ MonoBehaviour:
   <GameScene>k__BackingField: Assets/Scenes/MainScene.unity
   <MainMenuScene>k__BackingField: Assets/Scenes/MainMenu.unity
   <PopupUI>k__BackingField: Assets/Resources/Prefabs/UI/Popup.prefab
-  <AudioSourcePrefab>k__BackingField: Assets/Resources/Prefabs/Sound/SFXAudioSource.prefab
+  <SoundFXPrefab>k__BackingField: Assets/Resources/Prefabs/Sound/SFXAudioSource.prefab
+  <MusicPrefab>k__BackingField: Assets/Resources/Prefabs/Sound/MusicAudioSource.prefab
   <SoundFXDatabase>k__BackingField: Assets/Resources/Game/Sound/SFX/SoundFXDatabase.asset
+  <MusicDatabase>k__BackingField: Assets/Resources/Game/Sound/Music/MusicDatabase.asset
   <AudioMixer>k__BackingField: Assets/Resources/Game/Sound/MasterMixer.mixer
   <LogTextPrefab>k__BackingField: Assets/Resources/Prefabs/UI/LogText.prefab

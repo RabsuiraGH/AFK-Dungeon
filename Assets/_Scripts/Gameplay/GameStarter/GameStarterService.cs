@@ -1,4 +1,6 @@
-﻿using LA.DI;
+﻿using LA.AudioSystem;
+using LA.AudioSystem.Database;
+using LA.DI;
 using LA.UI;
 using SW.Utilities.LoadAsset;
 using UnityEngine;
@@ -13,12 +15,16 @@ namespace LA.Gameplay.GameStarter
         private LifetimeScope _gameScope;
 
         private PathConfig _pathConfig;
+        private MusicDatabase _musicDatabase;
+        private MusicService _musicService;
 
 
-        public GameStarterService(LifetimeScope parentScope, PathConfig pathConfig)
+        public GameStarterService(LifetimeScope parentScope, PathConfig pathConfig, MusicService musicService)
         {
             _parentScope = parentScope;
             _pathConfig = pathConfig;
+            _musicService = musicService;
+            _musicDatabase = LoadAssetUtility.Load<MusicDatabase>(pathConfig.MusicDatabase);
         }
 
 
@@ -28,6 +34,7 @@ namespace LA.Gameplay.GameStarter
 
             _gameScope = _parentScope.CreateChildFromPrefab(prefab);
             _gameScope.Build();
+            _musicService.PlayMusic(_musicDatabase.GameMusic, Vector2.zero);
         }
 
 

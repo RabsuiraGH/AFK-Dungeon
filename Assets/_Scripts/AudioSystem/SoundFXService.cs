@@ -20,7 +20,7 @@ namespace LA.AudioSystem
         [VContainer.Inject]
         public void Construct(PathConfig pathConfig)
         {
-            _audioSourcePrefab = LoadAssetUtility.Load<AudioSource>(pathConfig.AudioSourcePrefab);
+            _audioSourcePrefab = LoadAssetUtility.Load<AudioSource>(pathConfig.SoundFXPrefab);
             _audioContainer = AudioContainer.Create();
         }
 
