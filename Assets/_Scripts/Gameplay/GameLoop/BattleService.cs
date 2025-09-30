@@ -4,6 +4,7 @@ using System.Linq;
 using LA.Gameplay.AbilitySystem;
 using LA.Gameplay.AbilitySystem.Interfaces;
 using LA.AudioSystem;
+using LA.BattleLog;
 using SW.Utilities.LoadAsset;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -34,14 +35,17 @@ namespace LA.Gameplay.GameLoop
         private IRandomService _randomService;
         private SoundFXService _soundFXService;
         private SoundFXDatabase _soundFXDatabase;
+        private BattleLogService _battleLogService;
 
 
         [VContainer.Inject]
-        public void Construct(IRandomService randomService, SoundFXService soundFXService, PathConfig pathConfig)
+        public void Construct(IRandomService randomService, BattleLogService battleLogService,
+                              SoundFXService soundFXService, PathConfig pathConfig)
         {
             _randomService = randomService;
             _soundFXDatabase = LoadAssetUtility.Load<SoundFXDatabase>(pathConfig.SoundFXDatabase);
             _soundFXService = soundFXService;
+            _battleLogService = battleLogService;
         }
 
 
@@ -50,18 +54,31 @@ namespace LA.Gameplay.GameLoop
             AddTurn(_attackingUnit);
 
             BattleContext context = CreateBattleContext();
+            _battleLogService.Log($"Turn {_currentTurn} starts! Attacker: {context.Attacker.Name}", "BATTLE");
 
             CalculateHit(context);
 
             OnBeforeHitAbilities(context, context.Attacker);
             OnBeforeHitAbilities(context, context.Defender);
 
+            _battleLogService.Log($"Hit chance: {context.HitChance} ~ {(context.IsHit ? "HIT!" : "MISS")}", "BATTLE");
 
             PerformAttack(context, out int totalDamage);
 
+            if (totalDamage != 0)
+            {
+                _battleLogService.Log($"Total damage: {totalDamage}", "BATTLE");
+            }
+
             PerformCounterDamage(context, out int counterDamage);
 
-            Debug.Log(($"{_currentTurn} - {context.Attacker.Name}: Hit chance: {context.HitChance} | Is hit: {context.IsHit} | Damage: {totalDamage}"));
+            if (counterDamage != 0)
+            {
+                _battleLogService.Log($"Counter damage: {counterDamage}", "BATTLE");
+            }
+
+            _battleLogService.LogSeparator();
+
 
             UpdateUnits(context);
         }

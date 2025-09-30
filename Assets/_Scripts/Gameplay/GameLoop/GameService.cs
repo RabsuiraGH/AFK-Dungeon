@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Threading;
 using System.Threading.Tasks;
+using LA.BattleLog;
 using LA.Gameplay.Config;
 using LA.Gameplay.Enemy;
 
@@ -31,6 +32,7 @@ namespace LA.Gameplay.GameLoop
 
         private Player.Player _player;
         private GameplayConfig _gameplayConfig;
+        private BattleLogService _battleLogService;
 
         private TaskCompletionSource<bool> _pauseTcs;
         private CancellationTokenSource _cts;
@@ -67,7 +69,7 @@ namespace LA.Gameplay.GameLoop
 
 
         [VContainer.Inject]
-        public void Construct(Player.Player player, BattleService battleService, PathConfig pathConfig)
+        public void Construct(Player.Player player, BattleService battleService, BattleLogService battleLogService, PathConfig pathConfig)
         {
             _player = player;
             _player.Init();
@@ -78,6 +80,7 @@ namespace LA.Gameplay.GameLoop
             BattleService.OnUnitUpdates += UpdateUnit;
             BattleService.OnUnitAttack += UnitAttack;
 
+            _battleLogService = battleLogService;
 
             _enemyDatabase = LoadAssetUtility.Load<EnemyDatabase>(pathConfig.EnemyDatabase);
             _gameplayConfig = LoadAssetUtility.Load<GameplayConfig>(pathConfig.GameplayConfig);
@@ -122,6 +125,7 @@ namespace LA.Gameplay.GameLoop
         public void StartBattle()
         {
             _cts = new CancellationTokenSource();
+            _battleLogService.ClearLog();
             _ = SimulateBattle(_cts.Token);
         }
 
