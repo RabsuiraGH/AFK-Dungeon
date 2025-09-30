@@ -29,6 +29,7 @@ namespace LA.UI.MainMenu
         {
             _musicService.PlayMusic(_musicDatabase.MenuMusic, Vector2.zero);
 
+
             _mainMenuUI.OnStartButtonClicked += OnStartButtonClicked;
             _mainMenuUI.OnSettingsButtonClicked += OnSettingsButtonClicked;
             _mainMenuUI.OnQuitButtonClicked += OnQuitButtonClicked;

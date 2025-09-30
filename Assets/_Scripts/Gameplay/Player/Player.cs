@@ -21,7 +21,7 @@ namespace LA.Gameplay.Player
         public override void Init()
         {
             Name = "Player"; // TODO: Remove direct path to config
-            Sprite = LoadAssetUtility.Load<Sprite>("Assets/Resources/Art/Game/Player/GigaPlayer.png");
+            Sprite = LoadAssetUtility.Load<Sprite>("Assets/Resources/Art/Game/Player/Player.png");
             MaxHealth = 0;
             CurrentWeapon = new Weapon();
             Abilities = new List<AbilitySO>();

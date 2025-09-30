@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using LA.Gameplay.Damage;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 
 namespace LA.Gameplay
 {
