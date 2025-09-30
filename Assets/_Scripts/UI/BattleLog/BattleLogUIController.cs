@@ -1,4 +1,5 @@
-﻿using LA.BattleLog;
+﻿using System.Collections.Generic;
+using LA.BattleLog;
 using SW.Utilities.LoadAsset;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,10 @@ namespace LA.UI.BattleLog
     {
         [SerializeField] private BattleLogUI _battleLogUI;
         [SerializeField] private int _initialLogPoolSize = 25;
+        [SerializeField] private List<string> _existingTags = new();
+        [SerializeField] private List<string> _activeTags = new();
+
+        private bool _hasFilter = false;
         private TextMeshProUGUI _logTextPrefab;
 
         private BattleLogService _battleLogService;
@@ -24,10 +29,27 @@ namespace LA.UI.BattleLog
             _battleLogService.OnClearLog += ClearLogs;
 
             _battleLogUI.OnToggleLogsButtonClicked += Toggle;
+            _battleLogUI.OnFilterSelected += ManageFilter;
         }
 
 
-        private void Awake()
+        private void ManageFilter(List<string> filterTag)
+        {
+            _battleLogUI.HideAllLogs();
+            foreach (string tag in filterTag)
+            {
+                if (_existingTags.Contains(tag))
+                {
+                    _battleLogUI.ShowTaggedLogsAdditionally(tag);
+                }
+            }
+
+            _activeTags = filterTag;
+            _hasFilter = true;
+        }
+
+
+        private void Start()
         {
             _battleLogUI.Init(_logTextPrefab, _initialLogPoolSize);
             _battleLogUI.Hide();
@@ -51,12 +73,20 @@ namespace LA.UI.BattleLog
         private void ClearLogs()
         {
             _battleLogUI.ClearAllLogs();
+            _existingTags.Clear();
         }
 
 
         private void AddLog(LogEntry logEntry)
         {
-            _battleLogUI.AddLog(logEntry.Message, logEntry.Tag);
+            bool showLog = !_hasFilter || _activeTags.Contains(logEntry.Tag);
+            _battleLogUI.AddLog(logEntry.Message, logEntry.Tag, showLog);
+
+            if (!_existingTags.Contains(logEntry.Tag))
+            {
+                _existingTags.Add(logEntry.Tag);
+                _battleLogUI.AddDropdownOption(logEntry.Tag);
+            }
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,15 +11,17 @@ namespace LA.UI.BattleLog
     {
         [SerializeField] private Transform _content;
         [SerializeField] private Button _toggleLogs;
+
+        [SerializeField] private TMP_Dropdown _filterDropdown;
         private TextMeshProUGUI _logTextPrefab;
 
         private List<TextMeshProUGUI> _allLogs = new();
         private readonly Queue<TextMeshProUGUI> _pool = new();
         private Dictionary<string, List<TextMeshProUGUI>> _activeTaggedLogs = new();
-        private List<string> _activeTagsFilter = new();
-
 
         public event Action OnToggleLogsButtonClicked;
+        public event Action<List<string>> OnFilterSelected;
+
 
         public void Init(TextMeshProUGUI logTextPrefab, int poolSize)
         {
@@ -30,15 +33,18 @@ namespace LA.UI.BattleLog
             }
 
             _toggleLogs.onClick.AddListener(() => OnToggleLogsButtonClicked?.Invoke());
+
+            // OMG, this is absolutely horrid event! Who the hell decided to use bitmasks?
+            _filterDropdown.onValueChanged.AddListener(GetSelectedFilters);
         }
 
 
-        public void AddLog(string message, string tag)
+        public void AddLog(string message, string tag, bool isActive = true)
         {
             TextMeshProUGUI log = _pool.Count > 0 ? _pool.Dequeue() : CreateLogInstance();
 
             log.text = message;
-            log.gameObject.SetActive(true);
+            log.gameObject.SetActive(isActive);
 
             _allLogs.Add(log);
 
@@ -64,8 +70,18 @@ namespace LA.UI.BattleLog
             {
                 log.gameObject.SetActive(false);
             }
+        }
 
-            _activeTagsFilter.Remove(tag);
+
+        public void ShowAllLogs()
+        {
+            foreach (List<TextMeshProUGUI> list in _activeTaggedLogs.Values)
+            {
+                foreach (TextMeshProUGUI log in list)
+                {
+                    log.gameObject.SetActive(true);
+                }
+            }
         }
 
 
@@ -84,7 +100,6 @@ namespace LA.UI.BattleLog
 
         public void HideAllLogs()
         {
-            _activeTagsFilter.Clear();
             foreach (var log in _allLogs)
             {
                 log.gameObject.SetActive(false);
@@ -97,10 +112,33 @@ namespace LA.UI.BattleLog
             foreach (var log in _allLogs)
             {
                 _pool.Enqueue(log);
+                log.gameObject.SetActive(false);
             }
 
             _activeTaggedLogs = new();
-            _activeTagsFilter.Clear();
+        }
+
+
+        public void SetDropdownOptions(List<string> options) =>
+            _filterDropdown.options = options.Select(x => new TMP_Dropdown.OptionData(x)).ToList();
+
+
+        public void AddDropdownOption(string option) =>
+            _filterDropdown.options.Add(new TMP_Dropdown.OptionData(option));
+
+
+        private void GetSelectedFilters(int mask)
+        {
+            List<string> result = new();
+            for (int j = 0; j < _filterDropdown.options.Count; j++)
+            {
+                if ((mask & (1 << j)) != 0)
+                {
+                    result.Add(_filterDropdown.options.ElementAt(j).text);
+                }
+            }
+
+            OnFilterSelected?.Invoke(result);
         }
 
 
@@ -108,9 +146,6 @@ namespace LA.UI.BattleLog
         {
             if (!_activeTaggedLogs.TryGetValue(tag, out var list))
                 return;
-
-            _activeTagsFilter.Add(tag);
-
 
             foreach (TextMeshProUGUI log in list)
             {
@@ -130,6 +165,7 @@ namespace LA.UI.BattleLog
         private void OnDestroy()
         {
             _toggleLogs.onClick.RemoveAllListeners();
+            _filterDropdown.onValueChanged.RemoveAllListeners();
         }
     }
 }
