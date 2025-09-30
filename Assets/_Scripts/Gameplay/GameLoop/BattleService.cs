@@ -130,7 +130,7 @@ namespace LA.Gameplay.GameLoop
 
         private void PerformCounterDamage(BattleContext context, out int totalDamage)
         {
-            totalDamage = context.GetTotalOtherDamage(context.Attacker);
+            totalDamage = context.GetTotalOtherDamage(context.Defender);
             context.Attacker.TakeDamage(totalDamage);
         }
 
