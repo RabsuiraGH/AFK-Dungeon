@@ -14,7 +14,7 @@ namespace LA.AudioSystem
         private const string MUSIC_VOLUME_PARAMETER = "MusicVolume";
         private const string SFX_VOLUME_PARAMETER = "SFXVolume";
 
-        private const int DEFAULT_VOLUME = 100;
+        private const int DEFAULT_VOLUME = 1;
 
         public event Action OnVolumeChanged;
 
