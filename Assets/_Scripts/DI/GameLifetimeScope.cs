@@ -9,6 +9,7 @@ namespace LA.DI
     {
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<BattleLog.BattleLogService>(Lifetime.Singleton);
             builder.Register<Player>(Lifetime.Singleton);
             builder.Register<BattleService>(Lifetime.Singleton);
             builder.Register<GameService>(Lifetime.Singleton);

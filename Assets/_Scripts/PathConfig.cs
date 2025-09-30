@@ -23,5 +23,7 @@ namespace LA
 
         [field: SerializeField, PathField]public string AudioMixer { get; private set; }
 
+        [field: SerializeField, PathField]public string LogTextPrefab { get; private set; }
+
     }
 }
