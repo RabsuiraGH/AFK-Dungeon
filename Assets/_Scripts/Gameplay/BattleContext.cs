@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 
 namespace LA.Gameplay
 {
-    public class BattleContext
+    public class BattleContext : IDisposable
     {
         public int TurnNumber;
         public BattleUnit Attacker;
@@ -24,6 +24,7 @@ namespace LA.Gameplay
         public bool IsHit;
         public int HitChance;
 
+        public event Action<string> OnInnerLog;
 
         public void Init()
         {
@@ -42,6 +43,11 @@ namespace LA.Gameplay
                 { Attacker, new List<int>() },
                 { Defender, new List<int>() }
             };
+        }
+
+        public void InnerLog(string message)
+        {
+            OnInnerLog?.Invoke(message);
         }
 
 
@@ -105,6 +111,12 @@ namespace LA.Gameplay
             totalDamage = Math.Clamp(totalDamage, 0, int.MaxValue);
 
             return totalDamage;
+        }
+
+
+        public void Dispose()
+        {
+            OnInnerLog = null;
         }
     }
 }

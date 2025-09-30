@@ -53,7 +53,9 @@ namespace LA.Gameplay.GameLoop
         {
             AddTurn(_attackingUnit);
 
-            BattleContext context = CreateBattleContext();
+            using BattleContext context = CreateBattleContext();
+            context.OnInnerLog += (m) => _battleLogService.Log(m, "ABILITY");
+
             _battleLogService.Log($"Turn {_currentTurn} starts! Attacker: {context.Attacker.Name}", "BATTLE");
 
             CalculateHit(context);

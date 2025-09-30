@@ -20,7 +20,7 @@ namespace LA.Gameplay.AbilitySystem.Abilities
             int bonusDamage = damage.BaseDamage * (Multiplier - 1);
             damage.ModifyDamage(bonusDamage);
 
-            Log($"Owner: {context.AbilityOwner} Bonus Damage: {bonusDamage}");
+            Log($"Owner: {context.AbilityOwner} Bonus Damage: {bonusDamage}", context);
         }
     }
 }

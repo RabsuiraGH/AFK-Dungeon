@@ -19,12 +19,12 @@ namespace LA.Gameplay.AbilitySystem.Abilities
             if (IsAllConditionsMet(context))
             {
                 context.AddDamage(new DamageContext(BonusDamage, DamageType.None, Name + " Bonus"));
-                Log($"Owner: {context.AbilityOwner} Bonus Damage: {BonusDamage}");
+                Log($"Owner: {context.AbilityOwner} Bonus Damage: {BonusDamage}", context);
             }
             else
             {
                 context.AddDamage(new DamageContext(DamagePenalty, DamageType.None, Name + " Penalty"));
-                Log($"Owner: {context.AbilityOwner} Penalty Damage: {DamagePenalty}");
+                Log($"Owner: {context.AbilityOwner} Penalty Damage: {DamagePenalty}", context);
             }
         }
     }

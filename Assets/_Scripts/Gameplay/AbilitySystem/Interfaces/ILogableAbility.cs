@@ -2,6 +2,6 @@
 {
     public interface ILogableAbility
     {
-        public void Log(string message);
+        public void Log(string message, BattleContext context);
     }
 }

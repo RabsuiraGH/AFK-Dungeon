@@ -32,9 +32,10 @@ namespace LA.Gameplay.AbilitySystem
         }
 
 
-        public void Log(string message)
+
+        public void Log(string message, BattleContext context)
         {
-            Debug.Log(($"{Name} applied. {message}"));
+            context.InnerLog($"{Name} applied. {message}");
         }
     }
 }

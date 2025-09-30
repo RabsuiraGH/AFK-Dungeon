@@ -24,6 +24,12 @@ namespace LA.Gameplay
         }
 
 
+        override public string ToString()
+        {
+            return Name;
+        }
+
+
         public abstract void Init();
 
         public abstract bool IsHit(int hitValue);

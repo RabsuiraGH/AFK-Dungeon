@@ -32,7 +32,7 @@ namespace LA.Gameplay.AbilitySystem.Abilities
             DamageContext damageContext = new(damage, DamageType.None, Name + $"{context.TurnNumber}");
             context.AddDamage(damageContext);
 
-            Log($"Owner: {context.AbilityOwner} Damage: {damageContext.BaseDamage} Type: {damageContext.DamageType} Proc: {proc}");
+            Log($"Owner: {context.AbilityOwner} Damage: {damageContext.BaseDamage} Type: {damageContext.DamageType} Proc: {proc}", context);
 
         }
     }

@@ -15,7 +15,7 @@ namespace LA.Gameplay.AbilitySystem.Abilities
             DamageContext damage = context.GetWeaponDamage(context.Attacker);
 
             damage.ModifyDamage(-damage.BaseDamage);
-            Log($"Owner: {context.AbilityOwner} Damage Immunity: {damage.BaseDamage}");
+            Log($"Owner: {context.AbilityOwner} Damage Immunity: {damage.BaseDamage}", context);
         }
     }
 }

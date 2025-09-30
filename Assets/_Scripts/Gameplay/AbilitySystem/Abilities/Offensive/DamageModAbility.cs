@@ -21,7 +21,7 @@ namespace LA.Gameplay.AbilitySystem.Abilities
             DamageContext bonusDamage = new(DamageBonus, DamageType, Name);
             context.AddDamage(bonusDamage);
 
-            Log($"Owner: {context.AbilityOwner} Damage: {bonusDamage.BaseDamage} Type: {bonusDamage.DamageType}");
+            Log($"Owner: {context.AbilityOwner} Damage: {bonusDamage.BaseDamage} Type: {bonusDamage.DamageType}",context);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace LA.Gameplay.AbilitySystem.Abilities
 
             context.AddDamage(new DamageContext(-damageReduction, DamageType.None, Name), context.Attacker);
 
-            Log($"Owner: {context.AbilityOwner} Damage Reduction: {damageReduction}");
+            Log($"Owner: {context.AbilityOwner} Damage Reduction: {damageReduction}", context);
         }
     }
 }

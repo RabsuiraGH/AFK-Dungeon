@@ -15,7 +15,7 @@ namespace LA.Gameplay.AbilitySystem.Abilities
             if (!IsAllConditionsMet(context)) return;
 
             context.AddDamageMultiplier(Multiplier, context.Attacker);
-            Log($"Owner: {context.AbilityOwner} Damage Multiplier: {Multiplier}");
+            Log($"Owner: {context.AbilityOwner} Damage Multiplier: {Multiplier}", context);
         }
     }
 }
