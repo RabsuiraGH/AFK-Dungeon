@@ -24,8 +24,13 @@ namespace LA.UI.MainMenu
         private void Awake()
         {
             _canvasGroup.alpha = 0;
+            _canvasGroup.blocksRaycasts = false;
 
-            _fadeTween = DOTween.Sequence().SetDelay(2f).Append(_canvasGroup.DOFade(1, 5f)).SetLink(this.gameObject);
+            _fadeTween = DOTween.Sequence()
+                                .SetDelay(2f)
+                                .Append(_canvasGroup.DOFade(1, 5f))
+                                .SetLink(this.gameObject)
+                                .OnComplete(() => _canvasGroup.blocksRaycasts = true);
         }
 
 
