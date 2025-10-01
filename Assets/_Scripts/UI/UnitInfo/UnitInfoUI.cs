@@ -56,7 +56,7 @@ namespace LA.UI.UnitInfo
 
         private void AnimateSwing(float duration, Vector3 startPosition, Vector3 endPosition)
         {
-            Sequence seq = DOTween.Sequence();
+            Sequence seq = DOTween.Sequence().SetLink(this.gameObject);
 
             seq.Append(_unitImage.transform.DOMove(endPosition, duration * _attackSwingPercentage)
                                  .SetEase(Ease.OutQuad));
