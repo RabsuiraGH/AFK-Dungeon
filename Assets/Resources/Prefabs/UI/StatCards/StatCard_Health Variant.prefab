@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7628387488921324326
+--- !u!1001 &2418549258568791322
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 715010452422646488, guid: 56e879fcfbbcbc04ba58250de57be255, type: 3}
       propertyPath: StatType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3840028043502016685, guid: 56e879fcfbbcbc04ba58250de57be255, type: 3}
       propertyPath: m_Pivot.x
@@ -38,7 +38,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3840028043502016685, guid: 56e879fcfbbcbc04ba58250de57be255, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3840028043502016685, guid: 56e879fcfbbcbc04ba58250de57be255, type: 3}
       propertyPath: m_SizeDelta.y
@@ -95,22 +95,22 @@ PrefabInstance:
     - target: {fileID: 4426523717974422205, guid: 56e879fcfbbcbc04ba58250de57be255, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 042bb4b2cb2a7b947950ce92251fd164, type: 3}
+      objectReference: {fileID: 21300000, guid: 14a205178ba7f7c40ba7632c97de0e6c, type: 3}
     - target: {fileID: 8059054195110452217, guid: 56e879fcfbbcbc04ba58250de57be255, type: 3}
       propertyPath: m_Name
-      value: StatCard_Strength Variant
+      value: StatCard_Health Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8620864395063991058, guid: 56e879fcfbbcbc04ba58250de57be255, type: 3}
       propertyPath: <Name>k__BackingField
-      value: Strenght
+      value: Health
       objectReference: {fileID: 0}
     - target: {fileID: 8620864395063991058, guid: 56e879fcfbbcbc04ba58250de57be255, type: 3}
       propertyPath: <Sprite>k__BackingField
       value: 
-      objectReference: {fileID: 21300000, guid: 042bb4b2cb2a7b947950ce92251fd164, type: 3}
+      objectReference: {fileID: 21300000, guid: 14a205178ba7f7c40ba7632c97de0e6c, type: 3}
     - target: {fileID: 8620864395063991058, guid: 56e879fcfbbcbc04ba58250de57be255, type: 3}
       propertyPath: <Description>k__BackingField
-      value: Adds to damage.
+      value: If it goes below 0 or to 0 - you die.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
