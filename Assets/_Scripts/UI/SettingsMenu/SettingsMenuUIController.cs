@@ -46,7 +46,7 @@ namespace LA.UI.SettingsMenu
 
         private void OnDestroy()
         {
-            _soundMixerService.OnVolumeChanged += SetVolumeSliders;
+            _soundMixerService.OnVolumeChanged -= SetVolumeSliders;
 
             _settingsMenuUI.OnMasterVolumeChanged -= _soundMixerService.SetMasterVolume;
             _settingsMenuUI.OnSfxVolumeChanged -= _soundMixerService.SetSFXVolume;

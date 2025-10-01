@@ -15,6 +15,7 @@ namespace LA.UI.BattleHeader
 
         public event Action OnMenuShowRequested;
 
+
         [VContainer.Inject]
         public void Construct(PathConfig pathConfig, GameService gameService)
         {
@@ -24,29 +25,23 @@ namespace LA.UI.BattleHeader
             _gameService.OnTurnCountUpdated += _battleHeaderUI.SetTurn;
             _gameService.OnBattleCounterChanged += _battleHeaderUI.SetBattleCounter;
 
-            _battleHeaderUI.OnMenuButtonClicked +=  OnMenu;
+            _battleHeaderUI.OnMenuButtonClicked += OnMenuButtonClicked;
             _battleHeaderUI.OnSpeedButtonClicked += OnSpeedButtonClicked;
             _battleHeaderUI.OnPauseButtonClicked += OnPauseButtonClicked;
         }
 
 
-        private void OnMenu()
+        private void Start() => _battleHeaderUI.Setup(_gameplayConfig.GameSpeeds);
+
+
+        private void OnMenuButtonClicked()
         {
             OnMenuShowRequested?.Invoke();
             _gameService.PauseBattle();
         }
 
 
-        private void OnPauseButtonClicked()
-        {
-            _gameService.PauseBattle();
-        }
-
-
-        private void Start()
-        {
-            _battleHeaderUI.Setup(_gameplayConfig.GameSpeeds);
-        }
+        private void OnPauseButtonClicked() => _gameService.PauseBattle();
 
 
         private void OnSpeedButtonClicked(int speedIndex)
@@ -61,7 +56,7 @@ namespace LA.UI.BattleHeader
             _gameService.OnTurnCountUpdated -= _battleHeaderUI.SetTurn;
             _gameService.OnBattleCounterChanged -= _battleHeaderUI.SetBattleCounter;
 
-            _battleHeaderUI.OnMenuButtonClicked -=  OnMenu;
+            _battleHeaderUI.OnMenuButtonClicked -= OnMenuButtonClicked;
             _battleHeaderUI.OnSpeedButtonClicked -= OnSpeedButtonClicked;
             _battleHeaderUI.OnPauseButtonClicked -= OnPauseButtonClicked;
         }

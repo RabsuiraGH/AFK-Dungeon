@@ -29,8 +29,9 @@ namespace LA.UI.UnitInfo
 
         public void CreatePopup(string popupPath)
         {
-            PopupUI popup = PopupUI.CreatePopup(LoadAssetUtility.Load<PopupUI>(popupPath), _unitImage.transform.position,
-                                _unitImage.transform.parent);
+            PopupUI popup = PopupUI.CreatePopup(LoadAssetUtility.Load<PopupUI>(popupPath),
+                                                _unitImage.transform.position,
+                                                _unitImage.transform.parent);
 
             popup.SetText("DODGE").MovePopup(Vector3.up * 50, 0.3f).FadePopup(0, 0.2f).DestroyOnComplete();
         }

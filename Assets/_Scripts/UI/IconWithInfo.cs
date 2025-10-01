@@ -34,15 +34,8 @@ namespace LA.UI
         }
 
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            OnHoverEnter?.Invoke(this);
-        }
+        public void OnPointerEnter(PointerEventData eventData) => OnHoverEnter?.Invoke(this);
 
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            OnHoverExit?.Invoke(this);
-        }
+        public void OnPointerExit(PointerEventData eventData) => OnHoverExit?.Invoke(this);
     }
 }

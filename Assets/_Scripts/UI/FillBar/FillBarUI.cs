@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace LA.UI.FillBar
@@ -20,7 +19,9 @@ namespace LA.UI.FillBar
             if (FillImage.enabled == false)
                 FillImage.enabled = true;
 
-            float fill = !RightToLeftFill ? currentValue / maxValue : 1 - (currentValue / maxValue);
+            float percent = currentValue / maxValue;
+            float fill = RightToLeftFill ? 1 - percent : percent;
+
             FillImage.fillAmount = fill;
         }
 

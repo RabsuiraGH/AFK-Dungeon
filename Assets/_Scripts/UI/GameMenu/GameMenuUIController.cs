@@ -1,5 +1,6 @@
 ﻿using System;
 using LA.Gameplay.GameStarter;
+using LA.Utilities.SceneName;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,25 +22,12 @@ namespace LA.UI.GameMenu
         public void Construct(GameStarterService gameStarterService, PathConfig pathConfig)
         {
             _gameStarterService = gameStarterService;
-            _mainMenuSceneName = pathConfig.MainMenuScene.Split('/')[^1].Split('.')[0];
+            _mainMenuSceneName = SceneNameUtility.GetNameFromPath(pathConfig.MainMenuScene);
 
             _gameMenuUI.OnContinueButtonClicked += ContinueGame;
             _gameMenuUI.OnResetGameButtonClicked += _gameStarterService.Reset;
             _gameMenuUI.OnSettingsButtonClicked += RequestSettings;
             _gameMenuUI.OnQuitGameButtonClicked += BackToMainMenu;
-        }
-
-
-        private void RequestSettings()
-        {
-            OnSettingsRequested?.Invoke();
-        }
-
-
-        private void ContinueGame()
-        {
-            OnGameContinue?.Invoke();
-            _gameMenuUI.Hide();
         }
 
 
@@ -50,10 +38,7 @@ namespace LA.UI.GameMenu
         }
 
 
-        public void Show()
-        {
-            _gameMenuUI.Show();
-        }
+        public void Show() => _gameMenuUI.Show();
 
 
         public void Toggle()
@@ -67,6 +52,19 @@ namespace LA.UI.GameMenu
             {
                 Show();
             }
+        }
+
+
+        private void ContinueGame()
+        {
+            OnGameContinue?.Invoke();
+            _gameMenuUI.Hide();
+        }
+
+
+        private void RequestSettings()
+        {
+            OnSettingsRequested?.Invoke();
         }
 
 

@@ -10,11 +10,7 @@ namespace LA.UI.StartBattle
         public event Action OnStartBattleRequested;
 
 
-        private void Start()
-        {
-            _startBattleUI.OnStartBattleRequested += RequestBattleStart;
-        }
-
+        private void Start() => _startBattleUI.OnStartBattleRequested += RequestBattleStart;
 
         public void Show() => _startBattleUI.Show();
 
@@ -26,9 +22,6 @@ namespace LA.UI.StartBattle
         }
 
 
-        private void OnDestroy()
-        {
-            _startBattleUI.OnStartBattleRequested -= RequestBattleStart;
-        }
+        private void OnDestroy() => _startBattleUI.OnStartBattleRequested -= RequestBattleStart;
     }
 }

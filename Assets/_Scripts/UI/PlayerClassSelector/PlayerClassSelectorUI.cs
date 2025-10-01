@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using LA.Gameplay.AbilitySystem;
 using LA.Gameplay.Player.ClassSystem;
 using LA.Gameplay.Stat;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace LA.UI.PlayerClassSelector
 {
@@ -20,9 +18,25 @@ namespace LA.UI.PlayerClassSelector
         [SerializeField] private ClassCard _classCardPrefab;
         public event Action<int> OnClassLevelAdded;
 
+        bool _initialized = false;
+
 
         public void PrepareUI(IReadOnlyList<PlayerClassData> availableClasses, int totalLevel)
         {
+            if (!_initialized)
+            {
+                Init(availableClasses, totalLevel);
+            }
+            else
+            {
+                UpdateUI(availableClasses, totalLevel);
+            }
+        }
+
+
+        private void Init(IReadOnlyList<PlayerClassData> availableClasses, int totalLevel)
+        {
+            _initialized = true;
             _levelText.text = $"Level: {totalLevel + 1}";
 
             foreach (PlayerClassData classData in availableClasses)
@@ -37,7 +51,7 @@ namespace LA.UI.PlayerClassSelector
         }
 
 
-        public void UpdateClasses(IReadOnlyList<PlayerClassData> availableClasses, int totalLevel)
+        private void UpdateUI(IReadOnlyList<PlayerClassData> availableClasses, int totalLevel)
         {
             _levelText.text = $"Level: {totalLevel + 1}";
 
@@ -67,14 +81,14 @@ namespace LA.UI.PlayerClassSelector
             }
         }
 
+
         public void UpdateHealth(int maxHealth)
         {
             _healthStatCard.UpdateData(maxHealth.ToString());
         }
 
-        void AddClassLevelButtonPressed(ClassCard classCard)
-        {
+
+        private void AddClassLevelButtonPressed(ClassCard classCard) =>
             OnClassLevelAdded?.Invoke(_classCards.IndexOf(classCard));
-        }
     }
 }

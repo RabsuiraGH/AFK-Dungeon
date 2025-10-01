@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,29 +25,26 @@ namespace LA.UI.BattleHeader
         {
             _openMenuButton.onClick.AddListener(() => OnMenuButtonClicked?.Invoke());
 
-            _pauseButton.onValueChanged.AddListener((val) =>
-            {
-                if (val) OnPauseButtonClicked?.Invoke();
-            });
+            _pauseButton.onValueChanged.AddListener(SetPause);
 
-            for (int i = 0; i < _speedButtons.Count; i++)
+            for (int i = 0; i < Math.Min(_speedButtons.Count, speeds.Count); i++)
             {
-                if (i < speeds.Count)
+                int index = i;
+                _speedButtons[i].onValueChanged.AddListener((val) =>
                 {
-                    int index = i;
-                    _speedButtons[i].onValueChanged.AddListener((val) =>
-                    {
-                        if (val) OnSpeedButtonClicked?.Invoke(index);
-                    });
-
-                    _speedButtons[i].gameObject.SetActive(true);
-                }
-                else
-                {
-                    _speedButtons[i].gameObject.SetActive(false);
-                }
+                    if (val) OnSpeedButtonClicked?.Invoke(index);
+                });
             }
+
             _speedButtons[0].SetIsOnWithoutNotify(true);
+        }
+
+
+        private void SetPause(bool pause)
+        {
+            if (pause) return;
+
+            OnPauseButtonClicked?.Invoke();
         }
 
 
@@ -54,6 +52,7 @@ namespace LA.UI.BattleHeader
         {
             _turnText.text = $"TURN: {turn}";
         }
+
 
         public void SetBattleCounter(int battle)
         {

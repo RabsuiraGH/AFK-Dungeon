@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using LA.Gameplay.Config;
 using LA.Gameplay.Player;
 using LA.Gameplay.Player.ClassSystem;
 using LA.Gameplay.Player.Config;
@@ -32,37 +31,15 @@ namespace LA.UI.PlayerClassSelector
         }
 
 
-        private void Start()
-        {
-            _playerClassSelectorUI.OnClassLevelAdded += LevelUpClass;
-        }
+        private void Start() => _playerClassSelectorUI.OnClassLevelAdded += LevelUpClass;
 
 
-        public void Setup()
-        {
-            List<PlayerClassData> availableClasses = GetAvailableClasses();
-
-            _playerClassSelectorUI.PrepareUI(availableClasses, _player.TotalLevel);
-            _playerClassSelectorUI.UpdateStats(_player.Stats);
-            _playerClassSelectorUI.UpdateHealth(_player.MaxHealth);
-            _playerClassSelectorUI.Show();
-        }
-
-
-        private void LevelUpClass(int classIndex)
-        {
-            _player.AddClass(_classesDatabase.Classes[classIndex]);
-            OnClassSelected?.Invoke();
-            _playerClassSelectorUI.Hide();
-        }
-
-
-        public void OnPlayerWin()
+        public void Show()
         {
             if (_player.TotalLevel < _playerConfig.MaxPlayerLevel)
             {
                 List<PlayerClassData> availableClasses = GetAvailableClasses();
-                _playerClassSelectorUI.UpdateClasses(availableClasses, _player.TotalLevel);
+                _playerClassSelectorUI.PrepareUI(availableClasses, _player.TotalLevel);
                 _playerClassSelectorUI.UpdateStats(_player.Stats);
                 _playerClassSelectorUI.UpdateHealth(_player.MaxHealth);
                 _playerClassSelectorUI.Show();
@@ -72,6 +49,14 @@ namespace LA.UI.PlayerClassSelector
                 MaxLevelReachedAlready?.Invoke();
                 _playerClassSelectorUI.Hide();
             }
+        }
+
+
+        private void LevelUpClass(int classIndex)
+        {
+            _player.AddClass(_classesDatabase.Classes[classIndex]);
+            OnClassSelected?.Invoke();
+            _playerClassSelectorUI.Hide();
         }
 
 

@@ -1,7 +1,4 @@
 ﻿using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
-using LA.UI.UnitInfo;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

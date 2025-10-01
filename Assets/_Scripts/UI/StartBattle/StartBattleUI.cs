@@ -10,21 +10,10 @@ namespace LA.UI.StartBattle
 
         public event Action OnStartBattleRequested;
 
-        private void Start()
-        {
-            _startBattleButton.onClick.AddListener(OnStartBattleButtonClicked);
-        }
+        private void Start() => _startBattleButton.onClick.AddListener(OnStartBattleButtonClicked);
 
+        private void OnStartBattleButtonClicked() => OnStartBattleRequested?.Invoke();
 
-        private void OnStartBattleButtonClicked()
-        {
-            OnStartBattleRequested?.Invoke();
-        }
-
-
-        private void OnDestroy()
-        {
-            _startBattleButton.onClick.RemoveListener(OnStartBattleButtonClicked);
-        }
+        private void OnDestroy() => _startBattleButton.onClick.RemoveListener(OnStartBattleButtonClicked);
     }
 }
