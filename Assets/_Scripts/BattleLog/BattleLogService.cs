@@ -9,10 +9,9 @@ namespace LA.BattleLog
 
         public IReadOnlyCollection<LogEntry> Logs => _logs;
 
+        private List<LogEntry> _logs = new();
         public event Action<LogEntry> OnAddLog;
         public event Action OnClearLog;
-
-        private List<LogEntry> _logs = new();
 
 
         public BattleLogService()
@@ -32,14 +31,22 @@ namespace LA.BattleLog
             _instance.Log(message, tag);
         }
 
+
         public static void LogSeparatorStatic()
         {
             _instance.Log("", "SEPARATOR");
         }
 
+
         public void Log(string message)
         {
             Log(message, string.Empty);
+        }
+
+
+        public void LogSeparator()
+        {
+            Log("", "SEPARATOR");
         }
 
 
@@ -50,10 +57,7 @@ namespace LA.BattleLog
             OnAddLog?.Invoke(entry);
         }
 
-        public void LogSeparator()
-        {
-            Log("", "SEPARATOR");
-        }
+
         public void ClearLog()
         {
             _logs.Clear();

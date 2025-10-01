@@ -1,10 +1,7 @@
 ﻿using LA.AudioSystem;
 using LA.AudioSystem.Database;
-using LA.DI;
-using LA.UI;
 using SW.Utilities.LoadAsset;
 using UnityEngine;
-using VContainer;
 using VContainer.Unity;
 
 namespace LA.Gameplay.GameStarter
@@ -14,9 +11,9 @@ namespace LA.Gameplay.GameStarter
         private readonly LifetimeScope _parentScope;
         private LifetimeScope _gameScope;
 
-        private PathConfig _pathConfig;
-        private MusicDatabase _musicDatabase;
-        private MusicService _musicService;
+        private readonly PathConfig _pathConfig;
+        private readonly MusicDatabase _musicDatabase;
+        private readonly MusicService _musicService;
 
 
         public GameStarterService(LifetimeScope parentScope, PathConfig pathConfig, MusicService musicService)

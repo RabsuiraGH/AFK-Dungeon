@@ -1,11 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace LA.AudioSystem
 {
     public class AudioContainer : MonoBehaviour
     {
-        public static AudioContainer Create()
+        public static AudioContainer Create(string name = "AudioContainer")
         {
             GameObject go = new GameObject("AudioContainer");
             return go.AddComponent<AudioContainer>();

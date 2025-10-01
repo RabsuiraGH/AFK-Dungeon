@@ -118,18 +118,18 @@ namespace LA.UI
         }
 
 
-        private void OnPlayerWinBattleWrapper()
+        private void OnPlayerWinBattleWrapper(Enemy defeatedEnemy)
         {
             _unitInfoUIController.HideEnemyInfo();
-            StartCoroutine(OnPlayerWinBattle());
+            StartCoroutine(OnPlayerWinBattle(defeatedEnemy));
         }
 
 
-        private IEnumerator OnPlayerWinBattle()
+        private IEnumerator OnPlayerWinBattle(Enemy defeatedEnemy)
         {
             yield return _battleResultPopupUI.ShowPopup("YOU WIN!", 0.2f, 0.5f, 1f);
 
-            _lootUIController.OnPlayerWin(_gameService.BattleService.GetEnemy().EnemyBase.DeathDrop);
+            _lootUIController.OnPlayerWin(defeatedEnemy.EnemyBase.DeathDrop);
         }
 
 

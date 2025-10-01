@@ -9,16 +9,16 @@ namespace LA.Gameplay.Enemy
     [CreateAssetMenu(fileName = "EnemySO", menuName = "Game/EnemySO")]
     public class EnemySO : ScriptableObject
     {
-        [field: SerializeField] public string Name { get; set; }
-        [field: SerializeField] public Sprite Sprite { get; set; }
+        [field: SerializeField] public string Name { get; private set; }
+        [field: SerializeField] public Sprite Sprite { get; private set; }
 
-        [field: SerializeField] public int BaseHealth { get; set; }
-        [field: SerializeField] public WeaponSO BaseWeapon { get; set; }
+        [field: SerializeField] public int BaseHealth { get; private set; }
+        [field: SerializeField] public WeaponSO BaseWeapon { get; private set; }
 
-        [field: SerializeField] public Stats BaseStats { get; set; }
+        [field: SerializeField] public Stats BaseStats { get; private set; }
 
-        [field: SerializeField] public WeaponSO DeathDrop { get; set; }
+        [field: SerializeField] public WeaponSO DeathDrop { get; private set; }
 
-        [field: SerializeField] public List<AbilitySO> Abilities { get; set; }
+        [field: SerializeField] public List<AbilitySO> Abilities { get; private set; }
     }
 }

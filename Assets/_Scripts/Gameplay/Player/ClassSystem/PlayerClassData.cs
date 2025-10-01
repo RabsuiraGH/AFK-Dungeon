@@ -6,8 +6,8 @@ namespace LA.Gameplay.Player.ClassSystem
     [Serializable]
     public struct PlayerClassData
     {
-        [field: SerializeField] public ClassSO Class { get; set; }
-        [field: SerializeField] public int Level { get; set; }
+        [field: SerializeField] public ClassSO Class { get; private set; }
+        [field: SerializeField] public int Level { get; private set; }
 
 
         public PlayerClassData(ClassSO newClass, int level)

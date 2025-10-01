@@ -11,11 +11,15 @@ namespace LA.AudioSystem
         private AudioMixer _audioMixer;
 
         private const string MASTER_VOLUME_PARAMETER = "MasterVolume";
+
         private const string MUSIC_VOLUME_PARAMETER = "MusicVolume";
+
         private const string SFX_VOLUME_PARAMETER = "SFXVolume";
 
         private const float DEFAULT_MASTER_VOLUME = 1;
+
         private const float DEFAULT_SFX_VOLUME = 1;
+
         private const float DEFAULT_MUSIC_VOLUME = 0.5f;
 
         public event Action OnVolumeChanged;
@@ -25,6 +29,14 @@ namespace LA.AudioSystem
         public void Construct(PathConfig pathConfig)
         {
             _audioMixer = LoadAssetUtility.Load<AudioMixer>(pathConfig.AudioMixer);
+        }
+
+
+        public void Start()
+        {
+            SetMasterVolume(PlayerPrefs.GetFloat(MASTER_VOLUME_PARAMETER, DEFAULT_MASTER_VOLUME));
+            SetMusicVolume(PlayerPrefs.GetFloat(MUSIC_VOLUME_PARAMETER, DEFAULT_MUSIC_VOLUME));
+            SetSFXVolume(PlayerPrefs.GetFloat(SFX_VOLUME_PARAMETER, DEFAULT_SFX_VOLUME));
         }
 
 
@@ -72,14 +84,6 @@ namespace LA.AudioSystem
             PlayerPrefs.SetFloat(MASTER_VOLUME_PARAMETER, GetMasterVolume());
             PlayerPrefs.SetFloat(MUSIC_VOLUME_PARAMETER, GetMusicVolume());
             PlayerPrefs.SetFloat(SFX_VOLUME_PARAMETER, GetSFXVolume());
-        }
-
-
-        public void Start()
-        {
-            SetMasterVolume(PlayerPrefs.GetFloat(MASTER_VOLUME_PARAMETER, DEFAULT_MASTER_VOLUME));
-            SetMusicVolume(PlayerPrefs.GetFloat(MUSIC_VOLUME_PARAMETER, DEFAULT_MUSIC_VOLUME));
-            SetSFXVolume(PlayerPrefs.GetFloat(SFX_VOLUME_PARAMETER, DEFAULT_SFX_VOLUME));
         }
     }
 }

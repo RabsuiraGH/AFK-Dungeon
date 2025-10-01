@@ -18,7 +18,6 @@ namespace LA.DI
             builder.Register<SoundMixerService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<SoundFXService>(Lifetime.Singleton);
             builder.Register<MusicService>(Lifetime.Singleton);
-            builder.Register<RandomService>(Lifetime.Singleton).As<IRandomService>();
             builder.Register<GameStarterService>(Lifetime.Singleton);
         }
     }

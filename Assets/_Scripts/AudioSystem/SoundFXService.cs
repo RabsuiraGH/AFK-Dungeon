@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SW.Utilities.LoadAsset;
-using Unity.Mathematics;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -13,7 +12,7 @@ namespace LA.AudioSystem
     public class SoundFXService : IDisposable
     {
         private AudioSource _audioSourcePrefab;
-        private readonly Queue<AudioSource> _pool = new Queue<AudioSource>();
+        private readonly Queue<AudioSource> _pool = new();
         private AudioContainer _audioContainer;
 
 
@@ -50,7 +49,7 @@ namespace LA.AudioSystem
         }
 
 
-        public void PlaySoundFXClip(AudioClip clip, Vector2 position, float volume = 1f)
+        private void PlaySoundFXClip(AudioClip clip, Vector2 position, float volume = 1f)
         {
             AudioSource audioSource = GetFromPool();
 

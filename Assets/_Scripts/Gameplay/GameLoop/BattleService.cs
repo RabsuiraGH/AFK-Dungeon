@@ -30,20 +30,18 @@ namespace LA.Gameplay.GameLoop
 
         public event Action<int> OnTurnCountUpdated;
 
-        public event Action OnPlayerWin;
+        public event Action<Enemy.Enemy> OnPlayerWin;
         public event Action<Enemy.Enemy> OnPlayerLose;
 
-        private IRandomService _randomService;
         private SoundFXService _soundFXService;
         private SoundFXDatabase _soundFXDatabase;
         private BattleLogService _battleLogService;
 
 
         [VContainer.Inject]
-        public void Construct(IRandomService randomService, BattleLogService battleLogService,
+        public void Construct(BattleLogService battleLogService,
                               SoundFXService soundFXService, PathConfig pathConfig)
         {
-            _randomService = randomService;
             _soundFXDatabase = LoadAssetUtility.Load<SoundFXDatabase>(pathConfig.SoundFXDatabase);
             _soundFXService = soundFXService;
             _battleLogService = battleLogService;
@@ -83,7 +81,72 @@ namespace LA.Gameplay.GameLoop
             _battleLogService.LogSeparator();
 
 
-            UpdateUnits(context);
+            UpdateUnits();
+        }
+
+
+        public void DecideFirstTurn()
+        {
+            if (_player.Stats.Agility >= _enemy.Stats.Agility)
+            {
+                _attackingUnit = _player;
+                _defendingUnit = _enemy;
+            }
+            else
+            {
+                _attackingUnit = _enemy;
+                _defendingUnit = _player;
+            }
+        }
+
+
+        public void SwapUnits() => (_attackingUnit, _defendingUnit) = (_defendingUnit, _attackingUnit);
+
+
+        public void SetPlayer(Player.Player player)
+        {
+            _player = player;
+            _player.RestoreHealth();
+            OnUnitUpdates?.Invoke(_player);
+        }
+
+
+        public void SetEnemy(Enemy.Enemy enemyBase)
+        {
+            _enemy = enemyBase;
+        }
+
+
+        public Enemy.Enemy GetEnemy()
+        {
+            return _enemy;
+        }
+
+
+        public void ResetBattle()
+        {
+            _currentTurn = 0;
+            _turnCounters = new Dictionary<BattleUnit, int>();
+            OnTurnCountUpdated?.Invoke(_currentTurn);
+        }
+
+
+        public bool CheckBattleEnd()
+        {
+            return _player.IsDead() || _enemy.IsDead();
+        }
+
+
+        public void OnBattleEnd()
+        {
+            if (!_player.IsDead())
+            {
+                OnPlayerWin?.Invoke(_enemy);
+            }
+            else
+            {
+                OnPlayerLose?.Invoke(_enemy);
+            }
         }
 
 
@@ -136,7 +199,7 @@ namespace LA.Gameplay.GameLoop
         }
 
 
-        private void UpdateUnits(BattleContext context)
+        private void UpdateUnits()
         {
             OnUnitUpdates?.Invoke(_player);
             OnUnitUpdates?.Invoke(_enemy);
@@ -155,54 +218,7 @@ namespace LA.Gameplay.GameLoop
 
         private int CalculateHitChance(BattleUnit attacker, BattleUnit defender)
         {
-            return _randomService.Range(1, attacker.Stats.Agility + defender.Stats.Agility + 1);
-        }
-
-
-        public void SetEnemy(Enemy.Enemy enemyBase)
-        {
-            _enemy = enemyBase;
-        }
-
-
-        public Enemy.Enemy GetEnemy()
-        {
-            return _enemy;
-        }
-
-
-        public void SetPlayer(Player.Player player)
-        {
-            _player = player;
-            _player.RestoreHealth();
-            OnUnitUpdates?.Invoke(_player);
-        }
-
-
-        public void ResetBattle()
-        {
-            _currentTurn = 0;
-            _turnCounters = new Dictionary<BattleUnit, int>();
-            OnTurnCountUpdated?.Invoke(_currentTurn);
-        }
-
-
-        public bool CheckBattleEnd()
-        {
-            return _player.IsDead() || _enemy.IsDead();
-        }
-
-
-        public void OnBattleEnd()
-        {
-            if (!_player.IsDead())
-            {
-                OnPlayerWin?.Invoke();
-            }
-            else
-            {
-                OnPlayerLose?.Invoke(_enemy);
-            }
+            return Random.Range(1, attacker.Stats.Agility + defender.Stats.Agility + 1);
         }
 
 
@@ -213,23 +229,5 @@ namespace LA.Gameplay.GameLoop
             _turnCounters[_attackingUnit]++;
             OnTurnCountUpdated?.Invoke(_currentTurn);
         }
-
-
-        public void DecideFirstTurn()
-        {
-            if (_player.Stats.Agility >= _enemy.Stats.Agility)
-            {
-                _attackingUnit = _player;
-                _defendingUnit = _enemy;
-            }
-            else
-            {
-                _attackingUnit = _enemy;
-                _defendingUnit = _player;
-            }
-        }
-
-
-        public void SwapUnits() => (_attackingUnit, _defendingUnit) = (_defendingUnit, _attackingUnit);
     }
 }

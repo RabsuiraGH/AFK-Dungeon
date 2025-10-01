@@ -24,7 +24,7 @@ namespace LA.Gameplay
         }
 
 
-        override public string ToString()
+        public override string ToString()
         {
             return Name;
         }
