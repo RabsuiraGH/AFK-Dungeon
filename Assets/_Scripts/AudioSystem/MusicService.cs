@@ -27,6 +27,13 @@ namespace LA.AudioSystem
             _audioContainer = AudioContainer.Create();
         }
 
+        public void PlayMusicOnce(Music music, Vector2 position)
+        {
+            if(_nowPlaying.clip == music.Clip) return;
+
+            PlayMusicClip(music.Clip, position, false, music.Volume);
+        }
+
 
         public void PlayMusic(Music music, Vector2 position)
         {
@@ -41,6 +48,11 @@ namespace LA.AudioSystem
 
 
         public void ContinueMusic()
+        {
+            _nowPlaying?.UnPause();
+        }
+
+        public void RestartMusic()
         {
             _nowPlaying?.Play();
         }

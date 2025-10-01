@@ -34,7 +34,7 @@ namespace LA.Gameplay.GameStarter
 
             _gameScope = _parentScope.CreateChildFromPrefab(prefab);
             _gameScope.Build();
-            _musicService.PlayMusic(_musicDatabase.GameMusic, Vector2.zero);
+            _musicService.PlayMusicOnce(_musicDatabase.GameMusic, Vector2.zero);
         }
 
 
