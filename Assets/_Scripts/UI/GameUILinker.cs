@@ -28,6 +28,7 @@ namespace LA.UI
 
         [SerializeField] private BattleResultPopupUI _battleResultPopupUI;
 
+
         [SerializeField] private GameService _gameService;
         [SerializeField] private Player _player;
 

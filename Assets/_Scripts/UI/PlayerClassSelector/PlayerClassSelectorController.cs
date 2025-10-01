@@ -43,7 +43,7 @@ namespace LA.UI.PlayerClassSelector
 
             _playerClassSelectorUI.PrepareUI(availableClasses, _player.TotalLevel);
             _playerClassSelectorUI.UpdateStats(_player.Stats);
-
+            _playerClassSelectorUI.UpdateHealth(_player.MaxHealth);
             _playerClassSelectorUI.Show();
         }
 
@@ -61,8 +61,9 @@ namespace LA.UI.PlayerClassSelector
             if (_player.TotalLevel < _gameplayConfig.MaxPlayerLevel)
             {
                 List<PlayerClassData> availableClasses = GetAvailableClasses();
-                _playerClassSelectorUI.UpdateUI(availableClasses, _player.TotalLevel);
+                _playerClassSelectorUI.UpdateClasses(availableClasses, _player.TotalLevel);
                 _playerClassSelectorUI.UpdateStats(_player.Stats);
+                _playerClassSelectorUI.UpdateHealth(_player.MaxHealth);
                 _playerClassSelectorUI.Show();
             }
             else

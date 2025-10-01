@@ -30,6 +30,8 @@ namespace LA.Gameplay.GameLoop
 
         public event Action<BattleUnit> OnEnemySet;
 
+        public event Action<int> OnBattleCounterChanged;
+
         private Player.Player _player;
         private GameplayConfig _gameplayConfig;
         private BattleLogService _battleLogService;
@@ -124,6 +126,7 @@ namespace LA.Gameplay.GameLoop
 
         public void StartBattle()
         {
+            OnBattleCounterChanged?.Invoke(BattleCounter);
             _cts = new CancellationTokenSource();
             _battleLogService.ClearLog();
             _ = SimulateBattle(_cts.Token);

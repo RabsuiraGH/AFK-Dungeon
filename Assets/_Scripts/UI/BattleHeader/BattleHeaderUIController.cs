@@ -22,6 +22,7 @@ namespace LA.UI.BattleHeader
             _gameService = gameService;
 
             _gameService.BattleService.OnTurnCountUpdated += _battleHeaderUI.SetTurn;
+            _gameService.OnBattleCounterChanged += _battleHeaderUI.SetBattleCounter;
 
             _battleHeaderUI.OnMenuButtonClicked +=  OnMenu;
             _battleHeaderUI.OnSpeedButtonClicked += OnSpeedButtonClicked;
@@ -58,6 +59,7 @@ namespace LA.UI.BattleHeader
         private void OnDestroy()
         {
             _gameService.BattleService.OnTurnCountUpdated -= _battleHeaderUI.SetTurn;
+            _gameService.OnBattleCounterChanged -= _battleHeaderUI.SetBattleCounter;
 
             _battleHeaderUI.OnMenuButtonClicked -=  OnMenu;
             _battleHeaderUI.OnSpeedButtonClicked -= OnSpeedButtonClicked;

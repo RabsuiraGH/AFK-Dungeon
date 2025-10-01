@@ -36,7 +36,7 @@ namespace LA.UI.PlayerClassSelector
         {
             _classIcon.sprite = classData.Class.ClassIcon;
             _className.text = classData.Class.ClassName;
-            _healthUpgradeText.text = $"HP: +{classData.Class.HealthPerLevel.ToString()}";
+            _healthUpgradeText.text = $"+{classData.Class.HealthPerLevel.ToString()}";
 
             DisplayUpgrade(classData.Class.LevelUpgrades[classData.Level - 1]);
 

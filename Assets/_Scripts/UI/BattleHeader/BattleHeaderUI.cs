@@ -10,6 +10,7 @@ namespace LA.UI.BattleHeader
     {
         [SerializeField] private Button _openMenuButton;
         [SerializeField] private TextMeshProUGUI _turnText;
+        [SerializeField] private TextMeshProUGUI _battleCounterText;
         [SerializeField] private Toggle _pauseButton;
         [SerializeField] private List<Toggle> _speedButtons = new();
 
@@ -52,6 +53,11 @@ namespace LA.UI.BattleHeader
         public void SetTurn(int turn)
         {
             _turnText.text = $"TURN: {turn}";
+        }
+
+        public void SetBattleCounter(int battle)
+        {
+            _battleCounterText.text = $"BATTLE: {battle + 1}";
         }
 
 

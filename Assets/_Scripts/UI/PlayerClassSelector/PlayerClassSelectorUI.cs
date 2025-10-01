@@ -14,6 +14,7 @@ namespace LA.UI.PlayerClassSelector
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private Transform _contentPanel;
         [SerializeField] private List<StatCard> _statCards;
+        [SerializeField] private StatCard _healthStatCard;
         [SerializeField] private List<ClassCard> _classCards;
 
         [SerializeField] private ClassCard _classCardPrefab;
@@ -36,7 +37,7 @@ namespace LA.UI.PlayerClassSelector
         }
 
 
-        public void UpdateUI(IReadOnlyList<PlayerClassData> availableClasses, int totalLevel)
+        public void UpdateClasses(IReadOnlyList<PlayerClassData> availableClasses, int totalLevel)
         {
             _levelText.text = $"Level: {totalLevel + 1}";
 
@@ -66,6 +67,10 @@ namespace LA.UI.PlayerClassSelector
             }
         }
 
+        public void UpdateHealth(int maxHealth)
+        {
+            _healthStatCard.UpdateData(maxHealth.ToString());
+        }
 
         void AddClassLevelButtonPressed(ClassCard classCard)
         {
