@@ -20,17 +20,22 @@ namespace LA.Gameplay.AbilitySystem
 
         public bool IsAllConditionsMet(BattleContext context)
         {
-            bool roleMet = ApplyWhenRole switch
+            bool roleMet = IsRoleMet(context);
+
+            return roleMet && Conditions.All(entry => entry.Condition.IsMet(context, entry.Parameters));
+        }
+
+
+        protected bool IsRoleMet(BattleContext context)
+        {
+            return ApplyWhenRole switch
             {
                 BattleRole.Attacker => context.Attacker == context.AbilityOwner,
                 BattleRole.Defender => context.Defender == context.AbilityOwner,
                 BattleRole.Any => true,
                 _ => true
             };
-
-            return roleMet && Conditions.All(entry => entry.Condition.IsMet(context, entry.Parameters));
         }
-
 
 
         public void Log(string message, BattleContext context)

@@ -42,6 +42,7 @@ namespace LA.Gameplay
                 { Defender, new List<int>() }
             };
         }
+        public BattleUnit GetOpponent(BattleUnit unit) => unit == Attacker ? Defender : Attacker;
 
         public void InnerLog(string message)
         {

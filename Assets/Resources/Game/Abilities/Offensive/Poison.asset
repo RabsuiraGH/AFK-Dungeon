@@ -18,7 +18,7 @@ MonoBehaviour:
     next turn damage inreases by 1.
   <ApplyWhenRole>k__BackingField: 0
   <Conditions>k__BackingField: []
-  <BaseDamage>k__BackingField: 0
+  <BaseDamage>k__BackingField: -1
   <BonusDamagePerTurn>k__BackingField: 1
   <DurationInProcs>k__BackingField: 999
   <ProcOnlyOnMyTurn>k__BackingField: 1

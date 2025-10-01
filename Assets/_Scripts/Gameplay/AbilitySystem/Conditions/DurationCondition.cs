@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LA.Gameplay.AbilitySystem.Conditions
 {
-    [CreateAssetMenu(fileName = "TurnCondition", menuName = "Game/Abilities/Conditions/Turn Condition")]
+    [CreateAssetMenu(fileName = "DurationCondition", menuName = "Game/Abilities/Conditions/Duration Condition")]
     public class DurationCondition : AbilityCondition<DurationConditionParameters>
     {
         public override bool IsMet(BattleContext context, DurationConditionParameters parameters)

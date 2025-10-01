@@ -11,8 +11,10 @@ namespace LA.Gameplay.AbilitySystem.Conditions
     {
         public override bool IsMet(BattleContext context, StatConditionParametersBase parameters)
         {
-            return parameters.StatsToCompare.All(stCmp => stCmp.Compare(context.Attacker.Stats,
-                                                                        context.Defender.Stats));
+            Stats left = context.AbilityOwner.Stats;
+            Stats right = context.GetOpponent(context.AbilityOwner).Stats;
+
+            return parameters.StatsToCompare.All(stCmp => stCmp.Compare(left, right));
         }
     }
 

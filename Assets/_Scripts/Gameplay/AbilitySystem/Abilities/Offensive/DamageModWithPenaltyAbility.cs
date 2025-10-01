@@ -21,7 +21,7 @@ namespace LA.Gameplay.AbilitySystem.Abilities
                 context.AddDamage(new DamageContext(BonusDamage, DamageType.None, Name + " Bonus"));
                 Log($"Owner: {context.AbilityOwner} Bonus Damage: {BonusDamage}", context);
             }
-            else
+            else if(IsRoleMet(context))
             {
                 context.AddDamage(new DamageContext(DamagePenalty, DamageType.None, Name + " Penalty"));
                 Log($"Owner: {context.AbilityOwner} Penalty Damage: {DamagePenalty}", context);

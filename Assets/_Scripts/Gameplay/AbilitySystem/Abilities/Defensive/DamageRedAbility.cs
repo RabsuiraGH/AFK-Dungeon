@@ -14,7 +14,9 @@ namespace LA.Gameplay.AbilitySystem.Abilities
 
         public void OnBeforeHit(BattleContext context)
         {
+            Debug.Log(($"Shield Start"));
             if (!IsAllConditionsMet(context)) return;
+            Debug.Log(($"Shield Met"));
 
             context.AddDamage(new DamageContext(-Reduction, DamageType.None, Name), context.Attacker);
 

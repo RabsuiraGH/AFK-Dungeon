@@ -11,28 +11,17 @@ namespace LA.Gameplay.AbilitySystem.Conditions
     {
         public override bool IsMet(BattleContext context, TurnConditionParameters parameters)
         {
-            StringBuilder sb = new();
             int turn = parameters.UseGlobalTurn ? context.TurnNumber : context.GetTurnCountFor(context.AbilityOwner);
-
-            sb.AppendLine($"Turn: {turn}");
 
             if (parameters.OnTurn.Contains(turn))
             {
-                sb.AppendLine($"OnTurn: {turn}");
-                Debug.Log(($"{sb.ToString()}"));
                 return true;
             }
 
             if (parameters.RepeatEach && parameters.OnTurn.Any(x => turn % x == 0))
             {
-                sb.AppendLine($"RepeatEach: {turn}");
-                Debug.Log(($"{sb.ToString()}"));
-
                 return true;
             }
-
-            Debug.Log(($"{sb.ToString()}"));
-
 
             return false;
         }
