@@ -19,4 +19,10 @@ MonoBehaviour:
   - <Name>k__BackingField: attack_2
     <Clip>k__BackingField: {fileID: 8300000, guid: a18c8b507fc56a9449cfd45bd49e326e, type: 3}
     <Volume>k__BackingField: 1
+  - <Name>k__BackingField: attack_3
+    <Clip>k__BackingField: {fileID: 8300000, guid: 95918ac1a74475442823c2171e160b70, type: 3}
+    <Volume>k__BackingField: 1
+  - <Name>k__BackingField: attack_4
+    <Clip>k__BackingField: {fileID: 8300000, guid: ed6aa9e8b7e402846bd7b73e15a311c5, type: 3}
+    <Volume>k__BackingField: 1
   <Extras>k__BackingField: []
