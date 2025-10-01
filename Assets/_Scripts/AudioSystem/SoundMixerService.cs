@@ -14,7 +14,9 @@ namespace LA.AudioSystem
         private const string MUSIC_VOLUME_PARAMETER = "MusicVolume";
         private const string SFX_VOLUME_PARAMETER = "SFXVolume";
 
-        private const int DEFAULT_VOLUME = 1;
+        private const float DEFAULT_MASTER_VOLUME = 1;
+        private const float DEFAULT_SFX_VOLUME = 1;
+        private const float DEFAULT_MUSIC_VOLUME = 0.5f;
 
         public event Action OnVolumeChanged;
 
@@ -75,9 +77,9 @@ namespace LA.AudioSystem
 
         public void Start()
         {
-            SetMasterVolume(PlayerPrefs.GetFloat(MASTER_VOLUME_PARAMETER, DEFAULT_VOLUME));
-            SetMasterVolume(PlayerPrefs.GetFloat(MASTER_VOLUME_PARAMETER, DEFAULT_VOLUME));
-            SetMasterVolume(PlayerPrefs.GetFloat(MASTER_VOLUME_PARAMETER, DEFAULT_VOLUME));
+            SetMasterVolume(PlayerPrefs.GetFloat(MASTER_VOLUME_PARAMETER, DEFAULT_MASTER_VOLUME));
+            SetMusicVolume(PlayerPrefs.GetFloat(MUSIC_VOLUME_PARAMETER, DEFAULT_MUSIC_VOLUME));
+            SetSFXVolume(PlayerPrefs.GetFloat(SFX_VOLUME_PARAMETER, DEFAULT_SFX_VOLUME));
         }
     }
 }
