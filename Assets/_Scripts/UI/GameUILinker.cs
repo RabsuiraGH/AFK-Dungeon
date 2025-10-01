@@ -134,6 +134,7 @@ namespace LA.UI
 
         private void BeforeBattle()
         {
+            _player.RestoreHealth();
             _unitInfoUIController.SetUnitInfo(_player);
             _startBattleUIController.Show();
         }
