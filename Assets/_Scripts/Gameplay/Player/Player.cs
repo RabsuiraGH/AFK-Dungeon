@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LA.Gameplay.AbilitySystem;
 using LA.Gameplay.Player.ClassSystem;
+using LA.Gameplay.Player.Config;
 using LA.Gameplay.WeaponSystem;
 using SW.Utilities.LoadAsset;
 using UnityEngine;
@@ -17,18 +18,24 @@ namespace LA.Gameplay.Player
 
         public int TotalLevel => ClassesData.Sum(x => x.Level);
 
+        private PlayerConfig _playerConfig;
 
+        [VContainer.Inject]
+        public void Construct(PathConfig pathConfig)
+        {
+            _playerConfig = LoadAssetUtility.Load<PlayerConfig>(pathConfig.PlayerConfig);
+        }
         public override void Init()
         {
-            Name = "Player"; // TODO: Remove direct path to config
-            Sprite = LoadAssetUtility.Load<Sprite>("Assets/Resources/Art/Game/Player/Player.png");
+            Name = _playerConfig.PlayerName;
+            Sprite = LoadAssetUtility.Load<Sprite>(_playerConfig.PlayerSprite);
             MaxHealth = 0;
             CurrentWeapon = new Weapon();
             Abilities = new List<AbilitySO>();
 
-            Stats.Strength = Random.Range(1, 4);
-            Stats.Agility = Random.Range(1, 4);
-            Stats.Endurance = Random.Range(1, 4);
+            Stats.Strength = Random.Range(_playerConfig.MinimumStats.Strength, _playerConfig.MaximumStats.Strength + 1);
+            Stats.Agility = Random.Range(_playerConfig.MinimumStats.Agility, _playerConfig.MaximumStats.Agility + 1);
+            Stats.Endurance = Random.Range(_playerConfig.MinimumStats.Endurance, _playerConfig.MaximumStats.Endurance + 1);;
 
             RestoreHealth();
         }

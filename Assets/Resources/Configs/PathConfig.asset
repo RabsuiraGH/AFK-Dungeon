@@ -25,3 +25,4 @@ MonoBehaviour:
   <MusicDatabase>k__BackingField: Assets/Resources/Game/Sound/Music/MusicDatabase.asset
   <AudioMixer>k__BackingField: Assets/Resources/Game/Sound/MasterMixer.mixer
   <LogTextPrefab>k__BackingField: Assets/Resources/Prefabs/UI/LogText.prefab
+  <PlayerConfig>k__BackingField: Assets/Resources/Configs/Player/PlayerConfig.asset

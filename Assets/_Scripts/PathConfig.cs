@@ -17,15 +17,15 @@ namespace LA
         [field: SerializeField, PathField] public string MainMenuScene { get; private set; }
 
         [field: SerializeField, PathField] public string PopupUI { get; private set; }
-        [field: SerializeField, PathField]public string SoundFXPrefab { get; private set; }
-        [field: SerializeField, PathField]public string MusicPrefab { get; private set; }
+        [field: SerializeField, PathField] public string SoundFXPrefab { get; private set; }
+        [field: SerializeField, PathField] public string MusicPrefab { get; private set; }
 
-        [field: SerializeField, PathField]public string SoundFXDatabase { get; private set; }
-        [field: SerializeField, PathField]public string MusicDatabase { get; private set; }
+        [field: SerializeField, PathField] public string SoundFXDatabase { get; private set; }
+        [field: SerializeField, PathField] public string MusicDatabase { get; private set; }
 
-        [field: SerializeField, PathField]public string AudioMixer { get; private set; }
+        [field: SerializeField, PathField] public string AudioMixer { get; private set; }
 
-        [field: SerializeField, PathField]public string LogTextPrefab { get; private set; }
-
+        [field: SerializeField, PathField] public string LogTextPrefab { get; private set; }
+        [field: SerializeField, PathField] public string PlayerConfig { get; private set; }
     }
 }

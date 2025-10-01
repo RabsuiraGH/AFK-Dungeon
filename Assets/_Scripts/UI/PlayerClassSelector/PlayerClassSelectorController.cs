@@ -4,6 +4,7 @@ using System.Linq;
 using LA.Gameplay.Config;
 using LA.Gameplay.Player;
 using LA.Gameplay.Player.ClassSystem;
+using LA.Gameplay.Player.Config;
 using SW.Utilities.LoadAsset;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace LA.UI.PlayerClassSelector
 
         private Player _player;
         private ClassesDatabase _classesDatabase;
-        private GameplayConfig _gameplayConfig;
+        private PlayerConfig _playerConfig;
 
         public event Action OnClassSelected;
         public event Action MaxLevelReachedAlready;
@@ -25,7 +26,7 @@ namespace LA.UI.PlayerClassSelector
         public void Construct(Player player, PathConfig pathConfig)
         {
             _classesDatabase = LoadAssetUtility.Load<ClassesDatabase>(pathConfig.ClassesDatabase);
-            _gameplayConfig = LoadAssetUtility.Load<GameplayConfig>(pathConfig.GameplayConfig);
+            _playerConfig = LoadAssetUtility.Load<PlayerConfig>(pathConfig.PlayerConfig);
 
             _player = player;
         }
@@ -58,7 +59,7 @@ namespace LA.UI.PlayerClassSelector
 
         public void OnPlayerWin()
         {
-            if (_player.TotalLevel < _gameplayConfig.MaxPlayerLevel)
+            if (_player.TotalLevel < _playerConfig.MaxPlayerLevel)
             {
                 List<PlayerClassData> availableClasses = GetAvailableClasses();
                 _playerClassSelectorUI.UpdateClasses(availableClasses, _player.TotalLevel);

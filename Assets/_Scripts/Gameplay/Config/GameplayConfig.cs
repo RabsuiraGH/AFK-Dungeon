@@ -9,6 +9,5 @@ namespace LA.Gameplay.Config
         [field: SerializeField] public float BaseTurnIntervalInSeconds { get; private set; }
         [field: SerializeField] public List<float> GameSpeeds { get; private set; } = new() { 1f,2f };
 
-        [field: SerializeField] public int MaxPlayerLevel { get; private set; }
     }
 }
