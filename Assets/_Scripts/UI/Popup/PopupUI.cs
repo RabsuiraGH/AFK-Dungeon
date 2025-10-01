@@ -64,7 +64,7 @@ namespace LA.UI.Popup
 
         private void OpenSequence()
         {
-            _seq = DOTween.Sequence();
+            _seq = DOTween.Sequence().SetLink(this.gameObject);
         }
     }
 }
